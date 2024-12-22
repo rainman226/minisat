@@ -19,3 +19,4 @@ for i in "${!benchmark_files[@]}"; do
     # Add a separator for clarity in the console_log
     echo "------------------------------------" >> "$console_log"
 done
+
