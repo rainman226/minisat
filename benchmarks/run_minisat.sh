@@ -11,12 +11,15 @@ console_log="console_log"
 for i in "${!benchmark_files[@]}"; do
     benchmark="${benchmark_files[$i]}"
     output="output_file$((i + 1))"  # Generate output file name as output_file1, output_file2, etc.
-    
-    # Run MiniSat with a 10-second limit using -cpu-lim, and append console output to console_log
+
+    # Print the starting message and log it
     echo "Running MiniSat on $benchmark with output to $output" | tee -a "$console_log"
-    minisat -cpu-lim=8640 "$benchmark" "$output" >> "$console_log" 2>&1
-    
+
+    # Run MiniSat with a 10-second limit using -cpu-lim, display output live, and log to console_log
+    minisat -cpu-lim=8640 "$benchmark" "$output" 2>&1 | tee -a "$console_log"
+
     # Add a separator for clarity in the console_log
-    echo "------------------------------------" >> "$console_log"
+    echo "------------------------------------" | tee -a "$console_log"
+
 done
 
