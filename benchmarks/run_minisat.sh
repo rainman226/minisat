@@ -16,7 +16,7 @@ for i in "${!benchmark_files[@]}"; do
     echo "Running MiniSat on $benchmark with output to $output" | tee -a "$console_log"
 
     # Run MiniSat with a 10-second limit using -cpu-lim, display output live, and log to console_log
-    minisat -cpu-lim=8640 "$benchmark" "$output" 2>&1 | tee -a "$console_log"
+    minisat -var-decay=0.95 -cla-decay=0.93 -rfirst=200 "$benchmark" "$output" 2>&1 | tee -a "$console_log"
 
     # Add a separator for clarity in the console_log
     echo "------------------------------------" | tee -a "$console_log"
