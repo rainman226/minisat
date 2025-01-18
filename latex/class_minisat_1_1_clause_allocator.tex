@@ -1,0 +1,62 @@
+\doxysection{Minisat\+::Clause\+Allocator Class Reference}
+\hypertarget{class_minisat_1_1_clause_allocator}{}\label{class_minisat_1_1_clause_allocator}\index{Minisat::ClauseAllocator@{Minisat::ClauseAllocator}}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_minisat_1_1_clause_allocator_ae97ce3edb4b7e620741733342b341b99}\label{class_minisat_1_1_clause_allocator_ae97ce3edb4b7e620741733342b341b99} 
+enum \{ {\bfseries Unit\+\_\+\+Size} = Region\+Allocator\texorpdfstring{$<$}{<}uint32\+\_\+t\texorpdfstring{$>$}{>}\+::Unit\+\_\+\+Size
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_minisat_1_1_clause_allocator_aa83d942750cb3937318d1a7686f196c1}\label{class_minisat_1_1_clause_allocator_aa83d942750cb3937318d1a7686f196c1} 
+{\bfseries Clause\+Allocator} (uint32\+\_\+t start\+\_\+cap)
+\item 
+\Hypertarget{class_minisat_1_1_clause_allocator_a6bc55e865dbf05ed805de46a8844df31}\label{class_minisat_1_1_clause_allocator_a6bc55e865dbf05ed805de46a8844df31} 
+void {\bfseries move\+To} (\mbox{\hyperlink{class_minisat_1_1_clause_allocator}{Clause\+Allocator}} \&to)
+\item 
+\Hypertarget{class_minisat_1_1_clause_allocator_a6fc419d29c00c74eee79a3d38f51f6a0}\label{class_minisat_1_1_clause_allocator_a6fc419d29c00c74eee79a3d38f51f6a0} 
+CRef {\bfseries alloc} (const \mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} $>$ \&ps, bool learnt=false)
+\item 
+\Hypertarget{class_minisat_1_1_clause_allocator_ac195c28f39df82cbe03f7353c5993f33}\label{class_minisat_1_1_clause_allocator_ac195c28f39df82cbe03f7353c5993f33} 
+CRef {\bfseries alloc} (const \mbox{\hyperlink{class_minisat_1_1_clause}{Clause}} \&from)
+\item 
+\Hypertarget{class_minisat_1_1_clause_allocator_acdba84e6aa18b3f0297a08b9d835b539}\label{class_minisat_1_1_clause_allocator_acdba84e6aa18b3f0297a08b9d835b539} 
+uint32\+\_\+t {\bfseries size} () const
+\item 
+\Hypertarget{class_minisat_1_1_clause_allocator_afb9e9e6dcf980520bcf282a19b610ad5}\label{class_minisat_1_1_clause_allocator_afb9e9e6dcf980520bcf282a19b610ad5} 
+uint32\+\_\+t {\bfseries wasted} () const
+\item 
+\Hypertarget{class_minisat_1_1_clause_allocator_a67ec4bd63be926922cc5fbb055245830}\label{class_minisat_1_1_clause_allocator_a67ec4bd63be926922cc5fbb055245830} 
+\mbox{\hyperlink{class_minisat_1_1_clause}{Clause}} \& {\bfseries operator\mbox{[}$\,$\mbox{]}} (CRef r)
+\item 
+\Hypertarget{class_minisat_1_1_clause_allocator_a79979113b940e7eb701d162b07af8f89}\label{class_minisat_1_1_clause_allocator_a79979113b940e7eb701d162b07af8f89} 
+const \mbox{\hyperlink{class_minisat_1_1_clause}{Clause}} \& {\bfseries operator\mbox{[}$\,$\mbox{]}} (CRef r) const
+\item 
+\Hypertarget{class_minisat_1_1_clause_allocator_a67852a017072728eba33c20962cc1867}\label{class_minisat_1_1_clause_allocator_a67852a017072728eba33c20962cc1867} 
+\mbox{\hyperlink{class_minisat_1_1_clause}{Clause}} \texorpdfstring{$\ast$}{*} {\bfseries lea} (CRef r)
+\item 
+\Hypertarget{class_minisat_1_1_clause_allocator_a6d6dbec0ae726bb1feee485b6aebbc38}\label{class_minisat_1_1_clause_allocator_a6d6dbec0ae726bb1feee485b6aebbc38} 
+const \mbox{\hyperlink{class_minisat_1_1_clause}{Clause}} \texorpdfstring{$\ast$}{*} {\bfseries lea} (CRef r) const
+\item 
+\Hypertarget{class_minisat_1_1_clause_allocator_ac4318ca0ed4bfb41e563ab25d5f04c51}\label{class_minisat_1_1_clause_allocator_ac4318ca0ed4bfb41e563ab25d5f04c51} 
+CRef {\bfseries ael} (const \mbox{\hyperlink{class_minisat_1_1_clause}{Clause}} \texorpdfstring{$\ast$}{*}t)
+\item 
+\Hypertarget{class_minisat_1_1_clause_allocator_a914e91a15b2402d04c70857f77556322}\label{class_minisat_1_1_clause_allocator_a914e91a15b2402d04c70857f77556322} 
+void {\bfseries free} (CRef cid)
+\item 
+\Hypertarget{class_minisat_1_1_clause_allocator_a7141b324b6a876199c19a944c085a849}\label{class_minisat_1_1_clause_allocator_a7141b324b6a876199c19a944c085a849} 
+void {\bfseries reloc} (CRef \&cr, \mbox{\hyperlink{class_minisat_1_1_clause_allocator}{Clause\+Allocator}} \&to)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_minisat_1_1_clause_allocator_a5662c59455793333e332e334806e6c8b}\label{class_minisat_1_1_clause_allocator_a5662c59455793333e332e334806e6c8b} 
+bool {\bfseries extra\+\_\+clause\+\_\+field}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+code/minisat/core/Solver\+Types.\+h\end{DoxyCompactItemize}

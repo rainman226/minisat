@@ -1,0 +1,81 @@
+\doxysection{Minisat\+::Bool\+Option Class Reference}
+\hypertarget{class_minisat_1_1_bool_option}{}\label{class_minisat_1_1_bool_option}\index{Minisat::BoolOption@{Minisat::BoolOption}}
+Inheritance diagram for Minisat\+::Bool\+Option\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_minisat_1_1_bool_option}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_minisat_1_1_bool_option_a0145557d53761306ec92432f905a7f0e}\label{class_minisat_1_1_bool_option_a0145557d53761306ec92432f905a7f0e} 
+{\bfseries Bool\+Option} (const char \texorpdfstring{$\ast$}{*}c, const char \texorpdfstring{$\ast$}{*}n, const char \texorpdfstring{$\ast$}{*}d, bool v)
+\item 
+\Hypertarget{class_minisat_1_1_bool_option_a413ecef080b5846dbdc00f35049d3454}\label{class_minisat_1_1_bool_option_a413ecef080b5846dbdc00f35049d3454} 
+{\bfseries operator bool} (void) const
+\item 
+\Hypertarget{class_minisat_1_1_bool_option_a204263d017519af8a34d7459a054cd23}\label{class_minisat_1_1_bool_option_a204263d017519af8a34d7459a054cd23} 
+{\bfseries operator bool \&} (void)
+\item 
+\Hypertarget{class_minisat_1_1_bool_option_a09f9903b5a5e7c122f84d504f3366927}\label{class_minisat_1_1_bool_option_a09f9903b5a5e7c122f84d504f3366927} 
+\mbox{\hyperlink{class_minisat_1_1_bool_option}{Bool\+Option}} \& {\bfseries operator=} (bool b)
+\item 
+virtual bool \mbox{\hyperlink{class_minisat_1_1_bool_option_aa2aed4e8c39e56924faa18a6bf9b11de}{parse}} (const char \texorpdfstring{$\ast$}{*}str)
+\item 
+virtual void \mbox{\hyperlink{class_minisat_1_1_bool_option_a3fbc367a9e80fb2a2267a32944976f9d}{help}} (bool verbose=false)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_minisat_1_1_option}{Minisat\+::\+Option}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Option} (const char \texorpdfstring{$\ast$}{*}name\+\_\+, const char \texorpdfstring{$\ast$}{*}desc\+\_\+, const char \texorpdfstring{$\ast$}{*}cate\+\_\+, const char \texorpdfstring{$\ast$}{*}type\+\_\+)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Member Functions inherited from \mbox{\hyperlink{class_minisat_1_1_option}{Minisat\+::\+Option}}}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{class_minisat_1_1_option}{Option}} \texorpdfstring{$\ast$}{*} $>$ \& {\bfseries get\+Option\+List} ()
+\item 
+static const char \texorpdfstring{$\ast$}{*}\& {\bfseries get\+Usage\+String} ()
+\item 
+static const char \texorpdfstring{$\ast$}{*}\& {\bfseries get\+Help\+Prefix\+String} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_minisat_1_1_option}{Minisat\+::\+Option}}}
+\begin{DoxyCompactItemize}
+\item 
+const char \texorpdfstring{$\ast$}{*} {\bfseries name}
+\item 
+const char \texorpdfstring{$\ast$}{*} {\bfseries description}
+\item 
+const char \texorpdfstring{$\ast$}{*} {\bfseries category}
+\item 
+const char \texorpdfstring{$\ast$}{*} {\bfseries type\+\_\+name}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_minisat_1_1_bool_option_a3fbc367a9e80fb2a2267a32944976f9d}\index{Minisat::BoolOption@{Minisat::BoolOption}!help@{help}}
+\index{help@{help}!Minisat::BoolOption@{Minisat::BoolOption}}
+\doxysubsubsection{\texorpdfstring{help()}{help()}}
+{\footnotesize\ttfamily \label{class_minisat_1_1_bool_option_a3fbc367a9e80fb2a2267a32944976f9d} 
+virtual void Minisat\+::\+Bool\+Option\+::help (\begin{DoxyParamCaption}\item[{bool}]{verbose}{ = {\ttfamily false}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_minisat_1_1_option}{Minisat\+::\+Option}}.
+
+\Hypertarget{class_minisat_1_1_bool_option_aa2aed4e8c39e56924faa18a6bf9b11de}\index{Minisat::BoolOption@{Minisat::BoolOption}!parse@{parse}}
+\index{parse@{parse}!Minisat::BoolOption@{Minisat::BoolOption}}
+\doxysubsubsection{\texorpdfstring{parse()}{parse()}}
+{\footnotesize\ttfamily \label{class_minisat_1_1_bool_option_aa2aed4e8c39e56924faa18a6bf9b11de} 
+virtual bool Minisat\+::\+Bool\+Option\+::parse (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{str}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_minisat_1_1_option}{Minisat\+::\+Option}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+code/minisat/utils/Options.\+h\end{DoxyCompactItemize}

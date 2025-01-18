@@ -1,0 +1,90 @@
+\doxysection{Alg.\+h}
+\hypertarget{_alg_8h_source}{}\label{_alg_8h_source}\index{code/minisat/mtl/Alg.h@{code/minisat/mtl/Alg.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*******************************************************************************************[Alg.h]}}
+\DoxyCodeLine{00002\ \textcolor{comment}{Copyright\ (c)\ 2003-\/2006,\ Niklas\ Een,\ Niklas\ Sorensson}}
+\DoxyCodeLine{00003\ \textcolor{comment}{Copyright\ (c)\ 2007-\/2010,\ Niklas\ Sorensson}}
+\DoxyCodeLine{00004\ \textcolor{comment}{}}
+\DoxyCodeLine{00005\ \textcolor{comment}{Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of\ this\ software\ and}}
+\DoxyCodeLine{00006\ \textcolor{comment}{associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in\ the\ Software\ without\ restriction,}}
+\DoxyCodeLine{00007\ \textcolor{comment}{including\ without\ limitation\ the\ rights\ to\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,}}
+\DoxyCodeLine{00008\ \textcolor{comment}{sublicense,\ and/or\ sell\ copies\ of\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is}}
+\DoxyCodeLine{00009\ \textcolor{comment}{furnished\ to\ do\ so,\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{00010\ \textcolor{comment}{}}
+\DoxyCodeLine{00011\ \textcolor{comment}{The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all\ copies\ or}}
+\DoxyCodeLine{00012\ \textcolor{comment}{substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{}}
+\DoxyCodeLine{00014\ \textcolor{comment}{THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR\ IMPLIED,\ INCLUDING\ BUT}}
+\DoxyCodeLine{00015\ \textcolor{comment}{NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE\ AND}}
+\DoxyCodeLine{00016\ \textcolor{comment}{NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,}}
+\DoxyCodeLine{00017\ \textcolor{comment}{DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT}}
+\DoxyCodeLine{00018\ \textcolor{comment}{OF\ OR\ IN\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{00019\ \textcolor{comment}{**************************************************************************************************/}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#ifndef\ Minisat\_Alg\_h}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#define\ Minisat\_Alg\_h}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ "{}minisat/mtl/Vec.h"{}}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{namespace\ }Minisat\ \{}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{comment}{//=================================================================================================}}
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ Useful\ functions\ on\ vector-\/like\ types:}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{comment}{//=================================================================================================}}
+\DoxyCodeLine{00032\ \textcolor{comment}{//\ Removing\ and\ searching\ for\ elements:}}
+\DoxyCodeLine{00033\ \textcolor{comment}{//}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ V,\ \textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00036\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ remove(V\&\ ts,\ \textcolor{keyword}{const}\ T\&\ t)}
+\DoxyCodeLine{00037\ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{int}\ j\ =\ 0;}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordflow}{for}\ (;\ j\ <\ (int)ts.size()\ \&\&\ ts[j]\ !=\ t;\ j++);}
+\DoxyCodeLine{00040\ \ \ \ \ assert(j\ <\ (\textcolor{keywordtype}{int})ts.size());}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordflow}{for}\ (;\ j\ <\ (int)ts.size()-\/1;\ j++)\ ts[j]\ =\ ts[j+1];}
+\DoxyCodeLine{00042\ \ \ \ \ ts.pop();}
+\DoxyCodeLine{00043\ \}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ V,\ \textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00047\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ find(V\&\ ts,\ \textcolor{keyword}{const}\ T\&\ t)}
+\DoxyCodeLine{00048\ \{}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{int}\ j\ =\ 0;}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordflow}{for}\ (;\ j\ <\ (int)ts.size()\ \&\&\ ts[j]\ !=\ t;\ j++);}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordflow}{return}\ j\ <\ (int)ts.size();}
+\DoxyCodeLine{00052\ \}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{comment}{//=================================================================================================}}
+\DoxyCodeLine{00056\ \textcolor{comment}{//\ Copying\ vectors\ with\ support\ for\ nested\ vector\ types:}}
+\DoxyCodeLine{00057\ \textcolor{comment}{//}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \textcolor{comment}{//\ Base\ case:}}
+\DoxyCodeLine{00060\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00061\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ copy(\textcolor{keyword}{const}\ T\&\ from,\ T\&\ to)}
+\DoxyCodeLine{00062\ \{}
+\DoxyCodeLine{00063\ \ \ \ \ to\ =\ from;}
+\DoxyCodeLine{00064\ \}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \textcolor{comment}{//\ Recursive\ case:}}
+\DoxyCodeLine{00067\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00068\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ copy(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_minisat_1_1vec}{vec<T>}}\&\ from,\ \mbox{\hyperlink{class_minisat_1_1vec}{vec<T>}}\&\ to,\ \textcolor{keywordtype}{bool}\ append\ =\ \textcolor{keyword}{false})}
+\DoxyCodeLine{00069\ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordflow}{if}\ (!append)}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ to.clear();}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ from.size();\ i++)\{}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ to.push();}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ copy(from[i],\ to.last());}
+\DoxyCodeLine{00075\ \ \ \ \ \}}
+\DoxyCodeLine{00076\ \}}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00079\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ append(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_minisat_1_1vec}{vec<T>}}\&\ from,\ \mbox{\hyperlink{class_minisat_1_1vec}{vec<T>}}\&\ to)\{\ copy(from,\ to,\ \textcolor{keyword}{true});\ \}}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \textcolor{comment}{//=================================================================================================}}
+\DoxyCodeLine{00082\ \}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

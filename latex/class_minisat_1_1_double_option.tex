@@ -1,0 +1,90 @@
+\doxysection{Minisat\+::Double\+Option Class Reference}
+\hypertarget{class_minisat_1_1_double_option}{}\label{class_minisat_1_1_double_option}\index{Minisat::DoubleOption@{Minisat::DoubleOption}}
+Inheritance diagram for Minisat\+::Double\+Option\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_minisat_1_1_double_option}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_minisat_1_1_double_option_aede6aa5588030240cced8250f97d6b80}\label{class_minisat_1_1_double_option_aede6aa5588030240cced8250f97d6b80} 
+{\bfseries Double\+Option} (const char \texorpdfstring{$\ast$}{*}c, const char \texorpdfstring{$\ast$}{*}n, const char \texorpdfstring{$\ast$}{*}d, double def=double(), \mbox{\hyperlink{struct_minisat_1_1_double_range}{Double\+Range}} r=\mbox{\hyperlink{struct_minisat_1_1_double_range}{Double\+Range}}(-\/HUGE\+\_\+\+VAL, false, HUGE\+\_\+\+VAL, false))
+\item 
+\Hypertarget{class_minisat_1_1_double_option_af673ee8ad452c0341dd97f5bcdcb1215}\label{class_minisat_1_1_double_option_af673ee8ad452c0341dd97f5bcdcb1215} 
+{\bfseries operator double} (void) const
+\item 
+\Hypertarget{class_minisat_1_1_double_option_a2933f323fab1f15e6aa4279789a40ce5}\label{class_minisat_1_1_double_option_a2933f323fab1f15e6aa4279789a40ce5} 
+{\bfseries operator double \&} (void)
+\item 
+\Hypertarget{class_minisat_1_1_double_option_a8689d5acf1a69776575551a7e646466f}\label{class_minisat_1_1_double_option_a8689d5acf1a69776575551a7e646466f} 
+\mbox{\hyperlink{class_minisat_1_1_double_option}{Double\+Option}} \& {\bfseries operator=} (double x)
+\item 
+virtual bool \mbox{\hyperlink{class_minisat_1_1_double_option_a541ce3ca09be7750aa6c9534945acb43}{parse}} (const char \texorpdfstring{$\ast$}{*}str)
+\item 
+virtual void \mbox{\hyperlink{class_minisat_1_1_double_option_a5873fb5d2e9cc59e9e5e6ec85a580b14}{help}} (bool verbose=false)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_minisat_1_1_double_option_a25965128d3acbc34fcbf926576c099b2}\label{class_minisat_1_1_double_option_a25965128d3acbc34fcbf926576c099b2} 
+\mbox{\hyperlink{struct_minisat_1_1_double_range}{Double\+Range}} {\bfseries range}
+\item 
+\Hypertarget{class_minisat_1_1_double_option_aed63391db0eae6925e693725f495f090}\label{class_minisat_1_1_double_option_aed63391db0eae6925e693725f495f090} 
+double {\bfseries value}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_minisat_1_1_option}{Minisat\+::\+Option}}}
+\begin{DoxyCompactItemize}
+\item 
+const char \texorpdfstring{$\ast$}{*} {\bfseries name}
+\item 
+const char \texorpdfstring{$\ast$}{*} {\bfseries description}
+\item 
+const char \texorpdfstring{$\ast$}{*} {\bfseries category}
+\item 
+const char \texorpdfstring{$\ast$}{*} {\bfseries type\+\_\+name}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_minisat_1_1_option}{Minisat\+::\+Option}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Option} (const char \texorpdfstring{$\ast$}{*}name\+\_\+, const char \texorpdfstring{$\ast$}{*}desc\+\_\+, const char \texorpdfstring{$\ast$}{*}cate\+\_\+, const char \texorpdfstring{$\ast$}{*}type\+\_\+)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Member Functions inherited from \mbox{\hyperlink{class_minisat_1_1_option}{Minisat\+::\+Option}}}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{class_minisat_1_1_option}{Option}} \texorpdfstring{$\ast$}{*} $>$ \& {\bfseries get\+Option\+List} ()
+\item 
+static const char \texorpdfstring{$\ast$}{*}\& {\bfseries get\+Usage\+String} ()
+\item 
+static const char \texorpdfstring{$\ast$}{*}\& {\bfseries get\+Help\+Prefix\+String} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_minisat_1_1_double_option_a5873fb5d2e9cc59e9e5e6ec85a580b14}\index{Minisat::DoubleOption@{Minisat::DoubleOption}!help@{help}}
+\index{help@{help}!Minisat::DoubleOption@{Minisat::DoubleOption}}
+\doxysubsubsection{\texorpdfstring{help()}{help()}}
+{\footnotesize\ttfamily \label{class_minisat_1_1_double_option_a5873fb5d2e9cc59e9e5e6ec85a580b14} 
+virtual void Minisat\+::\+Double\+Option\+::help (\begin{DoxyParamCaption}\item[{bool}]{verbose}{ = {\ttfamily false}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_minisat_1_1_option}{Minisat\+::\+Option}}.
+
+\Hypertarget{class_minisat_1_1_double_option_a541ce3ca09be7750aa6c9534945acb43}\index{Minisat::DoubleOption@{Minisat::DoubleOption}!parse@{parse}}
+\index{parse@{parse}!Minisat::DoubleOption@{Minisat::DoubleOption}}
+\doxysubsubsection{\texorpdfstring{parse()}{parse()}}
+{\footnotesize\ttfamily \label{class_minisat_1_1_double_option_a541ce3ca09be7750aa6c9534945acb43} 
+virtual bool Minisat\+::\+Double\+Option\+::parse (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{str}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_minisat_1_1_option}{Minisat\+::\+Option}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+code/minisat/utils/Options.\+h\end{DoxyCompactItemize}

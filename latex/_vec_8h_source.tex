@@ -1,0 +1,140 @@
+\doxysection{Vec.\+h}
+\hypertarget{_vec_8h_source}{}\label{_vec_8h_source}\index{code/minisat/mtl/Vec.h@{code/minisat/mtl/Vec.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*******************************************************************************************[Vec.h]}}
+\DoxyCodeLine{00002\ \textcolor{comment}{Copyright\ (c)\ 2003-\/2007,\ Niklas\ Een,\ Niklas\ Sorensson}}
+\DoxyCodeLine{00003\ \textcolor{comment}{Copyright\ (c)\ 2007-\/2010,\ Niklas\ Sorensson}}
+\DoxyCodeLine{00004\ \textcolor{comment}{}}
+\DoxyCodeLine{00005\ \textcolor{comment}{Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of\ this\ software\ and}}
+\DoxyCodeLine{00006\ \textcolor{comment}{associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in\ the\ Software\ without\ restriction,}}
+\DoxyCodeLine{00007\ \textcolor{comment}{including\ without\ limitation\ the\ rights\ to\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,}}
+\DoxyCodeLine{00008\ \textcolor{comment}{sublicense,\ and/or\ sell\ copies\ of\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is}}
+\DoxyCodeLine{00009\ \textcolor{comment}{furnished\ to\ do\ so,\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{00010\ \textcolor{comment}{}}
+\DoxyCodeLine{00011\ \textcolor{comment}{The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all\ copies\ or}}
+\DoxyCodeLine{00012\ \textcolor{comment}{substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{}}
+\DoxyCodeLine{00014\ \textcolor{comment}{THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR\ IMPLIED,\ INCLUDING\ BUT}}
+\DoxyCodeLine{00015\ \textcolor{comment}{NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE\ AND}}
+\DoxyCodeLine{00016\ \textcolor{comment}{NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,}}
+\DoxyCodeLine{00017\ \textcolor{comment}{DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT}}
+\DoxyCodeLine{00018\ \textcolor{comment}{OF\ OR\ IN\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{00019\ \textcolor{comment}{**************************************************************************************************/}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#ifndef\ Minisat\_Vec\_h}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#define\ Minisat\_Vec\_h}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ <assert.h>}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ <limits>}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ <new>}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#include\ "{}minisat/mtl/IntTypes.h"{}}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}minisat/mtl/XAlloc.h"{}}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{namespace\ }Minisat\ \{}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{comment}{//=================================================================================================}}
+\DoxyCodeLine{00034\ \textcolor{comment}{//\ Automatically\ resizable\ arrays}}
+\DoxyCodeLine{00035\ \textcolor{comment}{//}}
+\DoxyCodeLine{00036\ \textcolor{comment}{//\ NOTE!\ Don't\ use\ this\ vector\ on\ datatypes\ that\ cannot\ be\ re-\/located\ in\ memory\ (with\ realloc)}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T,\ \textcolor{keyword}{class}\ \_Size\ =\ \textcolor{keywordtype}{int}>}
+\DoxyCodeLine{00039\ \textcolor{keyword}{class\ }vec\ \{}
+\DoxyCodeLine{00040\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keyword}{typedef}\ \_Size\ Size;}
+\DoxyCodeLine{00042\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00043\ \ \ \ \ T*\ \ \ data;}
+\DoxyCodeLine{00044\ \ \ \ \ Size\ sz;}
+\DoxyCodeLine{00045\ \ \ \ \ Size\ cap;}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{comment}{//\ Don't\ allow\ copying\ (error\ prone):}}
+\DoxyCodeLine{00048\ \ \ \ \ vec<T>\&\ \ operator=(vec<T>\&\ other);}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ vec\ \ \ \ \ \ (vec<T>\&\ other);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ Size\ max(Size\ x,\ Size\ y)\{\ \textcolor{keywordflow}{return}\ (x\ >\ y)\ ?\ x\ :\ y;\ \}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{comment}{//\ Constructors:}}
+\DoxyCodeLine{00055\ \ \ \ \ vec()\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ data(NULL),\ sz(0),\ cap(0)\ \ \ \ \{\ \}}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{explicit}\ vec(Size\ size)\ \ \ \ \ \ :\ data(NULL),\ sz(0),\ cap(0)\ \ \ \ \{\ growTo(size);\ \}}
+\DoxyCodeLine{00057\ \ \ \ \ vec(Size\ size,\ \textcolor{keyword}{const}\ T\&\ pad)\ :\ data(NULL),\ sz(0),\ cap(0)\ \ \ \ \{\ growTo(size,\ pad);\ \}}
+\DoxyCodeLine{00058\ \ \ \ \string~vec()\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ clear(\textcolor{keyword}{true});\ \}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{comment}{//\ Pointer\ to\ first\ element:}}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keyword}{operator}\ T*\ \ \ \ \ \ \ (void)\ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{keywordflow}{return}\ data;\ \}}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{comment}{//\ Size\ operations:}}
+\DoxyCodeLine{00064\ \ \ \ \ Size\ \ \ \ \ size\ \ \ \ \ (\textcolor{keywordtype}{void})\textcolor{keyword}{\ const\ \ \ }\{\ \textcolor{keywordflow}{return}\ sz;\ \}}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ shrink\ \ \ (Size\ nelems)\ \ \{\ assert(nelems\ <=\ sz);\ \textcolor{keywordflow}{for}\ (Size\ i\ =\ 0;\ i\ <\ nelems;\ i++)\ sz-\/-\/,\ data[sz].\string~T();\ \}}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ shrink\_\ \ (Size\ nelems)\ \ \{\ assert(nelems\ <=\ sz);\ sz\ -\/=\ nelems;\ \}}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ capacity\ (\textcolor{keywordtype}{void})\textcolor{keyword}{\ const\ \ \ }\{\ \textcolor{keywordflow}{return}\ cap;\ \}}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ capacity\ (Size\ min\_cap);}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ growTo\ \ \ (Size\ size);}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ growTo\ \ \ (Size\ size,\ \textcolor{keyword}{const}\ T\&\ pad);}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ clear\ \ \ \ (\textcolor{keywordtype}{bool}\ dealloc\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{comment}{//\ Stack\ interface:}}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ push\ \ (\textcolor{keywordtype}{void})\ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{keywordflow}{if}\ (sz\ ==\ cap)\ capacity(sz+1);\ \textcolor{keyword}{new}\ (\&data[sz])\ T();\ sz++;\ \}}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{comment}{//void\ \ \ \ \ push\ \ (const\ T\&\ elem)\ \ \ \ \ \{\ if\ (sz\ ==\ cap)\ capacity(sz+1);\ data[sz++]\ =\ elem;\ \}}}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ push\ \ (\textcolor{keyword}{const}\ T\&\ elem)\ \ \ \ \ \{\ \textcolor{keywordflow}{if}\ (sz\ ==\ cap)\ capacity(sz+1);\ \textcolor{keyword}{new}\ (\&data[sz++])\ T(elem);\ \}}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ push\_\ (\textcolor{keyword}{const}\ T\&\ elem)\ \ \ \ \ \{\ assert(sz\ <\ cap);\ data[sz++]\ =\ elem;\ \}}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ pop\ \ \ (\textcolor{keywordtype}{void})\ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ assert(sz\ >\ 0);\ sz-\/-\/,\ data[sz].\string~T();\ \}}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{comment}{//\ NOTE:\ it\ seems\ possible\ that\ overflow\ can\ happen\ in\ the\ 'sz+1'\ expression\ of\ 'push()',\ but}}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{comment}{//\ in\ fact\ it\ can\ not\ since\ it\ requires\ that\ 'cap'\ is\ equal\ to\ INT\_MAX.\ This\ in\ turn\ can\ not}}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{comment}{//\ happen\ given\ the\ way\ capacities\ are\ calculated\ (below).\ Essentially,\ all\ capacities\ are}}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{comment}{//\ even,\ but\ INT\_MAX\ is\ odd.}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keyword}{const}\ T\&\ last\ \ (\textcolor{keywordtype}{void})\textcolor{keyword}{\ const\ \ \ \ \ \ \ \ }\{\ \textcolor{keywordflow}{return}\ data[sz-\/1];\ \}}
+\DoxyCodeLine{00085\ \ \ \ \ T\&\ \ \ \ \ \ \ last\ \ (\textcolor{keywordtype}{void})\ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{keywordflow}{return}\ data[sz-\/1];\ \}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{comment}{//\ Vector\ interface:}}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keyword}{const}\ T\&\ operator\ []\ (Size\ index)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ data[index];\ \}}
+\DoxyCodeLine{00089\ \ \ \ \ T\&\ \ \ \ \ \ \ operator\ []\ (Size\ index)\ \ \ \ \ \ \ \{\ \textcolor{keywordflow}{return}\ data[index];\ \}}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{comment}{//\ Duplicatation\ (preferred\ instead):}}
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordtype}{void}\ copyTo(vec<T>\&\ copy)\textcolor{keyword}{\ const\ }\{\ copy.clear();\ copy.growTo(sz);\ \textcolor{keywordflow}{for}\ (Size\ i\ =\ 0;\ i\ <\ sz;\ i++)\ copy[i]\ =\ data[i];\ \}}
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{void}\ moveTo(vec<T>\&\ dest)\ \{\ dest.clear(\textcolor{keyword}{true});\ dest.data\ =\ data;\ dest.sz\ =\ sz;\ dest.cap\ =\ cap;\ data\ =\ NULL;\ sz\ =\ 0;\ cap\ =\ 0;\ \}}
+\DoxyCodeLine{00094\ \};}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T,\ \textcolor{keyword}{class}\ \_Size>}
+\DoxyCodeLine{00098\ \textcolor{keywordtype}{void}\ vec<T,\_Size>::capacity(Size\ min\_cap)\ \{}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordflow}{if}\ (cap\ >=\ min\_cap)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00100\ \ \ \ \ Size\ add\ =\ max((min\_cap\ -\/\ cap\ +\ 1)\ \&\ \string~1,\ ((cap\ >>\ 1)\ +\ 2)\ \&\ \string~1);\ \ \ \textcolor{comment}{//\ NOTE:\ grow\ by\ approximately\ 3/2}}
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keyword}{const}\ Size\ size\_max\ =\ std::numeric\_limits<Size>::max();}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordflow}{if}\ (\ ((size\_max\ <=\ std::numeric\_limits<int>::max())\ \&\&\ (add\ >\ size\_max\ -\/\ cap))}
+\DoxyCodeLine{00103\ \ \ \ \ ||\ \ \ (((data\ =\ (T*)::realloc(data,\ (cap\ +=\ add)\ *\ \textcolor{keyword}{sizeof}(T)))\ ==\ NULL)\ \&\&\ errno\ ==\ ENOMEM)\ )}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{class_minisat_1_1_out_of_memory_exception}{OutOfMemoryException}}();}
+\DoxyCodeLine{00105\ \ \}}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T,\ \textcolor{keyword}{class}\ \_Size>}
+\DoxyCodeLine{00109\ \textcolor{keywordtype}{void}\ vec<T,\_Size>::growTo(Size\ size,\ \textcolor{keyword}{const}\ T\&\ pad)\ \{}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordflow}{if}\ (sz\ >=\ size)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00111\ \ \ \ \ capacity(size);}
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keywordflow}{for}\ (Size\ i\ =\ sz;\ i\ <\ size;\ i++)\ data[i]\ =\ pad;}
+\DoxyCodeLine{00113\ \ \ \ \ sz\ =\ size;\ \}}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T,\ \textcolor{keyword}{class}\ \_Size>}
+\DoxyCodeLine{00117\ \textcolor{keywordtype}{void}\ vec<T,\_Size>::growTo(Size\ size)\ \{}
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keywordflow}{if}\ (sz\ >=\ size)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00119\ \ \ \ \ capacity(size);}
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keywordflow}{for}\ (Size\ i\ =\ sz;\ i\ <\ size;\ i++)\ \textcolor{keyword}{new}\ (\&data[i])\ T();}
+\DoxyCodeLine{00121\ \ \ \ \ sz\ =\ size;\ \}}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T,\ \textcolor{keyword}{class}\ \_Size>}
+\DoxyCodeLine{00125\ \textcolor{keywordtype}{void}\ vec<T,\_Size>::clear(\textcolor{keywordtype}{bool}\ dealloc)\ \{}
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keywordflow}{if}\ (data\ !=\ NULL)\{}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (Size\ i\ =\ 0;\ i\ <\ sz;\ i++)\ data[i].\string~T();}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ sz\ =\ 0;}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dealloc)\ free(data),\ data\ =\ NULL,\ cap\ =\ 0;\ \}\ \}}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ \textcolor{comment}{//=================================================================================================}}
+\DoxyCodeLine{00132\ \}}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00134\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

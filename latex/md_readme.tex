@@ -1,0 +1,53 @@
+\chapter{Formal verification using Mini\+Sat}
+\hypertarget{md_readme}{}\label{md_readme}\index{Formal verification using MiniSat@{Formal verification using MiniSat}}
+\label{md_readme_autotoc_md0}%
+\Hypertarget{md_readme_autotoc_md0}%
+
+
+In this project we will be looking into the implementation of {\bfseries{Mini\+Sat}}, a popular SAT solver, to figure out how this works. Our goal is to better understand how it implements the algorithms and how they work, and also runing some benchmarks to see how it behaves.\hypertarget{md_readme_autotoc_md1}{}\doxysection{\texorpdfstring{What is Mini\+Sat?}{What is Mini\+Sat?}}\label{md_readme_autotoc_md1}
+Mini\+Sat is a lightweight and super-\/efficient SAT solver that\textquotesingle{}s often used in formal verification, AI, and other fields. It takes logical formulas in CNF (Conjunctive Normal Form) and tries to tell if they\textquotesingle{}re satisfiable or not. It\textquotesingle{}s a very good starting point for people interested getting started on SAT.\hypertarget{md_readme_autotoc_md2}{}\doxysection{\texorpdfstring{Getting started\+: Installing Mini\+Sat}{Getting started\+: Installing Mini\+Sat}}\label{md_readme_autotoc_md2}
+We recommend running Mini\+Sat on a Linux enviroment, as it\textquotesingle{}s easier to install and compile compared to Windows.
+
+There are 2 ways\+: installing it directly using the command line, or downloading and building the tool.
+
+Using the command line, just type\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{sudo\ apt\ install\ minisat}
+
+\end{DoxyCode}
+
+
+If you want to build it yourself, first clone the repository of Mini\+Sat\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{git\ clone\ https://github.com/niklasso/minisat.git}
+\DoxyCodeLine{cd\ minisat}
+
+\end{DoxyCode}
+
+
+And then build it\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{mkdir\ build\ \&\&\ cd\ build}
+\DoxyCodeLine{cmake\ ..\ \&\&\ make}
+
+\end{DoxyCode}
+\hypertarget{md_readme_autotoc_md3}{}\doxysection{\texorpdfstring{About the benchmarks}{About the benchmarks}}\label{md_readme_autotoc_md3}
+For our tests, we\textquotesingle{}re using the {\bfseries{\href{https://benchmark-database.de/?track=main_2024&family=cryptography-simon}{\texttt{ Cryptography-\/\+Simon}}}} benchmark family from the {\bfseries{\href{https://satcompetition.github.io/2024/}{\texttt{ SAT Competition 2024}}}}. These benchmarks are specifically designed for evaluating SAT solvers in cryptographic contexts.
+
+To run the script easier, we\textquotesingle{}ve written a script, {\ttfamily run\+\_\+minisat.\+sh}. To use it first go into the benchmarks folder and run it like this\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd\ benchmarks}
+\DoxyCodeLine{./run\_minisat.sh}
+
+\end{DoxyCode}
+
+
+For each file we have set a run time of {\ttfamily 24 / number\+\_\+of\+\_\+benchmarks} so it all runs in 24 hours, it his case we have \texorpdfstring{$\sim$}{\string~}4 hours/bechmark file. Each file will have an output file with the coresponding output of minisat, and all console messages will be printed into the {\ttfamily console\+\_\+log} file. 

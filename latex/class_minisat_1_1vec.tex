@@ -1,0 +1,79 @@
+\doxysection{Minisat\+::vec\texorpdfstring{$<$}{<} T, \+\_\+\+Size \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{class_minisat_1_1vec}{}\label{class_minisat_1_1vec}\index{Minisat::vec$<$ T, \_Size $>$@{Minisat::vec$<$ T, \_Size $>$}}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_minisat_1_1vec_a63b7701870cbd37fc71d6579fb137ee8}\label{class_minisat_1_1vec_a63b7701870cbd37fc71d6579fb137ee8} 
+typedef \+\_\+\+Size {\bfseries Size}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_minisat_1_1vec_a006a509b5fc715f823e845a31ba2bee8}\label{class_minisat_1_1vec_a006a509b5fc715f823e845a31ba2bee8} 
+{\bfseries vec} (Size size)
+\item 
+\Hypertarget{class_minisat_1_1vec_ad13e186471b24f3e60ab510a651b2f54}\label{class_minisat_1_1vec_ad13e186471b24f3e60ab510a651b2f54} 
+{\bfseries vec} (Size size, const T \&pad)
+\item 
+\Hypertarget{class_minisat_1_1vec_ab9d07c92c728109925d82c69714bef47}\label{class_minisat_1_1vec_ab9d07c92c728109925d82c69714bef47} 
+{\bfseries operator T\texorpdfstring{$\ast$}{*}} (void)
+\item 
+\Hypertarget{class_minisat_1_1vec_a1d903a9b6284373d1c1f99af2cfde11e}\label{class_minisat_1_1vec_a1d903a9b6284373d1c1f99af2cfde11e} 
+Size {\bfseries size} (void) const
+\item 
+\Hypertarget{class_minisat_1_1vec_a643b727e9641edf0851c1f2965502acb}\label{class_minisat_1_1vec_a643b727e9641edf0851c1f2965502acb} 
+void {\bfseries shrink} (Size nelems)
+\item 
+\Hypertarget{class_minisat_1_1vec_a8cc0fedad8e49bf9e87d0dc6a4f7d2f1}\label{class_minisat_1_1vec_a8cc0fedad8e49bf9e87d0dc6a4f7d2f1} 
+void {\bfseries shrink\+\_\+} (Size nelems)
+\item 
+\Hypertarget{class_minisat_1_1vec_a734f7e3a469d9f32ae9be0965a6ab0e9}\label{class_minisat_1_1vec_a734f7e3a469d9f32ae9be0965a6ab0e9} 
+int {\bfseries capacity} (void) const
+\item 
+\Hypertarget{class_minisat_1_1vec_adf953ee43775b0203ba64731a06b18be}\label{class_minisat_1_1vec_adf953ee43775b0203ba64731a06b18be} 
+void {\bfseries capacity} (Size min\+\_\+cap)
+\item 
+\Hypertarget{class_minisat_1_1vec_a996568a4faaa4c64fdc47aef69395f71}\label{class_minisat_1_1vec_a996568a4faaa4c64fdc47aef69395f71} 
+void {\bfseries grow\+To} (Size size)
+\item 
+\Hypertarget{class_minisat_1_1vec_ac06451106112a95a8d53fec46d0771ec}\label{class_minisat_1_1vec_ac06451106112a95a8d53fec46d0771ec} 
+void {\bfseries grow\+To} (Size size, const T \&pad)
+\item 
+\Hypertarget{class_minisat_1_1vec_ad42b514d10ef01a6dbdf655e763f39b3}\label{class_minisat_1_1vec_ad42b514d10ef01a6dbdf655e763f39b3} 
+void {\bfseries clear} (bool dealloc=false)
+\item 
+\Hypertarget{class_minisat_1_1vec_a881f344584d4fcea85b246182433eaf4}\label{class_minisat_1_1vec_a881f344584d4fcea85b246182433eaf4} 
+void {\bfseries push} (void)
+\item 
+\Hypertarget{class_minisat_1_1vec_a2df3573a7463d12ea93235d52a554845}\label{class_minisat_1_1vec_a2df3573a7463d12ea93235d52a554845} 
+void {\bfseries push} (const T \&elem)
+\item 
+\Hypertarget{class_minisat_1_1vec_ac0c4db15baa34b99af5c0435f4c4c38c}\label{class_minisat_1_1vec_ac0c4db15baa34b99af5c0435f4c4c38c} 
+void {\bfseries push\+\_\+} (const T \&elem)
+\item 
+\Hypertarget{class_minisat_1_1vec_a031193c5797911fcb961f67bc8e0f4bf}\label{class_minisat_1_1vec_a031193c5797911fcb961f67bc8e0f4bf} 
+void {\bfseries pop} (void)
+\item 
+\Hypertarget{class_minisat_1_1vec_abb8bb1edc4efeb3771e98bee8dbe3569}\label{class_minisat_1_1vec_abb8bb1edc4efeb3771e98bee8dbe3569} 
+const T \& {\bfseries last} (void) const
+\item 
+\Hypertarget{class_minisat_1_1vec_ae40c1983c52c8e3b8e2dbeadd1d30e5e}\label{class_minisat_1_1vec_ae40c1983c52c8e3b8e2dbeadd1d30e5e} 
+T \& {\bfseries last} (void)
+\item 
+\Hypertarget{class_minisat_1_1vec_a39dae59421af0d7c0a5506ceef42d7a3}\label{class_minisat_1_1vec_a39dae59421af0d7c0a5506ceef42d7a3} 
+const T \& {\bfseries operator\mbox{[}$\,$\mbox{]}} (Size index) const
+\item 
+\Hypertarget{class_minisat_1_1vec_a17daee300e2d0c7d8c180d0368f2de7a}\label{class_minisat_1_1vec_a17daee300e2d0c7d8c180d0368f2de7a} 
+T \& {\bfseries operator\mbox{[}$\,$\mbox{]}} (Size index)
+\item 
+\Hypertarget{class_minisat_1_1vec_a4fa954083809014bda58b15891a346d3}\label{class_minisat_1_1vec_a4fa954083809014bda58b15891a346d3} 
+void {\bfseries copy\+To} (\mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ T $>$ \&copy) const
+\item 
+\Hypertarget{class_minisat_1_1vec_a7e7fff9db9ab3208ebf79373ea42d022}\label{class_minisat_1_1vec_a7e7fff9db9ab3208ebf79373ea42d022} 
+void {\bfseries move\+To} (\mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ T $>$ \&dest)
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+code/minisat/mtl/Vec.\+h\end{DoxyCompactItemize}

@@ -1,0 +1,137 @@
+\doxysection{Alloc.\+h}
+\hypertarget{_alloc_8h_source}{}\label{_alloc_8h_source}\index{code/minisat/mtl/Alloc.h@{code/minisat/mtl/Alloc.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*****************************************************************************************[Alloc.h]}}
+\DoxyCodeLine{00002\ \textcolor{comment}{Copyright\ (c)\ 2008-\/2010,\ Niklas\ Sorensson}}
+\DoxyCodeLine{00003\ \textcolor{comment}{}}
+\DoxyCodeLine{00004\ \textcolor{comment}{Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of\ this\ software\ and}}
+\DoxyCodeLine{00005\ \textcolor{comment}{associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in\ the\ Software\ without\ restriction,}}
+\DoxyCodeLine{00006\ \textcolor{comment}{including\ without\ limitation\ the\ rights\ to\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,}}
+\DoxyCodeLine{00007\ \textcolor{comment}{sublicense,\ and/or\ sell\ copies\ of\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is}}
+\DoxyCodeLine{00008\ \textcolor{comment}{furnished\ to\ do\ so,\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{00009\ \textcolor{comment}{}}
+\DoxyCodeLine{00010\ \textcolor{comment}{The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all\ copies\ or}}
+\DoxyCodeLine{00011\ \textcolor{comment}{substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{00012\ \textcolor{comment}{}}
+\DoxyCodeLine{00013\ \textcolor{comment}{THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR\ IMPLIED,\ INCLUDING\ BUT}}
+\DoxyCodeLine{00014\ \textcolor{comment}{NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE\ AND}}
+\DoxyCodeLine{00015\ \textcolor{comment}{NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,}}
+\DoxyCodeLine{00016\ \textcolor{comment}{DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT}}
+\DoxyCodeLine{00017\ \textcolor{comment}{OF\ OR\ IN\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{00018\ \textcolor{comment}{**************************************************************************************************/}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#ifndef\ Minisat\_Alloc\_h}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#define\ Minisat\_Alloc\_h}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ "{}minisat/mtl/XAlloc.h"{}}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ "{}minisat/mtl/Vec.h"{}}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{namespace\ }Minisat\ \{}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{comment}{//=================================================================================================}}
+\DoxyCodeLine{00030\ \textcolor{comment}{//\ Simple\ Region-\/based\ memory\ allocator:}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00033\ \textcolor{keyword}{class\ }RegionAllocator}
+\DoxyCodeLine{00034\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ T*\ \ \ \ \ \ \ \ memory;}
+\DoxyCodeLine{00036\ \ \ \ \ uint32\_t\ \ sz;}
+\DoxyCodeLine{00037\ \ \ \ \ uint32\_t\ \ cap;}
+\DoxyCodeLine{00038\ \ \ \ \ uint32\_t\ \ wasted\_;}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{void}\ capacity(uint32\_t\ min\_cap);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{comment}{//\ TODO:\ make\ this\ a\ class\ for\ better\ type-\/checking?}}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{typedef}\ uint32\_t\ Ref;}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{enum}\ \{\ Ref\_Undef\ =\ UINT32\_MAX\ \};}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keyword}{enum}\ \{\ Unit\_Size\ =\ \textcolor{keyword}{sizeof}(T)\ \};}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keyword}{explicit}\ RegionAllocator(uint32\_t\ start\_cap\ =\ 1024*1024)\ :\ memory(NULL),\ sz(0),\ cap(0),\ wasted\_(0)\{\ capacity(start\_cap);\ \}}
+\DoxyCodeLine{00049\ \ \ \ \ \string~RegionAllocator()}
+\DoxyCodeLine{00050\ \ \ \ \ \{}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (memory\ !=\ NULL)}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ ::free(memory);}
+\DoxyCodeLine{00053\ \ \ \ \ \}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ uint32\_t\ size\ \ \ \ \ \ ()\textcolor{keyword}{\ const\ \ \ \ \ \ }\{\ \textcolor{keywordflow}{return}\ sz;\ \}}
+\DoxyCodeLine{00057\ \ \ \ \ uint32\_t\ wasted\ \ \ \ ()\textcolor{keyword}{\ const\ \ \ \ \ \ }\{\ \textcolor{keywordflow}{return}\ wasted\_;\ \}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ Ref\ \ \ \ \ \ alloc\ \ \ \ \ (\textcolor{keywordtype}{int}\ size);\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ free\ \ \ \ \ \ (\textcolor{keywordtype}{int}\ size)\ \ \ \ \{\ wasted\_\ +=\ size;\ \}}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{comment}{//\ Deref,\ Load\ Effective\ Address\ (LEA),\ Inverse\ of\ LEA\ (AEL):}}
+\DoxyCodeLine{00063\ \ \ \ \ T\&\ \ \ \ \ \ \ operator[](Ref\ r)\ \ \ \ \ \ \ \{\ assert(r\ <\ sz);\ \textcolor{keywordflow}{return}\ memory[r];\ \}}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keyword}{const}\ T\&\ operator[](Ref\ r)\textcolor{keyword}{\ const\ }\{\ assert(r\ <\ sz);\ \textcolor{keywordflow}{return}\ memory[r];\ \}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \ \ T*\ \ \ \ \ \ \ lea\ \ \ \ \ \ \ (Ref\ r)\ \ \ \ \ \ \ \{\ assert(r\ <\ sz);\ \textcolor{keywordflow}{return}\ \&memory[r];\ \}}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keyword}{const}\ T*\ lea\ \ \ \ \ \ \ (Ref\ r)\textcolor{keyword}{\ const\ }\{\ assert(r\ <\ sz);\ \textcolor{keywordflow}{return}\ \&memory[r];\ \}}
+\DoxyCodeLine{00068\ \ \ \ \ Ref\ \ \ \ \ \ ael\ \ \ \ \ \ \ (\textcolor{keyword}{const}\ T*\ t)\ \ \{\ assert((\textcolor{keywordtype}{void}*)t\ >=\ (\textcolor{keywordtype}{void}*)\&memory[0]\ \&\&\ (\textcolor{keywordtype}{void}*)t\ <\ (\textcolor{keywordtype}{void}*)\&memory[sz-\/1]);}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \ (Ref)(t\ -\/\ \&memory[0]);\ \}}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ moveTo(RegionAllocator\&\ to)\ \{}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (to.memory\ !=\ NULL)\ ::free(to.memory);}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ to.memory\ =\ memory;}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ to.sz\ =\ sz;}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ to.cap\ =\ cap;}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ to.wasted\_\ =\ wasted\_;}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ memory\ =\ NULL;}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ sz\ =\ cap\ =\ wasted\_\ =\ 0;}
+\DoxyCodeLine{00080\ \ \ \ \ \}}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \};}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00086\ \textcolor{keywordtype}{void}\ RegionAllocator<T>::capacity(uint32\_t\ min\_cap)}
+\DoxyCodeLine{00087\ \{}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordflow}{if}\ (cap\ >=\ min\_cap)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ \ \ uint32\_t\ prev\_cap\ =\ cap;}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordflow}{while}\ (cap\ <\ min\_cap)\{}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ NOTE:\ Multiply\ by\ a\ factor\ (13/8)\ without\ causing\ overflow,\ then\ add\ 2\ and\ make\ the}}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ result\ even\ by\ clearing\ the\ least\ significant\ bit.\ The\ resulting\ sequence\ of\ capacities}}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ is\ carefully\ chosen\ to\ hit\ a\ maximum\ capacity\ that\ is\ close\ to\ the\ '2\string^32-\/1'\ limit\ when}}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ using\ 'uint32\_t'\ as\ indices\ so\ that\ as\ much\ as\ possible\ of\ this\ space\ can\ be\ used.}}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ uint32\_t\ delta\ =\ ((cap\ >>\ 1)\ +\ (cap\ >>\ 3)\ +\ 2)\ \&\ \string~1;}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ cap\ +=\ delta;}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (cap\ <=\ prev\_cap)}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{class_minisat_1_1_out_of_memory_exception}{OutOfMemoryException}}();}
+\DoxyCodeLine{00101\ \ \ \ \ \}}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{comment}{//\ printf("{}\ ..\ (\%p)\ cap\ =\ \%u\(\backslash\)n"{},\ this,\ cap);}}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \ \ \ assert(cap\ >\ 0);}
+\DoxyCodeLine{00105\ \ \ \ \ memory\ =\ (T*)xrealloc(memory,\ \textcolor{keyword}{sizeof}(T)*cap);}
+\DoxyCodeLine{00106\ \}}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00110\ \textcolor{keyword}{typename}\ RegionAllocator<T>::Ref}
+\DoxyCodeLine{00111\ RegionAllocator<T>::alloc(\textcolor{keywordtype}{int}\ size)}
+\DoxyCodeLine{00112\ \{\ }
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{comment}{//\ printf("{}ALLOC\ called\ (this\ =\ \%p,\ size\ =\ \%d)\(\backslash\)n"{},\ this,\ size);\ fflush(stdout);}}
+\DoxyCodeLine{00114\ \ \ \ \ assert(size\ >\ 0);}
+\DoxyCodeLine{00115\ \ \ \ \ capacity(sz\ +\ size);}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \ \ \ \ uint32\_t\ prev\_sz\ =\ sz;}
+\DoxyCodeLine{00118\ \ \ \ \ sz\ +=\ size;}
+\DoxyCodeLine{00119\ \ \ \ \ }
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{comment}{//\ Handle\ overflow:}}
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordflow}{if}\ (sz\ <\ prev\_sz)}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{class_minisat_1_1_out_of_memory_exception}{OutOfMemoryException}}();}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keywordflow}{return}\ prev\_sz;}
+\DoxyCodeLine{00125\ \}}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \textcolor{comment}{//=================================================================================================}}
+\DoxyCodeLine{00129\ \}}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

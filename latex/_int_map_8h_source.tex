@@ -1,0 +1,112 @@
+\doxysection{Int\+Map.\+h}
+\hypertarget{_int_map_8h_source}{}\label{_int_map_8h_source}\index{code/minisat/mtl/IntMap.h@{code/minisat/mtl/IntMap.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/****************************************************************************************[IntMap.h]}}
+\DoxyCodeLine{00002\ \textcolor{comment}{Copyright\ (c)\ 2011,\ Niklas\ Sorensson}}
+\DoxyCodeLine{00003\ \textcolor{comment}{Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of\ this\ software\ and}}
+\DoxyCodeLine{00004\ \textcolor{comment}{associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in\ the\ Software\ without\ restriction,}}
+\DoxyCodeLine{00005\ \textcolor{comment}{including\ without\ limitation\ the\ rights\ to\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,}}
+\DoxyCodeLine{00006\ \textcolor{comment}{sublicense,\ and/or\ sell\ copies\ of\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is}}
+\DoxyCodeLine{00007\ \textcolor{comment}{furnished\ to\ do\ so,\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{00008\ \textcolor{comment}{}}
+\DoxyCodeLine{00009\ \textcolor{comment}{The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all\ copies\ or}}
+\DoxyCodeLine{00010\ \textcolor{comment}{substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{00011\ \textcolor{comment}{}}
+\DoxyCodeLine{00012\ \textcolor{comment}{THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR\ IMPLIED,\ INCLUDING\ BUT}}
+\DoxyCodeLine{00013\ \textcolor{comment}{NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE\ AND}}
+\DoxyCodeLine{00014\ \textcolor{comment}{NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,}}
+\DoxyCodeLine{00015\ \textcolor{comment}{DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT}}
+\DoxyCodeLine{00016\ \textcolor{comment}{OF\ OR\ IN\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{00017\ \textcolor{comment}{**************************************************************************************************/}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#ifndef\ Minisat\_IntMap\_h}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ Minisat\_IntMap\_h}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ "{}minisat/mtl/Vec.h"{}}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{keyword}{namespace\ }Minisat\ \{}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T>\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_minisat_1_1_mk_index_default}{MkIndexDefault}}\ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keyword}{typename}\ vec<T>::Size\ operator()(T\ t)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ (\textcolor{keyword}{typename}\ vec<T>::Size)t;\ \}}
+\DoxyCodeLine{00028\ \ \ \ \ \};}
+\DoxyCodeLine{00029\ \ \ \ \ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ K,\ \textcolor{keyword}{class}\ V,\ \textcolor{keyword}{class}\ MkIndex\ =\ MkIndexDefault<K>\ >}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{class\ }IntMap\ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_minisat_1_1vec}{vec<V>}}\ \ \ map;}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ MkIndex\ \ index;}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ IntMap(MkIndex\ \_index\ =\ MkIndex())\ :\ index(\_index)\{\}}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ \ has\ \ \ \ \ \ \ (K\ k)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ index(k)\ <\ map.size();\ \}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ V\&\ operator[](K\ k)\textcolor{keyword}{\ const\ }\{\ assert(has(k));\ \textcolor{keywordflow}{return}\ map[index(k)];\ \}}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ V\&\ \ \ \ \ \ \ operator[](K\ k)\ \ \ \ \ \ \ \{\ assert(has(k));\ \textcolor{keywordflow}{return}\ map[index(k)];\ \}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ V*\ begin\ \ ()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \&map[0];\ \}}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ V*\ end\ \ \ \ ()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \&map[map.size()];\ \}}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ V*\ \ \ \ \ \ \ begin\ \ ()\ \ \ \ \ \ \ \{\ \textcolor{keywordflow}{return}\ \&map[0];\ \}}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ V*\ \ \ \ \ \ \ end\ \ \ \ ()\ \ \ \ \ \ \ \{\ \textcolor{keywordflow}{return}\ \&map[map.size()];\ \}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ reserve(K\ key,\ V\ pad)\ \ \ \ \ \ \ \{\ map.growTo(index(key)+1,\ pad);\ \}}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ reserve(K\ key)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ map.growTo(index(key)+1);\ \}}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ insert\ (K\ key,\ V\ val,\ V\ pad)\{\ reserve(key,\ pad);\ operator[](key)\ =\ val;\ \}}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ insert\ (K\ key,\ V\ val)\ \ \ \ \ \ \ \{\ reserve(key);\ operator[](key)\ =\ val;\ \}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ clear\ \ (\textcolor{keywordtype}{bool}\ dispose\ =\ \textcolor{keyword}{false})\ \{\ map.clear(dispose);\ \}}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ moveTo\ (IntMap\&\ to)\ \ \ \ \ \ \ \ \ \ \ \{\ map.moveTo(to.map);\ to.index\ =\ index;\ \}}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ copyTo\ (IntMap\&\ to)\textcolor{keyword}{\ const\ \ \ \ \ }\{\ map.copyTo(to.map);\ to.index\ =\ index;\ \}}
+\DoxyCodeLine{00055\ \ \ \ \ \};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ K,\ \textcolor{keyword}{class}\ MkIndex\ =\ MkIndexDefault<K>\ >}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_minisat_1_1_int_set}{IntSet}}}
+\DoxyCodeLine{00060\ \ \ \ \ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_minisat_1_1_int_map}{IntMap<K,\ char,\ MkIndex>}}\ in\_set;}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_minisat_1_1vec}{vec<K>}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ xs;}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Size\ operations:}}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ size\ \ \ \ \ \ \ \ (\textcolor{keywordtype}{void})\textcolor{keyword}{\ \ \ \ \ \ const\ \ }\{\ \textcolor{keywordflow}{return}\ xs.size();\ \}}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ clear\ \ \ \ \ \ \ (\textcolor{keywordtype}{bool}\ free\ =\ \textcolor{keyword}{false})\{}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (free)}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ in\_set.clear(\textcolor{keyword}{true});\ }
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ xs.size();\ i++)}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ in\_set[xs[i]]\ =\ 0;}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ xs.clear(free);}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Allow\ inspecting\ the\ internal\ vector:}}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_minisat_1_1vec}{vec<K>}}\&}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ toVec\ \ \ \ \ \ \ ()\textcolor{keyword}{\ \ \ \ \ \ \ \ \ \ const\ \ }\{\ \textcolor{keywordflow}{return}\ xs;\ \}}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Vector\ interface:}}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ K\ \ \ \ \ \ \ \ operator\ []\ (\textcolor{keywordtype}{int}\ index)\textcolor{keyword}{\ const\ \ }\{\ \textcolor{keywordflow}{return}\ xs[index];\ \}}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ insert\ \ \ \ \ \ (K\ k)\ \{\ in\_set.reserve(k,\ 0);\ \textcolor{keywordflow}{if}\ (!in\_set[k])\ \{\ in\_set[k]\ =\ 1;\ xs.push(k);\ \}\ \}}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ \ has\ \ \ \ \ \ \ \ \ (K\ k)\ \{\ in\_set.reserve(k,\ 0);\ \textcolor{keywordflow}{return}\ in\_set[k];\ \}}
+\DoxyCodeLine{00086\ \ \ \ \ \};}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \textcolor{preprocessor}{\ \ \ \ \#if\ 0}}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ K,\ \textcolor{keyword}{class}\ V,\ V\ nil,\ \textcolor{keyword}{class}\ MkIndex\ =\ MkIndexDefault<K>\ >}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keyword}{class\ }IntMapNil\ \{}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_minisat_1_1vec}{vec<V>}}\ map;}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ V\ \ \ \ \ \ nil;}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_minisat_1_1_int_map}{IntMap}}()\{\}}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ reserve(K);}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ V\&\ \ \ \ \ \ \ find\ \ \ (K);}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ V\&\ operator[](K\ k)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \ \ \};}
+\DoxyCodeLine{00102\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \textcolor{comment}{//=================================================================================================}}
+\DoxyCodeLine{00105\ \}\ \textcolor{comment}{//\ namespace\ Minisat}}
+\DoxyCodeLine{00106\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

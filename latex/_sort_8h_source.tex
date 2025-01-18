@@ -1,0 +1,104 @@
+\doxysection{Sort.\+h}
+\hypertarget{_sort_8h_source}{}\label{_sort_8h_source}\index{code/minisat/mtl/Sort.h@{code/minisat/mtl/Sort.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/******************************************************************************************[Sort.h]}}
+\DoxyCodeLine{00002\ \textcolor{comment}{Copyright\ (c)\ 2003-\/2007,\ Niklas\ Een,\ Niklas\ Sorensson}}
+\DoxyCodeLine{00003\ \textcolor{comment}{Copyright\ (c)\ 2007-\/2010,\ Niklas\ Sorensson}}
+\DoxyCodeLine{00004\ \textcolor{comment}{}}
+\DoxyCodeLine{00005\ \textcolor{comment}{Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of\ this\ software\ and}}
+\DoxyCodeLine{00006\ \textcolor{comment}{associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in\ the\ Software\ without\ restriction,}}
+\DoxyCodeLine{00007\ \textcolor{comment}{including\ without\ limitation\ the\ rights\ to\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,}}
+\DoxyCodeLine{00008\ \textcolor{comment}{sublicense,\ and/or\ sell\ copies\ of\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is}}
+\DoxyCodeLine{00009\ \textcolor{comment}{furnished\ to\ do\ so,\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{00010\ \textcolor{comment}{}}
+\DoxyCodeLine{00011\ \textcolor{comment}{The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all\ copies\ or}}
+\DoxyCodeLine{00012\ \textcolor{comment}{substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{}}
+\DoxyCodeLine{00014\ \textcolor{comment}{THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR\ IMPLIED,\ INCLUDING\ BUT}}
+\DoxyCodeLine{00015\ \textcolor{comment}{NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE\ AND}}
+\DoxyCodeLine{00016\ \textcolor{comment}{NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,}}
+\DoxyCodeLine{00017\ \textcolor{comment}{DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT}}
+\DoxyCodeLine{00018\ \textcolor{comment}{OF\ OR\ IN\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{00019\ \textcolor{comment}{**************************************************************************************************/}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#ifndef\ Minisat\_Sort\_h}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#define\ Minisat\_Sort\_h}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ "{}minisat/mtl/Vec.h"{}}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{comment}{//=================================================================================================}}
+\DoxyCodeLine{00027\ \textcolor{comment}{//\ Some\ sorting\ algorithms\ for\ vec's}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{namespace\ }Minisat\ \{}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00033\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_minisat_1_1_less_than__default}{LessThan\_default}}\ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{bool}\ operator\ ()\ (T\ x,\ T\ y)\ \{\ \textcolor{keywordflow}{return}\ x\ <\ y;\ \}}
+\DoxyCodeLine{00035\ \};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T,\ \textcolor{keyword}{class}\ LessThan>}
+\DoxyCodeLine{00039\ \textcolor{keywordtype}{void}\ selectionSort(T*\ array,\ \textcolor{keywordtype}{int}\ size,\ LessThan\ lt)}
+\DoxyCodeLine{00040\ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ i,\ j,\ best\_i;}
+\DoxyCodeLine{00042\ \ \ \ \ T\ \ \ \ \ \ \ tmp;}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ size-\/1;\ i++)\{}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ best\_i\ =\ i;}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (j\ =\ i+1;\ j\ <\ size;\ j++)\{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (lt(array[j],\ array[best\_i]))}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ best\_i\ =\ j;}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ tmp\ =\ array[i];\ array[i]\ =\ array[best\_i];\ array[best\_i]\ =\ tmp;}
+\DoxyCodeLine{00051\ \ \ \ \ \}}
+\DoxyCodeLine{00052\ \}}
+\DoxyCodeLine{00053\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ selectionSort(T*\ array,\ \textcolor{keywordtype}{int}\ size)\ \{}
+\DoxyCodeLine{00054\ \ \ \ \ selectionSort(array,\ size,\ \mbox{\hyperlink{struct_minisat_1_1_less_than__default}{LessThan\_default<T>}}());\ \}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T,\ \textcolor{keyword}{class}\ LessThan>}
+\DoxyCodeLine{00057\ \textcolor{keywordtype}{void}\ sort(T*\ array,\ \textcolor{keywordtype}{int}\ size,\ LessThan\ lt)}
+\DoxyCodeLine{00058\ \{}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordflow}{if}\ (size\ <=\ 15)}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ selectionSort(array,\ size,\ lt);}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ T\ \ \ \ \ \ \ \ \ \ \ pivot\ =\ array[size\ /\ 2];}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ T\ \ \ \ \ \ \ \ \ \ \ tmp;}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ i\ =\ -\/1;}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ j\ =\ size;}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(;;)\{}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}\ i++;\ \textcolor{keywordflow}{while}(lt(array[i],\ pivot));}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}\ j-\/-\/;\ \textcolor{keywordflow}{while}(lt(pivot,\ array[j]));}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ >=\ j)\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ tmp\ =\ array[i];\ array[i]\ =\ array[j];\ array[j]\ =\ tmp;}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ sort(array\ \ \ \ ,\ i\ \ \ \ \ ,\ lt);}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ sort(\&array[i],\ size-\/i,\ lt);}
+\DoxyCodeLine{00079\ \ \ \ \ \}}
+\DoxyCodeLine{00080\ \}}
+\DoxyCodeLine{00081\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ sort(T*\ array,\ \textcolor{keywordtype}{int}\ size)\ \{}
+\DoxyCodeLine{00082\ \ \ \ \ sort(array,\ size,\ \mbox{\hyperlink{struct_minisat_1_1_less_than__default}{LessThan\_default<T>}}());\ \}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \textcolor{comment}{//=================================================================================================}}
+\DoxyCodeLine{00086\ \textcolor{comment}{//\ For\ 'vec's:}}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T,\ \textcolor{keyword}{class}\ LessThan>\ \textcolor{keywordtype}{void}\ sort(\mbox{\hyperlink{class_minisat_1_1vec}{vec<T>}}\&\ v,\ LessThan\ lt)\ \{}
+\DoxyCodeLine{00090\ \ \ \ \ sort((T*)v,\ v.size(),\ lt);\ \}}
+\DoxyCodeLine{00091\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>\ \textcolor{keywordtype}{void}\ sort(\mbox{\hyperlink{class_minisat_1_1vec}{vec<T>}}\&\ v)\ \{}
+\DoxyCodeLine{00092\ \ \ \ \ sort(v,\ \mbox{\hyperlink{struct_minisat_1_1_less_than__default}{LessThan\_default<T>}}());\ \}}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \textcolor{comment}{//=================================================================================================}}
+\DoxyCodeLine{00096\ \}}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

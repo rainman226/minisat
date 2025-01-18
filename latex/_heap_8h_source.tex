@@ -1,0 +1,174 @@
+\doxysection{Heap.\+h}
+\hypertarget{_heap_8h_source}{}\label{_heap_8h_source}\index{code/minisat/mtl/Heap.h@{code/minisat/mtl/Heap.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/******************************************************************************************[Heap.h]}}
+\DoxyCodeLine{00002\ \textcolor{comment}{Copyright\ (c)\ 2003-\/2006,\ Niklas\ Een,\ Niklas\ Sorensson}}
+\DoxyCodeLine{00003\ \textcolor{comment}{Copyright\ (c)\ 2007-\/2010,\ Niklas\ Sorensson}}
+\DoxyCodeLine{00004\ \textcolor{comment}{}}
+\DoxyCodeLine{00005\ \textcolor{comment}{Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of\ this\ software\ and}}
+\DoxyCodeLine{00006\ \textcolor{comment}{associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in\ the\ Software\ without\ restriction,}}
+\DoxyCodeLine{00007\ \textcolor{comment}{including\ without\ limitation\ the\ rights\ to\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,}}
+\DoxyCodeLine{00008\ \textcolor{comment}{sublicense,\ and/or\ sell\ copies\ of\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is}}
+\DoxyCodeLine{00009\ \textcolor{comment}{furnished\ to\ do\ so,\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{00010\ \textcolor{comment}{}}
+\DoxyCodeLine{00011\ \textcolor{comment}{The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all\ copies\ or}}
+\DoxyCodeLine{00012\ \textcolor{comment}{substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{}}
+\DoxyCodeLine{00014\ \textcolor{comment}{THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR\ IMPLIED,\ INCLUDING\ BUT}}
+\DoxyCodeLine{00015\ \textcolor{comment}{NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE\ AND}}
+\DoxyCodeLine{00016\ \textcolor{comment}{NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,}}
+\DoxyCodeLine{00017\ \textcolor{comment}{DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT}}
+\DoxyCodeLine{00018\ \textcolor{comment}{OF\ OR\ IN\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{00019\ \textcolor{comment}{**************************************************************************************************/}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#ifndef\ Minisat\_Heap\_h}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#define\ Minisat\_Heap\_h}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ "{}minisat/mtl/Vec.h"{}}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ "{}minisat/mtl/IntMap.h"{}}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{namespace\ }Minisat\ \{}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{comment}{//=================================================================================================}}
+\DoxyCodeLine{00030\ \textcolor{comment}{//\ A\ heap\ implementation\ with\ support\ for\ decrease/increase\ key.}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ K,\ \textcolor{keyword}{class}\ Comp,\ \textcolor{keyword}{class}\ MkIndex\ =\ MkIndexDefault<K>\ >}
+\DoxyCodeLine{00034\ \textcolor{keyword}{class\ }Heap\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{class_minisat_1_1vec}{vec<K>}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ heap;\ \ \ \ \ \textcolor{comment}{//\ Heap\ of\ Keys}}
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{class_minisat_1_1_int_map}{IntMap<K,int,MkIndex>}}\ indices;\ \ \textcolor{comment}{//\ Each\ Key's\ position\ (index)\ in\ the\ Heap}}
+\DoxyCodeLine{00037\ \ \ \ \ Comp\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lt;\ \ \ \ \ \ \ \textcolor{comment}{//\ The\ heap\ is\ a\ minimum-\/heap\ with\ respect\ to\ this\ comparator}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{comment}{//\ Index\ "{}traversal"{}\ functions}}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{int}\ left\ \ (\textcolor{keywordtype}{int}\ i)\ \{\ \textcolor{keywordflow}{return}\ i*2+1;\ \}}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{int}\ right\ (\textcolor{keywordtype}{int}\ i)\ \{\ \textcolor{keywordflow}{return}\ (i+1)*2;\ \}}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{int}\ parent(\textcolor{keywordtype}{int}\ i)\ \{\ \textcolor{keywordflow}{return}\ (i-\/1)\ >>\ 1;\ \}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{void}\ percolateUp(\textcolor{keywordtype}{int}\ i)}
+\DoxyCodeLine{00046\ \ \ \ \ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ K\ \ \ x\ \ =\ heap[i];}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ p\ \ =\ parent(i);}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (i\ !=\ 0\ \&\&\ lt(x,\ heap[p]))\{}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ heap[i]\ \ \ \ \ \ \ \ \ \ =\ heap[p];}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ indices[heap[p]]\ =\ i;}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ i\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ p;}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ p\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ parent(p);}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ heap\ \ \ [i]\ =\ x;}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ indices[x]\ =\ i;}
+\DoxyCodeLine{00058\ \ \ \ \ \}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{void}\ percolateDown(\textcolor{keywordtype}{int}\ i)}
+\DoxyCodeLine{00062\ \ \ \ \ \{}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ K\ x\ =\ heap[i];}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (left(i)\ <\ heap.size())\{}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ child\ =\ right(i)\ <\ heap.size()\ \&\&\ lt(heap[right(i)],\ heap[left(i)])\ ?\ right(i)\ :\ left(i);}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!lt(heap[child],\ x))\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ heap[i]\ \ \ \ \ \ \ \ \ \ =\ heap[child];}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ indices[heap[i]]\ =\ i;}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ i\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ child;}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ heap\ \ \ [i]\ =\ x;}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ indices[x]\ =\ i;}
+\DoxyCodeLine{00073\ \ \ \ \ \}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00077\ \ \ \ \ Heap(\textcolor{keyword}{const}\ Comp\&\ c,\ MkIndex\ \_index\ =\ MkIndex())\ :\ indices(\_index),\ lt(c)\ \{\}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{int}\ \ size\ \ \ \ \ \ ()\textcolor{keyword}{\ \ \ \ \ \ \ \ \ \ const\ }\{\ \textcolor{keywordflow}{return}\ heap.size();\ \}}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{bool}\ empty\ \ \ \ \ ()\textcolor{keyword}{\ \ \ \ \ \ \ \ \ \ const\ }\{\ \textcolor{keywordflow}{return}\ heap.size()\ ==\ 0;\ \}}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{bool}\ inHeap\ \ \ \ (K\ k)\textcolor{keyword}{\ \ \ \ \ \ \ const\ }\{\ \textcolor{keywordflow}{return}\ indices.has(k)\ \&\&\ indices[k]\ >=\ 0;\ \}}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordtype}{int}\ \ operator[](\textcolor{keywordtype}{int}\ index)\textcolor{keyword}{\ const\ }\{\ assert(index\ <\ heap.size());\ \textcolor{keywordflow}{return}\ heap[index];\ \}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{void}\ decrease\ \ (K\ k)\ \{\ assert(inHeap(k));\ percolateUp\ \ (indices[k]);\ \}}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{void}\ increase\ \ (K\ k)\ \{\ assert(inHeap(k));\ percolateDown(indices[k]);\ \}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{comment}{//\ Safe\ variant\ of\ insert/decrease/increase:}}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordtype}{void}\ update(K\ k)}
+\DoxyCodeLine{00090\ \ \ \ \ \{}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!inHeap(k))}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ insert(k);}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ percolateUp(indices[k]);}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ percolateDown(indices[k]);\ \}}
+\DoxyCodeLine{00096\ \ \ \ \ \}}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordtype}{void}\ insert(K\ k)}
+\DoxyCodeLine{00100\ \ \ \ \ \{}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ indices.reserve(k,\ -\/1);}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ assert(!inHeap(k));}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ indices[k]\ =\ heap.size();}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ heap.push(k);}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ percolateUp(indices[k]);}
+\DoxyCodeLine{00107\ \ \ \ \ \}}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordtype}{void}\ remove(K\ k)}
+\DoxyCodeLine{00111\ \ \ \ \ \{}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ assert(inHeap(k));}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ k\_pos\ \ =\ indices[k];}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ indices[k]\ =\ -\/1;}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (k\_pos\ <\ heap.size()-\/1)\{}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ heap[k\_pos]\ \ \ \ \ \ \ \ \ \ =\ heap.last();}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ indices[heap[k\_pos]]\ =\ k\_pos;}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ heap.pop();}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ percolateDown(k\_pos);}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \}\textcolor{keywordflow}{else}}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ heap.pop();}
+\DoxyCodeLine{00124\ \ \ \ \ \}}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ \ \ \ \ K\ removeMin()}
+\DoxyCodeLine{00128\ \ \ \ \ \{}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ K\ x\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ heap[0];}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ heap[0]\ \ \ \ \ \ \ \ \ \ =\ heap.last();}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ indices[heap[0]]\ =\ 0;}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ indices[x]\ \ \ \ \ \ \ =\ -\/1;}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ heap.pop();}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (heap.size()\ >\ 1)\ percolateDown(0);}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ x;\ }
+\DoxyCodeLine{00136\ \ \ \ \ \}}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{comment}{//\ Rebuild\ the\ heap\ from\ scratch,\ using\ the\ elements\ in\ 'ns':}}
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keywordtype}{void}\ build(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_minisat_1_1vec}{vec<K>}}\&\ ns)\ \{}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ heap.size();\ i++)}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ indices[heap[i]]\ =\ -\/1;}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ heap.clear();}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ ns.size();\ i++)\{}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ TODO:\ this\ should\ probably\ call\ reserve\ instead\ of\ relying\ on\ it\ being\ reserved\ already.}}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ assert(indices.has(ns[i]));}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ indices[ns[i]]\ =\ i;}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ heap.push(ns[i]);\ \}}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ heap.size()\ /\ 2\ -\/\ 1;\ i\ >=\ 0;\ i-\/-\/)}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ percolateDown(i);}
+\DoxyCodeLine{00153\ \ \ \ \ \}}
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00155\ \ \ \ \ \textcolor{keywordtype}{void}\ clear(\textcolor{keywordtype}{bool}\ dispose\ =\ \textcolor{keyword}{false})\ }
+\DoxyCodeLine{00156\ \ \ \ \ \{\ }
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ TODO:\ shouldn't\ the\ 'indices'\ map\ also\ be\ dispose-\/cleared?}}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ heap.size();\ i++)}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ indices[heap[i]]\ =\ -\/1;}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ heap.clear(dispose);\ }
+\DoxyCodeLine{00161\ \ \ \ \ \}}
+\DoxyCodeLine{00162\ \};}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \textcolor{comment}{//=================================================================================================}}
+\DoxyCodeLine{00166\ \}}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00168\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

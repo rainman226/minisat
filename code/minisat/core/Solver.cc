@@ -24,6 +24,11 @@ OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWA
 #include "minisat/mtl/Sort.h"
 #include "minisat/utils/System.h"
 #include "minisat/core/Solver.h"
+/**
+ * @brief Clasa exemplu.
+ * 
+ * Aceasta este o descriere detaliată a clasei.
+ */
 
 using namespace Minisat;
 
@@ -699,6 +704,12 @@ bool Solver::simplify()
 |    all variables are decision variables, this means that the clause set is satisfiable. 'l_False'
 |    if the clause set is unsatisfiable. 'l_Undef' if the bound on number of conflicts is reached.
 |________________________________________________________________________________________________@*/
+/**
+ * @brief Searches for a model within a specified number of conflicts.
+ * 
+ * @param nof_conflicts The number of conflicts to allow before stopping.
+ * @return The result of the search: satisfiable, unsatisfiable, or undefined.
+ */
 lbool Solver::search(int nof_conflicts)
 {
     assert(ok);

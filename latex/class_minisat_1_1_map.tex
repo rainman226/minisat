@@ -1,0 +1,51 @@
+\doxysection{Minisat\+::Map\texorpdfstring{$<$}{<} K, D, H, E \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{class_minisat_1_1_map}{}\label{class_minisat_1_1_map}\index{Minisat::Map$<$ K, D, H, E $>$@{Minisat::Map$<$ K, D, H, E $>$}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_minisat_1_1_map_1_1_pair}{Pair}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_minisat_1_1_map_a39a0d7d684fbe4b0761a4f806c628624}\label{class_minisat_1_1_map_a39a0d7d684fbe4b0761a4f806c628624} 
+{\bfseries Map} (const H \&h, const E \&e)
+\item 
+\Hypertarget{class_minisat_1_1_map_a0e87c8e5df7589ee0b2f72154caa1180}\label{class_minisat_1_1_map_a0e87c8e5df7589ee0b2f72154caa1180} 
+const D \& {\bfseries operator\mbox{[}$\,$\mbox{]}} (const K \&k) const
+\item 
+\Hypertarget{class_minisat_1_1_map_a31e97083ac6c52054245272154d0a03c}\label{class_minisat_1_1_map_a31e97083ac6c52054245272154d0a03c} 
+D \& {\bfseries operator\mbox{[}$\,$\mbox{]}} (const K \&k)
+\item 
+\Hypertarget{class_minisat_1_1_map_a0bdaca8e4efb83e3940120d1c2f7d1ec}\label{class_minisat_1_1_map_a0bdaca8e4efb83e3940120d1c2f7d1ec} 
+void {\bfseries insert} (const K \&k, const D \&d)
+\item 
+\Hypertarget{class_minisat_1_1_map_aa3e96668e2cfd99f9b44843d35a70d8f}\label{class_minisat_1_1_map_aa3e96668e2cfd99f9b44843d35a70d8f} 
+bool {\bfseries peek} (const K \&k, D \&d) const
+\item 
+\Hypertarget{class_minisat_1_1_map_ad353cb77475c9d5ed6e1c35099cf1ed2}\label{class_minisat_1_1_map_ad353cb77475c9d5ed6e1c35099cf1ed2} 
+bool {\bfseries has} (const K \&k) const
+\item 
+\Hypertarget{class_minisat_1_1_map_a86b0ff6a25f6c3c54bcb601c6d7e28c5}\label{class_minisat_1_1_map_a86b0ff6a25f6c3c54bcb601c6d7e28c5} 
+void {\bfseries remove} (const K \&k)
+\item 
+\Hypertarget{class_minisat_1_1_map_af6bbafd1c62746b068e266e0295e78a5}\label{class_minisat_1_1_map_af6bbafd1c62746b068e266e0295e78a5} 
+void {\bfseries clear} ()
+\item 
+\Hypertarget{class_minisat_1_1_map_a94bd7e723f3e1b55f2cfc66bc8b75557}\label{class_minisat_1_1_map_a94bd7e723f3e1b55f2cfc66bc8b75557} 
+int {\bfseries elems} () const
+\item 
+\Hypertarget{class_minisat_1_1_map_a25659e61348db17c2fb41454e6a6dec5}\label{class_minisat_1_1_map_a25659e61348db17c2fb41454e6a6dec5} 
+int {\bfseries bucket\+\_\+count} () const
+\item 
+\Hypertarget{class_minisat_1_1_map_a121512d1017e40c7c8c3bc09a0028474}\label{class_minisat_1_1_map_a121512d1017e40c7c8c3bc09a0028474} 
+void {\bfseries move\+To} (\mbox{\hyperlink{class_minisat_1_1_map}{Map}} \&other)
+\item 
+\Hypertarget{class_minisat_1_1_map_a12661b43156424edf91a75c986ead716}\label{class_minisat_1_1_map_a12661b43156424edf91a75c986ead716} 
+const \mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_map_1_1_pair}{Pair}} $>$ \& {\bfseries bucket} (int i) const
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+code/minisat/mtl/Map.\+h\end{DoxyCompactItemize}

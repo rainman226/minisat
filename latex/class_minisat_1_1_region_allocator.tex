@@ -1,0 +1,57 @@
+\doxysection{Minisat\+::Region\+Allocator\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{class_minisat_1_1_region_allocator}{}\label{class_minisat_1_1_region_allocator}\index{Minisat::RegionAllocator$<$ T $>$@{Minisat::RegionAllocator$<$ T $>$}}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_minisat_1_1_region_allocator_aa6a3bc03824d398cf046fc5b9b042488}\label{class_minisat_1_1_region_allocator_aa6a3bc03824d398cf046fc5b9b042488} 
+enum \{ {\bfseries Ref\+\_\+\+Undef} = UINT32\+\_\+\+MAX
+ \}
+\item 
+\Hypertarget{class_minisat_1_1_region_allocator_a1aeabcf8956b63e564bac9e1d17b4d68}\label{class_minisat_1_1_region_allocator_a1aeabcf8956b63e564bac9e1d17b4d68} 
+enum \{ {\bfseries Unit\+\_\+\+Size} = sizeof(T)
+ \}
+\item 
+\Hypertarget{class_minisat_1_1_region_allocator_ac70f47b89c4477f701656b819b6b49a4}\label{class_minisat_1_1_region_allocator_ac70f47b89c4477f701656b819b6b49a4} 
+typedef uint32\+\_\+t {\bfseries Ref}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_minisat_1_1_region_allocator_a9329dbf01fe9e05b52925728f958ff9d}\label{class_minisat_1_1_region_allocator_a9329dbf01fe9e05b52925728f958ff9d} 
+{\bfseries Region\+Allocator} (uint32\+\_\+t start\+\_\+cap=1024 \texorpdfstring{$\ast$}{*}1024)
+\item 
+\Hypertarget{class_minisat_1_1_region_allocator_a41ec29687bcbcd7607d05a542b2fbcea}\label{class_minisat_1_1_region_allocator_a41ec29687bcbcd7607d05a542b2fbcea} 
+uint32\+\_\+t {\bfseries size} () const
+\item 
+\Hypertarget{class_minisat_1_1_region_allocator_a8818abf90a7703bbbf881a42c20c2b7f}\label{class_minisat_1_1_region_allocator_a8818abf90a7703bbbf881a42c20c2b7f} 
+uint32\+\_\+t {\bfseries wasted} () const
+\item 
+\Hypertarget{class_minisat_1_1_region_allocator_aa019b41526011f3d18b23f7c00ae2ffa}\label{class_minisat_1_1_region_allocator_aa019b41526011f3d18b23f7c00ae2ffa} 
+Ref {\bfseries alloc} (int size)
+\item 
+\Hypertarget{class_minisat_1_1_region_allocator_aec12fd9151357bbf29b9a6c81ab5a165}\label{class_minisat_1_1_region_allocator_aec12fd9151357bbf29b9a6c81ab5a165} 
+void {\bfseries free} (int size)
+\item 
+\Hypertarget{class_minisat_1_1_region_allocator_afe94d7f6aac4734e97508f0a97745a76}\label{class_minisat_1_1_region_allocator_afe94d7f6aac4734e97508f0a97745a76} 
+T \& {\bfseries operator\mbox{[}$\,$\mbox{]}} (Ref r)
+\item 
+\Hypertarget{class_minisat_1_1_region_allocator_a1a2e5d70043dbdf90bdc57b424c69591}\label{class_minisat_1_1_region_allocator_a1a2e5d70043dbdf90bdc57b424c69591} 
+const T \& {\bfseries operator\mbox{[}$\,$\mbox{]}} (Ref r) const
+\item 
+\Hypertarget{class_minisat_1_1_region_allocator_ae45eaf7b515d5ec88c7dc3edac075697}\label{class_minisat_1_1_region_allocator_ae45eaf7b515d5ec88c7dc3edac075697} 
+T \texorpdfstring{$\ast$}{*} {\bfseries lea} (Ref r)
+\item 
+\Hypertarget{class_minisat_1_1_region_allocator_aa41fb5599d4dfccdabecd429a98f160d}\label{class_minisat_1_1_region_allocator_aa41fb5599d4dfccdabecd429a98f160d} 
+const T \texorpdfstring{$\ast$}{*} {\bfseries lea} (Ref r) const
+\item 
+\Hypertarget{class_minisat_1_1_region_allocator_a87cdceb6ba7b2097c77930b3fdd37516}\label{class_minisat_1_1_region_allocator_a87cdceb6ba7b2097c77930b3fdd37516} 
+Ref {\bfseries ael} (const T \texorpdfstring{$\ast$}{*}t)
+\item 
+\Hypertarget{class_minisat_1_1_region_allocator_a1103c36c9df5f88d480d1215da81025f}\label{class_minisat_1_1_region_allocator_a1103c36c9df5f88d480d1215da81025f} 
+void {\bfseries move\+To} (\mbox{\hyperlink{class_minisat_1_1_region_allocator}{Region\+Allocator}} \&to)
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+code/minisat/mtl/Alloc.\+h\end{DoxyCompactItemize}

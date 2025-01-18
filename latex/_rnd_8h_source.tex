@@ -1,0 +1,73 @@
+\doxysection{Rnd.\+h}
+\hypertarget{_rnd_8h_source}{}\label{_rnd_8h_source}\index{code/minisat/mtl/Rnd.h@{code/minisat/mtl/Rnd.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*******************************************************************************************[Rnd.h]}}
+\DoxyCodeLine{00002\ \textcolor{comment}{Copyright\ (c)\ 2012,\ Niklas\ Sorensson}}
+\DoxyCodeLine{00003\ \textcolor{comment}{Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of\ this\ software\ and}}
+\DoxyCodeLine{00004\ \textcolor{comment}{associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in\ the\ Software\ without\ restriction,}}
+\DoxyCodeLine{00005\ \textcolor{comment}{including\ without\ limitation\ the\ rights\ to\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,}}
+\DoxyCodeLine{00006\ \textcolor{comment}{sublicense,\ and/or\ sell\ copies\ of\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is}}
+\DoxyCodeLine{00007\ \textcolor{comment}{furnished\ to\ do\ so,\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{00008\ \textcolor{comment}{}}
+\DoxyCodeLine{00009\ \textcolor{comment}{The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all\ copies\ or}}
+\DoxyCodeLine{00010\ \textcolor{comment}{substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{00011\ \textcolor{comment}{}}
+\DoxyCodeLine{00012\ \textcolor{comment}{THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR\ IMPLIED,\ INCLUDING\ BUT}}
+\DoxyCodeLine{00013\ \textcolor{comment}{NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE\ AND}}
+\DoxyCodeLine{00014\ \textcolor{comment}{NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,}}
+\DoxyCodeLine{00015\ \textcolor{comment}{DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT}}
+\DoxyCodeLine{00016\ \textcolor{comment}{OF\ OR\ IN\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{00017\ \textcolor{comment}{**************************************************************************************************/}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#ifndef\ Minisat\_Rnd\_h}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ Minisat\_Rnd\_h}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ "{}minisat/mtl/Vec.h"{}}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{keyword}{namespace\ }Minisat\ \{}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{comment}{//\ Generate\ a\ random\ double:}}
+\DoxyCodeLine{00027\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{double}\ drand(\textcolor{keywordtype}{double}\&\ seed)}
+\DoxyCodeLine{00028\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ seed\ *=\ 1389796;}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{int}\ q\ =\ (int)(seed\ /\ 2147483647);}
+\DoxyCodeLine{00031\ \ \ \ \ seed\ -\/=\ (double)q\ *\ 2147483647;}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordflow}{return}\ seed\ /\ 2147483647;}
+\DoxyCodeLine{00033\ \}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{comment}{//\ Generate\ a\ random\ integer:}}
+\DoxyCodeLine{00037\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{int}\ irand(\textcolor{keywordtype}{double}\&\ seed,\ \textcolor{keywordtype}{int}\ size)\ \{\ \textcolor{keywordflow}{return}\ (\textcolor{keywordtype}{int})(drand(seed)\ *\ size);\ \}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{comment}{//\ Randomly\ shuffle\ the\ contents\ of\ a\ vector:}}
+\DoxyCodeLine{00041\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00042\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ randomShuffle(\textcolor{keywordtype}{double}\&\ seed,\ \mbox{\hyperlink{class_minisat_1_1vec}{vec<T>}}\&\ xs)}
+\DoxyCodeLine{00043\ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ xs.size();\ i++)\{}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ pick\ =\ i\ +\ irand(seed,\ xs.size()\ -\/\ i);}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ T\ tmp\ =\ xs[i];}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ xs[i]\ =\ xs[pick];}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ xs[pick]\ =\ tmp;}
+\DoxyCodeLine{00049\ \ \ \ \ \}}
+\DoxyCodeLine{00050\ \}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{comment}{//\ Randomly\ shuffle\ a\ vector\ of\ a\ vector\ (ugly)}}
+\DoxyCodeLine{00053\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00054\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ randomShuffle(\textcolor{keywordtype}{double}\&\ seed,\ \mbox{\hyperlink{class_minisat_1_1vec}{vec}}<\mbox{\hyperlink{class_minisat_1_1vec}{vec<T>}}\ >\&\ xs)}
+\DoxyCodeLine{00055\ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ xs.size();\ i++)\{}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ pick\ =\ i\ +\ irand(seed,\ xs.size()\ -\/\ i);}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_minisat_1_1vec}{vec<T>}}\ tmp;\ xs[i].moveTo(tmp);}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ xs[pick].moveTo(xs[i]);}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ tmp.moveTo(xs[pick]);}
+\DoxyCodeLine{00061\ \ \ \ \ \}}
+\DoxyCodeLine{00062\ \}}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \textcolor{comment}{//=================================================================================================}}
+\DoxyCodeLine{00066\ \}\ \textcolor{comment}{//\ namespace\ Minisat}}
+\DoxyCodeLine{00067\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

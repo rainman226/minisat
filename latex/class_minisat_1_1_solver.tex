@@ -1,0 +1,521 @@
+\doxysection{Minisat\+::Solver Class Reference}
+\hypertarget{class_minisat_1_1_solver}{}\label{class_minisat_1_1_solver}\index{Minisat::Solver@{Minisat::Solver}}
+Inheritance diagram for Minisat\+::Solver\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_minisat_1_1_solver}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_minisat_1_1_solver_1_1_shrink_stack_elem}{Shrink\+Stack\+Elem}}
+\item 
+struct \mbox{\hyperlink{struct_minisat_1_1_solver_1_1_var_data}{Var\+Data}}
+\item 
+struct \mbox{\hyperlink{struct_minisat_1_1_solver_1_1_var_order_lt}{Var\+Order\+Lt}}
+\item 
+struct \mbox{\hyperlink{struct_minisat_1_1_solver_1_1_watcher}{Watcher}}
+\item 
+struct \mbox{\hyperlink{struct_minisat_1_1_solver_1_1_watcher_deleted}{Watcher\+Deleted}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_minisat_1_1_solver_a482e044a59e2bcefd6875dda1f863bb5}\label{class_minisat_1_1_solver_a482e044a59e2bcefd6875dda1f863bb5} 
+Var {\bfseries new\+Var} (\mbox{\hyperlink{class_minisat_1_1lbool}{lbool}} upol=l\+\_\+\+Undef, bool dvar=true)
+\item 
+\Hypertarget{class_minisat_1_1_solver_a75f8d12a5c24c09003b341ade62c0246}\label{class_minisat_1_1_solver_a75f8d12a5c24c09003b341ade62c0246} 
+void {\bfseries release\+Var} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} l)
+\item 
+\Hypertarget{class_minisat_1_1_solver_a9c9ad74371552eaaf4cc58b890878468}\label{class_minisat_1_1_solver_a9c9ad74371552eaaf4cc58b890878468} 
+bool {\bfseries add\+Clause} (const \mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} $>$ \&ps)
+\item 
+\Hypertarget{class_minisat_1_1_solver_aade475d25e1b0807b72b8f918ba5e03f}\label{class_minisat_1_1_solver_aade475d25e1b0807b72b8f918ba5e03f} 
+bool {\bfseries add\+Empty\+Clause} ()
+\item 
+\Hypertarget{class_minisat_1_1_solver_a7717e79ed9f28eecec661694fd1c6f77}\label{class_minisat_1_1_solver_a7717e79ed9f28eecec661694fd1c6f77} 
+bool {\bfseries add\+Clause} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p)
+\item 
+\Hypertarget{class_minisat_1_1_solver_ad9e632e090e266bdfeef46e0d84c9a27}\label{class_minisat_1_1_solver_ad9e632e090e266bdfeef46e0d84c9a27} 
+bool {\bfseries add\+Clause} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} q)
+\item 
+\Hypertarget{class_minisat_1_1_solver_a0fca610a5b436f29f59159d96bde0d8b}\label{class_minisat_1_1_solver_a0fca610a5b436f29f59159d96bde0d8b} 
+bool {\bfseries add\+Clause} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} q, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} r)
+\item 
+\Hypertarget{class_minisat_1_1_solver_a8880b05f2cc079ecb54b04bcc7493f01}\label{class_minisat_1_1_solver_a8880b05f2cc079ecb54b04bcc7493f01} 
+bool {\bfseries add\+Clause} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} q, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} r, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} s)
+\item 
+\Hypertarget{class_minisat_1_1_solver_a119be2237ea6a7a9c62871f0609ff014}\label{class_minisat_1_1_solver_a119be2237ea6a7a9c62871f0609ff014} 
+bool {\bfseries add\+Clause\+\_\+} (\mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} $>$ \&ps)
+\item 
+\Hypertarget{class_minisat_1_1_solver_ad1a30caa31b68223f269026a9ae6938e}\label{class_minisat_1_1_solver_ad1a30caa31b68223f269026a9ae6938e} 
+bool {\bfseries simplify} ()
+\item 
+\Hypertarget{class_minisat_1_1_solver_a107054d5b51671b36722ca51236f0ce6}\label{class_minisat_1_1_solver_a107054d5b51671b36722ca51236f0ce6} 
+bool {\bfseries solve} (const \mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} $>$ \&assumps)
+\item 
+\Hypertarget{class_minisat_1_1_solver_a28721b091fcfe2e0a4a3468fdd8b14dd}\label{class_minisat_1_1_solver_a28721b091fcfe2e0a4a3468fdd8b14dd} 
+\mbox{\hyperlink{class_minisat_1_1lbool}{lbool}} {\bfseries solve\+Limited} (const \mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} $>$ \&assumps)
+\item 
+\Hypertarget{class_minisat_1_1_solver_a936c49964d404d880d12cdd12b04cc22}\label{class_minisat_1_1_solver_a936c49964d404d880d12cdd12b04cc22} 
+bool {\bfseries solve} ()
+\item 
+\Hypertarget{class_minisat_1_1_solver_ac0fefc63fb61f04c9fddfbf539033039}\label{class_minisat_1_1_solver_ac0fefc63fb61f04c9fddfbf539033039} 
+bool {\bfseries solve} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p)
+\item 
+\Hypertarget{class_minisat_1_1_solver_ae2e336f6f7c26640c77b4dcb1f542cd4}\label{class_minisat_1_1_solver_ae2e336f6f7c26640c77b4dcb1f542cd4} 
+bool {\bfseries solve} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} q)
+\item 
+\Hypertarget{class_minisat_1_1_solver_a7abb81f59ae584835e57c7b878f5168e}\label{class_minisat_1_1_solver_a7abb81f59ae584835e57c7b878f5168e} 
+bool {\bfseries solve} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} q, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} r)
+\item 
+\Hypertarget{class_minisat_1_1_solver_a9ddb324bd660c66a20ec199251c66d40}\label{class_minisat_1_1_solver_a9ddb324bd660c66a20ec199251c66d40} 
+bool {\bfseries okay} () const
+\item 
+\Hypertarget{class_minisat_1_1_solver_a4e1a31b00b7fbb6a6d0365e75a77fcb8}\label{class_minisat_1_1_solver_a4e1a31b00b7fbb6a6d0365e75a77fcb8} 
+bool {\bfseries implies} (const \mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} $>$ \&assumps, \mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} $>$ \&out)
+\item 
+\Hypertarget{class_minisat_1_1_solver_a037b510880f2d109c8b3e6ebf9760c93}\label{class_minisat_1_1_solver_a037b510880f2d109c8b3e6ebf9760c93} 
+\mbox{\hyperlink{class_minisat_1_1_clause_iterator}{Clause\+Iterator}} {\bfseries clauses\+Begin} () const
+\item 
+\Hypertarget{class_minisat_1_1_solver_a25b73de25f5c8b6e3d473728ecd314ab}\label{class_minisat_1_1_solver_a25b73de25f5c8b6e3d473728ecd314ab} 
+\mbox{\hyperlink{class_minisat_1_1_clause_iterator}{Clause\+Iterator}} {\bfseries clauses\+End} () const
+\item 
+\Hypertarget{class_minisat_1_1_solver_a3459d108b47c813601346137c9c53f1d}\label{class_minisat_1_1_solver_a3459d108b47c813601346137c9c53f1d} 
+\mbox{\hyperlink{class_minisat_1_1_trail_iterator}{Trail\+Iterator}} {\bfseries trail\+Begin} () const
+\item 
+\Hypertarget{class_minisat_1_1_solver_ae4d7f4d5196588d499907cb469e07b3e}\label{class_minisat_1_1_solver_ae4d7f4d5196588d499907cb469e07b3e} 
+\mbox{\hyperlink{class_minisat_1_1_trail_iterator}{Trail\+Iterator}} {\bfseries trail\+End} () const
+\item 
+\Hypertarget{class_minisat_1_1_solver_a193f334cc13aa70f214fb617ca5c993d}\label{class_minisat_1_1_solver_a193f334cc13aa70f214fb617ca5c993d} 
+void {\bfseries to\+Dimacs} (FILE \texorpdfstring{$\ast$}{*}f, const \mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} $>$ \&assumps)
+\item 
+\Hypertarget{class_minisat_1_1_solver_a2b82560f7f485bd1fda271e60be074e1}\label{class_minisat_1_1_solver_a2b82560f7f485bd1fda271e60be074e1} 
+void {\bfseries to\+Dimacs} (const char \texorpdfstring{$\ast$}{*}file, const \mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} $>$ \&assumps)
+\item 
+\Hypertarget{class_minisat_1_1_solver_aaf5c4ac8d77980569db9f222860312c6}\label{class_minisat_1_1_solver_aaf5c4ac8d77980569db9f222860312c6} 
+void {\bfseries to\+Dimacs} (FILE \texorpdfstring{$\ast$}{*}f, \mbox{\hyperlink{class_minisat_1_1_clause}{Clause}} \&c, \mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ Var $>$ \&map, Var \&max)
+\item 
+\Hypertarget{class_minisat_1_1_solver_ac78cbc7e67e4d4e8273ff36bf0025486}\label{class_minisat_1_1_solver_ac78cbc7e67e4d4e8273ff36bf0025486} 
+void {\bfseries to\+Dimacs} (const char \texorpdfstring{$\ast$}{*}file)
+\item 
+\Hypertarget{class_minisat_1_1_solver_ac58af5f57af31b8af3dcf1bc00f21c78}\label{class_minisat_1_1_solver_ac58af5f57af31b8af3dcf1bc00f21c78} 
+void {\bfseries to\+Dimacs} (const char \texorpdfstring{$\ast$}{*}file, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p)
+\item 
+\Hypertarget{class_minisat_1_1_solver_a1c7aa6bc85d96f6d99e5171785dd4f88}\label{class_minisat_1_1_solver_a1c7aa6bc85d96f6d99e5171785dd4f88} 
+void {\bfseries to\+Dimacs} (const char \texorpdfstring{$\ast$}{*}file, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} q)
+\item 
+\Hypertarget{class_minisat_1_1_solver_a570a4c1961192c6db8c8a20b0017d371}\label{class_minisat_1_1_solver_a570a4c1961192c6db8c8a20b0017d371} 
+void {\bfseries to\+Dimacs} (const char \texorpdfstring{$\ast$}{*}file, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} q, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} r)
+\item 
+\Hypertarget{class_minisat_1_1_solver_aabda1a08f619dd5b8e321fe2d5c931dd}\label{class_minisat_1_1_solver_aabda1a08f619dd5b8e321fe2d5c931dd} 
+void {\bfseries set\+Polarity} (Var v, \mbox{\hyperlink{class_minisat_1_1lbool}{lbool}} b)
+\item 
+\Hypertarget{class_minisat_1_1_solver_ad2de9fc5e9ef8701b87492893bd407d3}\label{class_minisat_1_1_solver_ad2de9fc5e9ef8701b87492893bd407d3} 
+void {\bfseries set\+Decision\+Var} (Var v, bool b)
+\item 
+\Hypertarget{class_minisat_1_1_solver_ae77d99074cceab0135299dd373391717}\label{class_minisat_1_1_solver_ae77d99074cceab0135299dd373391717} 
+\mbox{\hyperlink{class_minisat_1_1lbool}{lbool}} {\bfseries value} (Var x) const
+\item 
+\Hypertarget{class_minisat_1_1_solver_a05605eea9267ad082e93cd29e21d27d9}\label{class_minisat_1_1_solver_a05605eea9267ad082e93cd29e21d27d9} 
+\mbox{\hyperlink{class_minisat_1_1lbool}{lbool}} {\bfseries value} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p) const
+\item 
+\Hypertarget{class_minisat_1_1_solver_a3cf93baba304feee8abefea763c96e79}\label{class_minisat_1_1_solver_a3cf93baba304feee8abefea763c96e79} 
+\mbox{\hyperlink{class_minisat_1_1lbool}{lbool}} {\bfseries model\+Value} (Var x) const
+\item 
+\Hypertarget{class_minisat_1_1_solver_a51b664f2d48c7205d83e0f79318053a3}\label{class_minisat_1_1_solver_a51b664f2d48c7205d83e0f79318053a3} 
+\mbox{\hyperlink{class_minisat_1_1lbool}{lbool}} {\bfseries model\+Value} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p) const
+\item 
+\Hypertarget{class_minisat_1_1_solver_acaa88f506affc227cdf00cbab585a6a5}\label{class_minisat_1_1_solver_acaa88f506affc227cdf00cbab585a6a5} 
+int {\bfseries n\+Assigns} () const
+\item 
+\Hypertarget{class_minisat_1_1_solver_af02962f43c48e66e8c69a0453ccb7168}\label{class_minisat_1_1_solver_af02962f43c48e66e8c69a0453ccb7168} 
+int {\bfseries n\+Clauses} () const
+\item 
+\Hypertarget{class_minisat_1_1_solver_a2ab98855bdd453e4f74486e371d3e72c}\label{class_minisat_1_1_solver_a2ab98855bdd453e4f74486e371d3e72c} 
+int {\bfseries n\+Learnts} () const
+\item 
+\Hypertarget{class_minisat_1_1_solver_a481caa22aeea07c8e0dd4af502c9237b}\label{class_minisat_1_1_solver_a481caa22aeea07c8e0dd4af502c9237b} 
+int {\bfseries n\+Vars} () const
+\item 
+\Hypertarget{class_minisat_1_1_solver_a0f79b78d722cfa63749373325c5b52bc}\label{class_minisat_1_1_solver_a0f79b78d722cfa63749373325c5b52bc} 
+int {\bfseries n\+Free\+Vars} () const
+\item 
+\Hypertarget{class_minisat_1_1_solver_ae811697823cdc971129d20657f066dcc}\label{class_minisat_1_1_solver_ae811697823cdc971129d20657f066dcc} 
+void {\bfseries print\+Stats} () const
+\item 
+\Hypertarget{class_minisat_1_1_solver_ac185b542ee52044d8358b3d1bcc7273f}\label{class_minisat_1_1_solver_ac185b542ee52044d8358b3d1bcc7273f} 
+void {\bfseries set\+Conf\+Budget} (int64\+\_\+t x)
+\item 
+\Hypertarget{class_minisat_1_1_solver_a6b6c684b6e5f299e1f4c9fbea690aab6}\label{class_minisat_1_1_solver_a6b6c684b6e5f299e1f4c9fbea690aab6} 
+void {\bfseries set\+Prop\+Budget} (int64\+\_\+t x)
+\item 
+\Hypertarget{class_minisat_1_1_solver_a3051846644be8d3798673fb191978f96}\label{class_minisat_1_1_solver_a3051846644be8d3798673fb191978f96} 
+void {\bfseries budget\+Off} ()
+\item 
+\Hypertarget{class_minisat_1_1_solver_af0c743c77bb2f9882f0bb733d019af0b}\label{class_minisat_1_1_solver_af0c743c77bb2f9882f0bb733d019af0b} 
+void {\bfseries interrupt} ()
+\item 
+\Hypertarget{class_minisat_1_1_solver_a023a4e3a76347e5a4a576dfbc00bd9cb}\label{class_minisat_1_1_solver_a023a4e3a76347e5a4a576dfbc00bd9cb} 
+void {\bfseries clear\+Interrupt} ()
+\item 
+\Hypertarget{class_minisat_1_1_solver_a483457ef263aa53ba8ae8dcadc5d5602}\label{class_minisat_1_1_solver_a483457ef263aa53ba8ae8dcadc5d5602} 
+virtual void {\bfseries garbage\+Collect} ()
+\item 
+\Hypertarget{class_minisat_1_1_solver_ab3aea51bbdd0d9d126935608e669a35c}\label{class_minisat_1_1_solver_ab3aea51bbdd0d9d126935608e669a35c} 
+void {\bfseries check\+Garbage} (double gf)
+\item 
+\Hypertarget{class_minisat_1_1_solver_a2be2c29ca256171dea4b3535eab6364a}\label{class_minisat_1_1_solver_a2be2c29ca256171dea4b3535eab6364a} 
+void {\bfseries check\+Garbage} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_minisat_1_1_solver_aae3d2f0cca7750249fe28e2ef6974b3c}\label{class_minisat_1_1_solver_aae3d2f0cca7750249fe28e2ef6974b3c} 
+\mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{class_minisat_1_1lbool}{lbool}} $>$ {\bfseries model}
+\item 
+\Hypertarget{class_minisat_1_1_solver_a2aae35a7077065e1e1de7a54553c0068}\label{class_minisat_1_1_solver_a2aae35a7077065e1e1de7a54553c0068} 
+\mbox{\hyperlink{class_minisat_1_1_l_set}{LSet}} {\bfseries conflict}
+\item 
+\Hypertarget{class_minisat_1_1_solver_ab09a887093f9f71f2c8a28024f0b9155}\label{class_minisat_1_1_solver_ab09a887093f9f71f2c8a28024f0b9155} 
+int {\bfseries verbosity}
+\item 
+\Hypertarget{class_minisat_1_1_solver_a92e481ff2e8aae3e0580da9ae2b400fd}\label{class_minisat_1_1_solver_a92e481ff2e8aae3e0580da9ae2b400fd} 
+double {\bfseries var\+\_\+decay}
+\item 
+\Hypertarget{class_minisat_1_1_solver_a67e6fad93d5848d14fca2431f401a94f}\label{class_minisat_1_1_solver_a67e6fad93d5848d14fca2431f401a94f} 
+double {\bfseries clause\+\_\+decay}
+\item 
+\Hypertarget{class_minisat_1_1_solver_a980852d1323e4a9b993ab4c79ac45e32}\label{class_minisat_1_1_solver_a980852d1323e4a9b993ab4c79ac45e32} 
+double {\bfseries random\+\_\+var\+\_\+freq}
+\item 
+\Hypertarget{class_minisat_1_1_solver_a20f572a57b0e3a3d9daa387fd630eb7b}\label{class_minisat_1_1_solver_a20f572a57b0e3a3d9daa387fd630eb7b} 
+double {\bfseries random\+\_\+seed}
+\item 
+\Hypertarget{class_minisat_1_1_solver_a78c45e99658888dff32db24615849df6}\label{class_minisat_1_1_solver_a78c45e99658888dff32db24615849df6} 
+bool {\bfseries luby\+\_\+restart}
+\item 
+\Hypertarget{class_minisat_1_1_solver_a00fa63ae813b007d5a4325dc03e81ee9}\label{class_minisat_1_1_solver_a00fa63ae813b007d5a4325dc03e81ee9} 
+int {\bfseries ccmin\+\_\+mode}
+\item 
+\Hypertarget{class_minisat_1_1_solver_aedab8ed0dd1c2c1b6461cc9e81897689}\label{class_minisat_1_1_solver_aedab8ed0dd1c2c1b6461cc9e81897689} 
+int {\bfseries phase\+\_\+saving}
+\item 
+\Hypertarget{class_minisat_1_1_solver_af37c48b9b322c1dc1541383e95da9644}\label{class_minisat_1_1_solver_af37c48b9b322c1dc1541383e95da9644} 
+bool {\bfseries rnd\+\_\+pol}
+\item 
+\Hypertarget{class_minisat_1_1_solver_a66cbad92d436228ba85b0137ab55c4c7}\label{class_minisat_1_1_solver_a66cbad92d436228ba85b0137ab55c4c7} 
+bool {\bfseries rnd\+\_\+init\+\_\+act}
+\item 
+\Hypertarget{class_minisat_1_1_solver_ad09f2cce1c497a1e532652a3b651569a}\label{class_minisat_1_1_solver_ad09f2cce1c497a1e532652a3b651569a} 
+double {\bfseries garbage\+\_\+frac}
+\item 
+\Hypertarget{class_minisat_1_1_solver_a98f6653bf369d588153f0994ba85ac27}\label{class_minisat_1_1_solver_a98f6653bf369d588153f0994ba85ac27} 
+int {\bfseries min\+\_\+learnts\+\_\+lim}
+\item 
+\Hypertarget{class_minisat_1_1_solver_af35a679525a156ab845f03aed3d0acd2}\label{class_minisat_1_1_solver_af35a679525a156ab845f03aed3d0acd2} 
+int {\bfseries restart\+\_\+first}
+\item 
+\Hypertarget{class_minisat_1_1_solver_a69f5be7b1f461f3b6c266530183f7640}\label{class_minisat_1_1_solver_a69f5be7b1f461f3b6c266530183f7640} 
+double {\bfseries restart\+\_\+inc}
+\item 
+\Hypertarget{class_minisat_1_1_solver_a011408e69904b88cf7568b7220a76421}\label{class_minisat_1_1_solver_a011408e69904b88cf7568b7220a76421} 
+double {\bfseries learntsize\+\_\+factor}
+\item 
+\Hypertarget{class_minisat_1_1_solver_a20f4d813dcc582df120bf175eccb5251}\label{class_minisat_1_1_solver_a20f4d813dcc582df120bf175eccb5251} 
+double {\bfseries learntsize\+\_\+inc}
+\item 
+\Hypertarget{class_minisat_1_1_solver_af81759feada7a26e6d967fde75bd3318}\label{class_minisat_1_1_solver_af81759feada7a26e6d967fde75bd3318} 
+int {\bfseries learntsize\+\_\+adjust\+\_\+start\+\_\+confl}
+\item 
+\Hypertarget{class_minisat_1_1_solver_ad70e3eb592c1931126348dcf78da30cd}\label{class_minisat_1_1_solver_ad70e3eb592c1931126348dcf78da30cd} 
+double {\bfseries learntsize\+\_\+adjust\+\_\+inc}
+\item 
+\Hypertarget{class_minisat_1_1_solver_af23099bf9d5697c3fe3543d8c0995223}\label{class_minisat_1_1_solver_af23099bf9d5697c3fe3543d8c0995223} 
+uint64\+\_\+t {\bfseries solves}
+\item 
+\Hypertarget{class_minisat_1_1_solver_a1d5f4b12c0277ed90c66954653281460}\label{class_minisat_1_1_solver_a1d5f4b12c0277ed90c66954653281460} 
+uint64\+\_\+t {\bfseries starts}
+\item 
+\Hypertarget{class_minisat_1_1_solver_aeacb7e5049e9eeb149998e8083dc53a9}\label{class_minisat_1_1_solver_aeacb7e5049e9eeb149998e8083dc53a9} 
+uint64\+\_\+t {\bfseries decisions}
+\item 
+\Hypertarget{class_minisat_1_1_solver_a4967b7d7bee7a98f5002dbe05f12d39c}\label{class_minisat_1_1_solver_a4967b7d7bee7a98f5002dbe05f12d39c} 
+uint64\+\_\+t {\bfseries rnd\+\_\+decisions}
+\item 
+\Hypertarget{class_minisat_1_1_solver_a25561af1c62a0e131bd988d2e9cbb9dd}\label{class_minisat_1_1_solver_a25561af1c62a0e131bd988d2e9cbb9dd} 
+uint64\+\_\+t {\bfseries propagations}
+\item 
+\Hypertarget{class_minisat_1_1_solver_a88350633bb3f70fba17f0e605c851306}\label{class_minisat_1_1_solver_a88350633bb3f70fba17f0e605c851306} 
+uint64\+\_\+t {\bfseries conflicts}
+\item 
+\Hypertarget{class_minisat_1_1_solver_abe2b8a3d320c4ef7f8c1de46590111f6}\label{class_minisat_1_1_solver_abe2b8a3d320c4ef7f8c1de46590111f6} 
+uint64\+\_\+t {\bfseries dec\+\_\+vars}
+\item 
+\Hypertarget{class_minisat_1_1_solver_acaabbde721b07927c7e46759e3ebe9e0}\label{class_minisat_1_1_solver_acaabbde721b07927c7e46759e3ebe9e0} 
+uint64\+\_\+t {\bfseries num\+\_\+clauses}
+\item 
+\Hypertarget{class_minisat_1_1_solver_af94898dfe015076ff6f61d50067548d8}\label{class_minisat_1_1_solver_af94898dfe015076ff6f61d50067548d8} 
+uint64\+\_\+t {\bfseries num\+\_\+learnts}
+\item 
+\Hypertarget{class_minisat_1_1_solver_a1484d338a13b37e4477d4ade7a810bc7}\label{class_minisat_1_1_solver_a1484d338a13b37e4477d4ade7a810bc7} 
+uint64\+\_\+t {\bfseries clauses\+\_\+literals}
+\item 
+\Hypertarget{class_minisat_1_1_solver_aa25961fd9b815d9fdf47c3059bce55e7}\label{class_minisat_1_1_solver_aa25961fd9b815d9fdf47c3059bce55e7} 
+uint64\+\_\+t {\bfseries learnts\+\_\+literals}
+\item 
+\Hypertarget{class_minisat_1_1_solver_ac531f5c4fbb8636bc2db2dc83205ce6d}\label{class_minisat_1_1_solver_ac531f5c4fbb8636bc2db2dc83205ce6d} 
+uint64\+\_\+t {\bfseries max\+\_\+literals}
+\item 
+\Hypertarget{class_minisat_1_1_solver_a0e5be2b3a8ecedc4049230dd197dea54}\label{class_minisat_1_1_solver_a0e5be2b3a8ecedc4049230dd197dea54} 
+uint64\+\_\+t {\bfseries tot\+\_\+literals}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_minisat_1_1_solver_a9afd89441d48f0d4a06bcc1ef0884e2d}\label{class_minisat_1_1_solver_a9afd89441d48f0d4a06bcc1ef0884e2d} 
+void {\bfseries insert\+Var\+Order} (Var x)
+\item 
+\Hypertarget{class_minisat_1_1_solver_a0dfbf3409518b5690dc4c69220711f71}\label{class_minisat_1_1_solver_a0dfbf3409518b5690dc4c69220711f71} 
+\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} {\bfseries pick\+Branch\+Lit} ()
+\item 
+\Hypertarget{class_minisat_1_1_solver_a63c74bc7cb85b273b7f533b3977824d9}\label{class_minisat_1_1_solver_a63c74bc7cb85b273b7f533b3977824d9} 
+void {\bfseries new\+Decision\+Level} ()
+\item 
+\Hypertarget{class_minisat_1_1_solver_af18fa904934ea2b2e3f7c6b975962096}\label{class_minisat_1_1_solver_af18fa904934ea2b2e3f7c6b975962096} 
+void {\bfseries unchecked\+Enqueue} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p, CRef from=CRef\+\_\+\+Undef)
+\item 
+\Hypertarget{class_minisat_1_1_solver_af5db45c871f89859da8c2f0697988ccd}\label{class_minisat_1_1_solver_af5db45c871f89859da8c2f0697988ccd} 
+bool {\bfseries enqueue} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p, CRef from=CRef\+\_\+\+Undef)
+\item 
+\Hypertarget{class_minisat_1_1_solver_a152b3ab287308a53e677f73c5cc79157}\label{class_minisat_1_1_solver_a152b3ab287308a53e677f73c5cc79157} 
+CRef {\bfseries propagate} ()
+\item 
+\Hypertarget{class_minisat_1_1_solver_a2fb2d91a89d728cdf90f04703d2f51d7}\label{class_minisat_1_1_solver_a2fb2d91a89d728cdf90f04703d2f51d7} 
+void {\bfseries cancel\+Until} (int level)
+\item 
+\Hypertarget{class_minisat_1_1_solver_a6d3e78b95132a09eaa210f514571e9aa}\label{class_minisat_1_1_solver_a6d3e78b95132a09eaa210f514571e9aa} 
+void {\bfseries analyze} (CRef confl, \mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} $>$ \&out\+\_\+learnt, int \&out\+\_\+btlevel)
+\item 
+\Hypertarget{class_minisat_1_1_solver_a4bc629492593940fee7c81c54106e707}\label{class_minisat_1_1_solver_a4bc629492593940fee7c81c54106e707} 
+void {\bfseries analyze\+Final} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p, \mbox{\hyperlink{class_minisat_1_1_l_set}{LSet}} \&out\+\_\+conflict)
+\item 
+\Hypertarget{class_minisat_1_1_solver_a79f32c013599099ca66de244a8d678d7}\label{class_minisat_1_1_solver_a79f32c013599099ca66de244a8d678d7} 
+bool {\bfseries lit\+Redundant} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p)
+\item 
+\mbox{\hyperlink{class_minisat_1_1lbool}{lbool}} \mbox{\hyperlink{class_minisat_1_1_solver_a16eaedf9b9c2d13d4ff5e93f759cfcf6}{search}} (int nof\+\_\+conflicts)
+\begin{DoxyCompactList}\small\item\em Searches for a model within a specified number of conflicts. \end{DoxyCompactList}\item 
+\Hypertarget{class_minisat_1_1_solver_ac3a707bbcbfcd0b3b4b2fc5dc399c1cd}\label{class_minisat_1_1_solver_ac3a707bbcbfcd0b3b4b2fc5dc399c1cd} 
+\mbox{\hyperlink{class_minisat_1_1lbool}{lbool}} {\bfseries solve\+\_\+} ()
+\item 
+\Hypertarget{class_minisat_1_1_solver_a62eea2c00917497fbfb843bf9ca4482e}\label{class_minisat_1_1_solver_a62eea2c00917497fbfb843bf9ca4482e} 
+void {\bfseries reduce\+DB} ()
+\item 
+\Hypertarget{class_minisat_1_1_solver_a8158cf7db6c80fe89b31b87e731a1716}\label{class_minisat_1_1_solver_a8158cf7db6c80fe89b31b87e731a1716} 
+void {\bfseries remove\+Satisfied} (\mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ CRef $>$ \&cs)
+\item 
+\Hypertarget{class_minisat_1_1_solver_a6a06e78b1d2d568b1cdb0df024086449}\label{class_minisat_1_1_solver_a6a06e78b1d2d568b1cdb0df024086449} 
+void {\bfseries rebuild\+Order\+Heap} ()
+\item 
+\Hypertarget{class_minisat_1_1_solver_a340e5768b477f46b40db85611dc0af39}\label{class_minisat_1_1_solver_a340e5768b477f46b40db85611dc0af39} 
+void {\bfseries var\+Decay\+Activity} ()
+\item 
+\Hypertarget{class_minisat_1_1_solver_abbbebd89e4218e547f9c8e39a3b4e183}\label{class_minisat_1_1_solver_abbbebd89e4218e547f9c8e39a3b4e183} 
+void {\bfseries var\+Bump\+Activity} (Var v, double inc)
+\item 
+\Hypertarget{class_minisat_1_1_solver_a24c0f43af9507ff6e83eda3d649f0954}\label{class_minisat_1_1_solver_a24c0f43af9507ff6e83eda3d649f0954} 
+void {\bfseries var\+Bump\+Activity} (Var v)
+\item 
+\Hypertarget{class_minisat_1_1_solver_a322eb9d375e56b0ca591209daa83c375}\label{class_minisat_1_1_solver_a322eb9d375e56b0ca591209daa83c375} 
+void {\bfseries cla\+Decay\+Activity} ()
+\item 
+\Hypertarget{class_minisat_1_1_solver_a3b632e3d1f2bbf4308f9533daff30843}\label{class_minisat_1_1_solver_a3b632e3d1f2bbf4308f9533daff30843} 
+void {\bfseries cla\+Bump\+Activity} (\mbox{\hyperlink{class_minisat_1_1_clause}{Clause}} \&c)
+\item 
+\Hypertarget{class_minisat_1_1_solver_a7527b63c389b07fb34db82f85c367c50}\label{class_minisat_1_1_solver_a7527b63c389b07fb34db82f85c367c50} 
+void {\bfseries attach\+Clause} (CRef cr)
+\item 
+\Hypertarget{class_minisat_1_1_solver_a67da67107cbd7cf4de860879133b7945}\label{class_minisat_1_1_solver_a67da67107cbd7cf4de860879133b7945} 
+void {\bfseries detach\+Clause} (CRef cr, bool strict=false)
+\item 
+\Hypertarget{class_minisat_1_1_solver_a516caed20aee5d2378b0117e39d36569}\label{class_minisat_1_1_solver_a516caed20aee5d2378b0117e39d36569} 
+void {\bfseries remove\+Clause} (CRef cr)
+\item 
+\Hypertarget{class_minisat_1_1_solver_afe95eb9561c5ce762d047ad5562ca2b4}\label{class_minisat_1_1_solver_afe95eb9561c5ce762d047ad5562ca2b4} 
+bool {\bfseries is\+Removed} (CRef cr) const
+\item 
+\Hypertarget{class_minisat_1_1_solver_a50c367b32406fbaa54fea5c1421c52a2}\label{class_minisat_1_1_solver_a50c367b32406fbaa54fea5c1421c52a2} 
+bool {\bfseries locked} (const \mbox{\hyperlink{class_minisat_1_1_clause}{Clause}} \&c) const
+\item 
+\Hypertarget{class_minisat_1_1_solver_af94b0f2e1e8558df56231ff1be865552}\label{class_minisat_1_1_solver_af94b0f2e1e8558df56231ff1be865552} 
+bool {\bfseries satisfied} (const \mbox{\hyperlink{class_minisat_1_1_clause}{Clause}} \&c) const
+\item 
+\Hypertarget{class_minisat_1_1_solver_aca6c56c55e3cdd573e5ab8154196647d}\label{class_minisat_1_1_solver_aca6c56c55e3cdd573e5ab8154196647d} 
+int {\bfseries decision\+Level} () const
+\item 
+\Hypertarget{class_minisat_1_1_solver_aab7da42ca1319432ef4f92f661cb69ee}\label{class_minisat_1_1_solver_aab7da42ca1319432ef4f92f661cb69ee} 
+uint32\+\_\+t {\bfseries abstract\+Level} (Var x) const
+\item 
+\Hypertarget{class_minisat_1_1_solver_a69b1db889a795cd261187927641c742b}\label{class_minisat_1_1_solver_a69b1db889a795cd261187927641c742b} 
+CRef {\bfseries reason} (Var x) const
+\item 
+\Hypertarget{class_minisat_1_1_solver_a75a79eba12f9dc978d4e041ee83a9d62}\label{class_minisat_1_1_solver_a75a79eba12f9dc978d4e041ee83a9d62} 
+int {\bfseries level} (Var x) const
+\item 
+\Hypertarget{class_minisat_1_1_solver_a48d121977794d2c9d346d0e3ec009678}\label{class_minisat_1_1_solver_a48d121977794d2c9d346d0e3ec009678} 
+double {\bfseries progress\+Estimate} () const
+\item 
+\Hypertarget{class_minisat_1_1_solver_aa7987833e2ac40f16e988502b6a6320c}\label{class_minisat_1_1_solver_aa7987833e2ac40f16e988502b6a6320c} 
+bool {\bfseries within\+Budget} () const
+\item 
+\Hypertarget{class_minisat_1_1_solver_a49bc8d088936bbde8715a530d61251f2}\label{class_minisat_1_1_solver_a49bc8d088936bbde8715a530d61251f2} 
+void {\bfseries reloc\+All} (\mbox{\hyperlink{class_minisat_1_1_clause_allocator}{Clause\+Allocator}} \&to)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_minisat_1_1_solver_ab736ab66df74304003f5ddf9778557c6}\label{class_minisat_1_1_solver_ab736ab66df74304003f5ddf9778557c6} 
+static \mbox{\hyperlink{struct_minisat_1_1_solver_1_1_var_data}{Var\+Data}} {\bfseries mk\+Var\+Data} (CRef cr, int l)
+\item 
+\Hypertarget{class_minisat_1_1_solver_a83dd7a87796db40d4dc3ec7c7944ff64}\label{class_minisat_1_1_solver_a83dd7a87796db40d4dc3ec7c7944ff64} 
+static double {\bfseries drand} (double \&seed)
+\item 
+\Hypertarget{class_minisat_1_1_solver_ab4d3d08b802d1c8bc8a70a0a9b2c6cc9}\label{class_minisat_1_1_solver_ab4d3d08b802d1c8bc8a70a0a9b2c6cc9} 
+static int {\bfseries irand} (double \&seed, int size)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_minisat_1_1_solver_ae8b3a1f73b39f5bf2b5d4f9eb796624e}\label{class_minisat_1_1_solver_ae8b3a1f73b39f5bf2b5d4f9eb796624e} 
+\mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ CRef $>$ {\bfseries clauses}
+\item 
+\Hypertarget{class_minisat_1_1_solver_ad6cf895c9510b3b4ba69e149b705e6f9}\label{class_minisat_1_1_solver_ad6cf895c9510b3b4ba69e149b705e6f9} 
+\mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ CRef $>$ {\bfseries learnts}
+\item 
+\Hypertarget{class_minisat_1_1_solver_aafb8ffa87d3efe07ba9e5ea94a35ce29}\label{class_minisat_1_1_solver_aafb8ffa87d3efe07ba9e5ea94a35ce29} 
+\mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} $>$ {\bfseries trail}
+\item 
+\Hypertarget{class_minisat_1_1_solver_aa5960eeff9167c7b7f2b624d2316848f}\label{class_minisat_1_1_solver_aa5960eeff9167c7b7f2b624d2316848f} 
+\mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ int $>$ {\bfseries trail\+\_\+lim}
+\item 
+\Hypertarget{class_minisat_1_1_solver_ad57c8c6db7152f33c78ce70a43eacc6e}\label{class_minisat_1_1_solver_ad57c8c6db7152f33c78ce70a43eacc6e} 
+\mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} $>$ {\bfseries assumptions}
+\item 
+\Hypertarget{class_minisat_1_1_solver_aa0d9bf7e6c94b9458798f07ef7245db3}\label{class_minisat_1_1_solver_aa0d9bf7e6c94b9458798f07ef7245db3} 
+\mbox{\hyperlink{class_minisat_1_1_v_map}{VMap}}$<$ double $>$ {\bfseries activity}
+\item 
+\Hypertarget{class_minisat_1_1_solver_a9b8c032446b89ef352728f7b44600d16}\label{class_minisat_1_1_solver_a9b8c032446b89ef352728f7b44600d16} 
+\mbox{\hyperlink{class_minisat_1_1_v_map}{VMap}}$<$ \mbox{\hyperlink{class_minisat_1_1lbool}{lbool}} $>$ {\bfseries assigns}
+\item 
+\Hypertarget{class_minisat_1_1_solver_aecbc81b08f78b4bb48b10cf2ed39dd60}\label{class_minisat_1_1_solver_aecbc81b08f78b4bb48b10cf2ed39dd60} 
+\mbox{\hyperlink{class_minisat_1_1_v_map}{VMap}}$<$ char $>$ {\bfseries polarity}
+\item 
+\Hypertarget{class_minisat_1_1_solver_a3ffc53b73b59726853d78dd63811be70}\label{class_minisat_1_1_solver_a3ffc53b73b59726853d78dd63811be70} 
+\mbox{\hyperlink{class_minisat_1_1_v_map}{VMap}}$<$ \mbox{\hyperlink{class_minisat_1_1lbool}{lbool}} $>$ {\bfseries user\+\_\+pol}
+\item 
+\Hypertarget{class_minisat_1_1_solver_a710c8bd5ccbdbe743c412b106aa95985}\label{class_minisat_1_1_solver_a710c8bd5ccbdbe743c412b106aa95985} 
+\mbox{\hyperlink{class_minisat_1_1_v_map}{VMap}}$<$ char $>$ {\bfseries decision}
+\item 
+\Hypertarget{class_minisat_1_1_solver_a9d9c9460704768dc48b572c9f3a17050}\label{class_minisat_1_1_solver_a9d9c9460704768dc48b572c9f3a17050} 
+\mbox{\hyperlink{class_minisat_1_1_v_map}{VMap}}$<$ \mbox{\hyperlink{struct_minisat_1_1_solver_1_1_var_data}{Var\+Data}} $>$ {\bfseries vardata}
+\item 
+\Hypertarget{class_minisat_1_1_solver_a402c4dda8816c7434b39f96f7079641d}\label{class_minisat_1_1_solver_a402c4dda8816c7434b39f96f7079641d} 
+\mbox{\hyperlink{class_minisat_1_1_occ_lists}{Occ\+Lists}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}, \mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_solver_1_1_watcher}{Watcher}} $>$, \mbox{\hyperlink{struct_minisat_1_1_solver_1_1_watcher_deleted}{Watcher\+Deleted}}, \mbox{\hyperlink{struct_minisat_1_1_mk_index_lit}{Mk\+Index\+Lit}} $>$ {\bfseries watches}
+\item 
+\Hypertarget{class_minisat_1_1_solver_af74917cd4f3f2420c1fa4a16d5740d05}\label{class_minisat_1_1_solver_af74917cd4f3f2420c1fa4a16d5740d05} 
+\mbox{\hyperlink{class_minisat_1_1_heap}{Heap}}$<$ Var, \mbox{\hyperlink{struct_minisat_1_1_solver_1_1_var_order_lt}{Var\+Order\+Lt}} $>$ {\bfseries order\+\_\+heap}
+\item 
+\Hypertarget{class_minisat_1_1_solver_a6b4968f5651b2a8c4c5c2a8863863ca8}\label{class_minisat_1_1_solver_a6b4968f5651b2a8c4c5c2a8863863ca8} 
+bool {\bfseries ok}
+\item 
+\Hypertarget{class_minisat_1_1_solver_aa8e69846f1ca0e5630313005f56a6e35}\label{class_minisat_1_1_solver_aa8e69846f1ca0e5630313005f56a6e35} 
+double {\bfseries cla\+\_\+inc}
+\item 
+\Hypertarget{class_minisat_1_1_solver_a6006db5383039793b4239822d842e942}\label{class_minisat_1_1_solver_a6006db5383039793b4239822d842e942} 
+double {\bfseries var\+\_\+inc}
+\item 
+\Hypertarget{class_minisat_1_1_solver_a51ad55fe016e4d7da499af88c5d3632c}\label{class_minisat_1_1_solver_a51ad55fe016e4d7da499af88c5d3632c} 
+int {\bfseries qhead}
+\item 
+\Hypertarget{class_minisat_1_1_solver_a24b67acc0c6ab665ce0551dc3647ca4a}\label{class_minisat_1_1_solver_a24b67acc0c6ab665ce0551dc3647ca4a} 
+int {\bfseries simp\+DB\+\_\+assigns}
+\item 
+\Hypertarget{class_minisat_1_1_solver_a09e697b88fd015c93b0ed28f50cb6b19}\label{class_minisat_1_1_solver_a09e697b88fd015c93b0ed28f50cb6b19} 
+int64\+\_\+t {\bfseries simp\+DB\+\_\+props}
+\item 
+\Hypertarget{class_minisat_1_1_solver_ae50a36266d599f5fd49a1e783a5b7b57}\label{class_minisat_1_1_solver_ae50a36266d599f5fd49a1e783a5b7b57} 
+double {\bfseries progress\+\_\+estimate}
+\item 
+\Hypertarget{class_minisat_1_1_solver_a34f115eeb5ed7b470217e94cf53befdb}\label{class_minisat_1_1_solver_a34f115eeb5ed7b470217e94cf53befdb} 
+bool {\bfseries remove\+\_\+satisfied}
+\item 
+\Hypertarget{class_minisat_1_1_solver_acd467bb04eea8764d0fc84ffb4f10d96}\label{class_minisat_1_1_solver_acd467bb04eea8764d0fc84ffb4f10d96} 
+Var {\bfseries next\+\_\+var}
+\item 
+\Hypertarget{class_minisat_1_1_solver_ab4bcdf1d0264a1f4bc78bb83b083c8ae}\label{class_minisat_1_1_solver_ab4bcdf1d0264a1f4bc78bb83b083c8ae} 
+\mbox{\hyperlink{class_minisat_1_1_clause_allocator}{Clause\+Allocator}} {\bfseries ca}
+\item 
+\Hypertarget{class_minisat_1_1_solver_ae7260219d759d1252e2fc24ef13520a4}\label{class_minisat_1_1_solver_ae7260219d759d1252e2fc24ef13520a4} 
+\mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ Var $>$ {\bfseries released\+\_\+vars}
+\item 
+\Hypertarget{class_minisat_1_1_solver_a341793e8f6b8d203c23e4e14cf4bf360}\label{class_minisat_1_1_solver_a341793e8f6b8d203c23e4e14cf4bf360} 
+\mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ Var $>$ {\bfseries free\+\_\+vars}
+\item 
+\Hypertarget{class_minisat_1_1_solver_af2df1ae990ee464c2cbe7fcfac1caec0}\label{class_minisat_1_1_solver_af2df1ae990ee464c2cbe7fcfac1caec0} 
+\mbox{\hyperlink{class_minisat_1_1_v_map}{VMap}}$<$ char $>$ {\bfseries seen}
+\item 
+\Hypertarget{class_minisat_1_1_solver_ad479378275557513328e379f1daf1ca8}\label{class_minisat_1_1_solver_ad479378275557513328e379f1daf1ca8} 
+\mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_solver_1_1_shrink_stack_elem}{Shrink\+Stack\+Elem}} $>$ {\bfseries analyze\+\_\+stack}
+\item 
+\Hypertarget{class_minisat_1_1_solver_ac80251c318007f53eb4c17c61862cf6b}\label{class_minisat_1_1_solver_ac80251c318007f53eb4c17c61862cf6b} 
+\mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} $>$ {\bfseries analyze\+\_\+toclear}
+\item 
+\Hypertarget{class_minisat_1_1_solver_a7bb45eed05cca5d1d37dbaf02b49c50c}\label{class_minisat_1_1_solver_a7bb45eed05cca5d1d37dbaf02b49c50c} 
+\mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} $>$ {\bfseries add\+\_\+tmp}
+\item 
+\Hypertarget{class_minisat_1_1_solver_aa440774fbde13647612b7cf5f6ec86e2}\label{class_minisat_1_1_solver_aa440774fbde13647612b7cf5f6ec86e2} 
+double {\bfseries max\+\_\+learnts}
+\item 
+\Hypertarget{class_minisat_1_1_solver_ae21e6f0eace3649119cc442802926926}\label{class_minisat_1_1_solver_ae21e6f0eace3649119cc442802926926} 
+double {\bfseries learntsize\+\_\+adjust\+\_\+confl}
+\item 
+\Hypertarget{class_minisat_1_1_solver_aa74723404d3f51a2f7837346fad5b5b4}\label{class_minisat_1_1_solver_aa74723404d3f51a2f7837346fad5b5b4} 
+int {\bfseries learntsize\+\_\+adjust\+\_\+cnt}
+\item 
+\Hypertarget{class_minisat_1_1_solver_a5692d384837c29b8753e22860b055355}\label{class_minisat_1_1_solver_a5692d384837c29b8753e22860b055355} 
+int64\+\_\+t {\bfseries conflict\+\_\+budget}
+\item 
+\Hypertarget{class_minisat_1_1_solver_a4a4cbd87d6c7a72200a6e5d83e98eca3}\label{class_minisat_1_1_solver_a4a4cbd87d6c7a72200a6e5d83e98eca3} 
+int64\+\_\+t {\bfseries propagation\+\_\+budget}
+\item 
+\Hypertarget{class_minisat_1_1_solver_af5b6991a49c0182825ed1778c25fd0a0}\label{class_minisat_1_1_solver_af5b6991a49c0182825ed1778c25fd0a0} 
+bool {\bfseries asynch\+\_\+interrupt}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_minisat_1_1_solver_a16eaedf9b9c2d13d4ff5e93f759cfcf6}\index{Minisat::Solver@{Minisat::Solver}!search@{search}}
+\index{search@{search}!Minisat::Solver@{Minisat::Solver}}
+\doxysubsubsection{\texorpdfstring{search()}{search()}}
+{\footnotesize\ttfamily \label{class_minisat_1_1_solver_a16eaedf9b9c2d13d4ff5e93f759cfcf6} 
+\mbox{\hyperlink{class_minisat_1_1lbool}{lbool}} Solver\+::search (\begin{DoxyParamCaption}\item[{int}]{nof\+\_\+conflicts}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Searches for a model within a specified number of conflicts. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nof\+\_\+conflicts} & The number of conflicts to allow before stopping. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result of the search\+: satisfiable, unsatisfiable, or undefined. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+code/minisat/core/Solver.\+h\item 
+code/minisat/core/Solver.\+cc\end{DoxyCompactItemize}

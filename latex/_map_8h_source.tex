@@ -1,0 +1,199 @@
+\doxysection{Map.\+h}
+\hypertarget{_map_8h_source}{}\label{_map_8h_source}\index{code/minisat/mtl/Map.h@{code/minisat/mtl/Map.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*******************************************************************************************[Map.h]}}
+\DoxyCodeLine{00002\ \textcolor{comment}{Copyright\ (c)\ 2006-\/2010,\ Niklas\ Sorensson}}
+\DoxyCodeLine{00003\ \textcolor{comment}{}}
+\DoxyCodeLine{00004\ \textcolor{comment}{Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of\ this\ software\ and}}
+\DoxyCodeLine{00005\ \textcolor{comment}{associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in\ the\ Software\ without\ restriction,}}
+\DoxyCodeLine{00006\ \textcolor{comment}{including\ without\ limitation\ the\ rights\ to\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,}}
+\DoxyCodeLine{00007\ \textcolor{comment}{sublicense,\ and/or\ sell\ copies\ of\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is}}
+\DoxyCodeLine{00008\ \textcolor{comment}{furnished\ to\ do\ so,\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{00009\ \textcolor{comment}{}}
+\DoxyCodeLine{00010\ \textcolor{comment}{The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all\ copies\ or}}
+\DoxyCodeLine{00011\ \textcolor{comment}{substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{00012\ \textcolor{comment}{}}
+\DoxyCodeLine{00013\ \textcolor{comment}{THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR\ IMPLIED,\ INCLUDING\ BUT}}
+\DoxyCodeLine{00014\ \textcolor{comment}{NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE\ AND}}
+\DoxyCodeLine{00015\ \textcolor{comment}{NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,}}
+\DoxyCodeLine{00016\ \textcolor{comment}{DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT}}
+\DoxyCodeLine{00017\ \textcolor{comment}{OF\ OR\ IN\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{00018\ \textcolor{comment}{**************************************************************************************************/}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#ifndef\ Minisat\_Map\_h}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#define\ Minisat\_Map\_h}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ "{}minisat/mtl/IntTypes.h"{}}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ "{}minisat/mtl/Vec.h"{}}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{namespace\ }Minisat\ \{}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{comment}{//=================================================================================================}}
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ Default\ hash/equals\ functions}}
+\DoxyCodeLine{00030\ \textcolor{comment}{//}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ K>\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_minisat_1_1_hash}{Hash}}\ \ \{\ uint32\_t\ operator()(\textcolor{keyword}{const}\ K\&\ k)\textcolor{keyword}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ const\ }\{\ \textcolor{keywordflow}{return}\ hash(k);\ \ \}\ \};}
+\DoxyCodeLine{00033\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ K>\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_minisat_1_1_equal}{Equal}}\ \{\ \textcolor{keywordtype}{bool}\ \ \ \ \ operator()(\textcolor{keyword}{const}\ K\&\ k1,\ \textcolor{keyword}{const}\ K\&\ k2)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ k1\ ==\ k2;\ \}\ \};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ K>\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_minisat_1_1_deep_hash}{DeepHash}}\ \ \{\ uint32\_t\ operator()(\textcolor{keyword}{const}\ K*\ k)\textcolor{keyword}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ const\ }\{\ \textcolor{keywordflow}{return}\ hash(*k);\ \ \}\ \};}
+\DoxyCodeLine{00036\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ K>\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_minisat_1_1_deep_equal}{DeepEqual}}\ \{\ \textcolor{keywordtype}{bool}\ \ \ \ \ operator()(\textcolor{keyword}{const}\ K*\ k1,\ \textcolor{keyword}{const}\ K*\ k2)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ *k1\ ==\ *k2;\ \}\ \};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint32\_t\ hash(uint32\_t\ x)\{\ \textcolor{keywordflow}{return}\ x;\ \}}
+\DoxyCodeLine{00039\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint32\_t\ hash(uint64\_t\ x)\{\ \textcolor{keywordflow}{return}\ (uint32\_t)x;\ \}}
+\DoxyCodeLine{00040\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint32\_t\ hash(int32\_t\ x)\ \{\ \textcolor{keywordflow}{return}\ (uint32\_t)x;\ \}}
+\DoxyCodeLine{00041\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint32\_t\ hash(int64\_t\ x)\ \{\ \textcolor{keywordflow}{return}\ (uint32\_t)x;\ \}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \textcolor{comment}{//=================================================================================================}}
+\DoxyCodeLine{00045\ \textcolor{comment}{//\ Some\ primes}}
+\DoxyCodeLine{00046\ \textcolor{comment}{//}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ nprimes\ \ \ \ \ \ \ \ \ \ =\ 25;}
+\DoxyCodeLine{00049\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ primes\ [nprimes]\ =\ \{\ 31,\ 73,\ 151,\ 313,\ 643,\ 1291,\ 2593,\ 5233,\ 10501,\ 21013,\ 42073,\ 84181,\ 168451,\ 337219,\ 674701,\ 1349473,\ 2699299,\ 5398891,\ 10798093,\ 21596719,\ 43193641,\ 86387383,\ 172775299,\ 345550609,\ 691101253\ \};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{comment}{//=================================================================================================}}
+\DoxyCodeLine{00052\ \textcolor{comment}{//\ Hash\ table\ implementation\ of\ Maps}}
+\DoxyCodeLine{00053\ \textcolor{comment}{//}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ K,\ \textcolor{keyword}{class}\ D,\ \textcolor{keyword}{class}\ H\ =\ Hash<K>,\ \textcolor{keyword}{class}\ E\ =\ Equal<K>\ >}
+\DoxyCodeLine{00056\ \textcolor{keyword}{class\ }Map\ \{}
+\DoxyCodeLine{00057\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_minisat_1_1_map_1_1_pair}{Pair}}\ \{\ K\ key;\ D\ data;\ \};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00061\ \ \ \ \ H\ \ \ \ \ \ \ \ \ \ hash;}
+\DoxyCodeLine{00062\ \ \ \ \ E\ \ \ \ \ \ \ \ \ \ equals;}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ \mbox{\hyperlink{class_minisat_1_1vec}{vec<Pair>}}*\ table;}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ cap;}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ size;}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{comment}{//\ Don't\ allow\ copying\ (error\ prone):}}
+\DoxyCodeLine{00069\ \ \ \ \ Map<K,D,H,E>\&\ \ operator\ =\ (Map<K,D,H,E>\&\ other);}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Map\ \ \ \ \ \ \ \ (Map<K,D,H,E>\&\ other);}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ checkCap(\textcolor{keywordtype}{int}\ new\_size)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ new\_size\ >\ cap;\ \}}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \ \ int32\_t\ index\ \ (\textcolor{keyword}{const}\ K\&\ k)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ hash(k)\ \%\ cap;\ \}}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \_insert\ (\textcolor{keyword}{const}\ K\&\ k,\ \textcolor{keyword}{const}\ D\&\ d)\ \{\ }
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ vec<Pair>\&\ ps\ =\ table[index(k)];}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ ps.push();\ ps.last().key\ =\ k;\ ps.last().data\ =\ d;\ \}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ rehash\ ()\ \{}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ vec<Pair>*\ old\ =\ table;}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ old\_cap\ =\ cap;}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ newsize\ =\ primes[0];}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 1;\ newsize\ <=\ cap\ \&\&\ i\ <\ nprimes;\ i++)}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ newsize\ =\ primes[i];}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ table\ =\ \textcolor{keyword}{new}\ vec<Pair>[newsize];}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ cap\ \ \ =\ newsize;}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ old\_cap;\ i++)\{}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ old[i].size();\ j++)\{}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_insert(old[i][j].key,\ old[i][j].data);\ \}\}}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ []\ old;}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ printf("{}\ -\/-\/-\/\ rehashing,\ old-\/cap=\%d,\ new-\/cap=\%d\(\backslash\)n"{},\ cap,\ newsize);}}
+\DoxyCodeLine{00097\ \ \ \ \ \}}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \ \ }
+\DoxyCodeLine{00100\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \ \ Map\ ()\ :\ table(NULL),\ cap(0),\ size(0)\ \{\}}
+\DoxyCodeLine{00103\ \ \ \ \ Map\ (\textcolor{keyword}{const}\ H\&\ h,\ \textcolor{keyword}{const}\ E\&\ e)\ :\ hash(h),\ equals(e),\ table(NULL),\ cap(0),\ size(0)\{\}}
+\DoxyCodeLine{00104\ \ \ \ \ \string~Map\ ()\ \{\ \textcolor{keyword}{delete}\ []\ table;\ \}}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{comment}{//\ PRECONDITION:\ the\ key\ must\ already\ exist\ in\ the\ map.}}
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keyword}{const}\ D\&\ operator\ []\ (\textcolor{keyword}{const}\ K\&\ k)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00108\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ assert(size\ !=\ 0);}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ D*\ \ \ \ \ \ \ \ \ res\ =\ NULL;}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ vec<Pair>\&\ ps\ \ =\ table[index(k)];}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ ps.size();\ i++)}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (equals(ps[i].key,\ k))}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ res\ =\ \&ps[i].data;}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ assert(res\ !=\ NULL);}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *res;}
+\DoxyCodeLine{00117\ \ \ \ \ \}}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{comment}{//\ PRECONDITION:\ the\ key\ must\ already\ exist\ in\ the\ map.}}
+\DoxyCodeLine{00120\ \ \ \ \ D\&\ operator\ []\ (\textcolor{keyword}{const}\ K\&\ k)}
+\DoxyCodeLine{00121\ \ \ \ \ \{}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ assert(size\ !=\ 0);}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ D*\ \ \ \ \ \ \ \ \ res\ =\ NULL;}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ vec<Pair>\&\ ps\ \ =\ table[index(k)];}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ ps.size();\ i++)}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (equals(ps[i].key,\ k))}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ res\ =\ \&ps[i].data;}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ assert(res\ !=\ NULL);}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *res;}
+\DoxyCodeLine{00130\ \ \ \ \ \}}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{comment}{//\ PRECONDITION:\ the\ key\ must\ *NOT*\ exist\ in\ the\ map.}}
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keywordtype}{void}\ insert\ (\textcolor{keyword}{const}\ K\&\ k,\ \textcolor{keyword}{const}\ D\&\ d)\ \{\ \textcolor{keywordflow}{if}\ (checkCap(size+1))\ rehash();\ \_insert(k,\ d);\ size++;\ \}}
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keywordtype}{bool}\ peek\ \ \ (\textcolor{keyword}{const}\ K\&\ k,\ D\&\ d)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (size\ ==\ 0)\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ vec<Pair>\&\ ps\ =\ table[index(k)];}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ ps.size();\ i++)}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (equals(ps[i].key,\ k))\{}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ d\ =\ ps[i].data;}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};\ \}\ }
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00142\ \ \ \ \ \}}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keywordtype}{bool}\ has\ \ \ (\textcolor{keyword}{const}\ K\&\ k)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (size\ ==\ 0)\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ vec<Pair>\&\ ps\ =\ table[index(k)];}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ ps.size();\ i++)}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (equals(ps[i].key,\ k))}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00151\ \ \ \ \ \}}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{comment}{//\ PRECONDITION:\ the\ key\ must\ exist\ in\ the\ map.}}
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keywordtype}{void}\ remove(\textcolor{keyword}{const}\ K\&\ k)\ \{}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ assert(table\ !=\ NULL);}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ vec<Pair>\&\ ps\ =\ table[index(k)];}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ j\ =\ 0;}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (;\ j\ <\ ps.size()\ \&\&\ !equals(ps[j].key,\ k);\ j++);}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ assert(j\ <\ ps.size());}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ ps[j]\ =\ ps.last();}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ ps.pop();}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ size-\/-\/;}
+\DoxyCodeLine{00163\ \ \ \ \ \}}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \ \ \ \ \textcolor{keywordtype}{void}\ clear\ \ ()\ \{}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ cap\ =\ size\ =\ 0;}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ []\ table;}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ table\ =\ NULL;}
+\DoxyCodeLine{00169\ \ \ \ \ \}}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00171\ \ \ \ \ \textcolor{keywordtype}{int}\ \ elems()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ size;\ \}}
+\DoxyCodeLine{00172\ \ \ \ \ \textcolor{keywordtype}{int}\ \ bucket\_count()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ cap;\ \}}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00174\ \ \ \ \ \textcolor{comment}{//\ NOTE:\ the\ hash\ and\ equality\ objects\ are\ not\ moved\ by\ this\ method:}}
+\DoxyCodeLine{00175\ \ \ \ \ \textcolor{keywordtype}{void}\ moveTo(Map\&\ other)\{}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ []\ other.table;}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ other.table\ =\ table;}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ other.cap\ \ \ =\ cap;}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ other.size\ \ =\ size;}
+\DoxyCodeLine{00181\ }
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ table\ =\ NULL;}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ size\ =\ cap\ =\ 0;}
+\DoxyCodeLine{00184\ \ \ \ \ \}}
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00186\ \ \ \ \ \textcolor{comment}{//\ NOTE:\ given\ a\ bit\ more\ time,\ I\ could\ make\ a\ more\ C++-\/style\ iterator\ out\ of\ this:}}
+\DoxyCodeLine{00187\ \ \ \ \ \textcolor{keyword}{const}\ vec<Pair>\&\ bucket(\textcolor{keywordtype}{int}\ i)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ table[i];\ \}}
+\DoxyCodeLine{00188\ \};}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00190\ \textcolor{comment}{//=================================================================================================}}
+\DoxyCodeLine{00191\ \}}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00193\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

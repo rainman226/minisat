@@ -1,0 +1,551 @@
+\doxysection{Minisat\+::Simp\+Solver Class Reference}
+\hypertarget{class_minisat_1_1_simp_solver}{}\label{class_minisat_1_1_simp_solver}\index{Minisat::SimpSolver@{Minisat::SimpSolver}}
+Inheritance diagram for Minisat\+::Simp\+Solver\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_minisat_1_1_simp_solver}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_minisat_1_1_simp_solver_1_1_clause_deleted}{Clause\+Deleted}}
+\item 
+struct \mbox{\hyperlink{struct_minisat_1_1_simp_solver_1_1_elim_lt}{Elim\+Lt}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_ac7d4ccb98ce43a59ee2230d1d2533654}\label{class_minisat_1_1_simp_solver_ac7d4ccb98ce43a59ee2230d1d2533654} 
+Var {\bfseries new\+Var} (\mbox{\hyperlink{class_minisat_1_1lbool}{lbool}} upol=l\+\_\+\+Undef, bool dvar=true)
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_a5cb1459502b9152f84a2b0604d52d3d9}\label{class_minisat_1_1_simp_solver_a5cb1459502b9152f84a2b0604d52d3d9} 
+void {\bfseries release\+Var} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} l)
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_a08ff456234609547987edf9226be748b}\label{class_minisat_1_1_simp_solver_a08ff456234609547987edf9226be748b} 
+bool {\bfseries add\+Clause} (const \mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} $>$ \&ps)
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_a78fa33d5027817d0e560bde616027258}\label{class_minisat_1_1_simp_solver_a78fa33d5027817d0e560bde616027258} 
+bool {\bfseries add\+Empty\+Clause} ()
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_a81ef4af60422e295e0c919ff1f2812a7}\label{class_minisat_1_1_simp_solver_a81ef4af60422e295e0c919ff1f2812a7} 
+bool {\bfseries add\+Clause} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p)
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_aadf186138fa6ce1f5d0183bbce328a15}\label{class_minisat_1_1_simp_solver_aadf186138fa6ce1f5d0183bbce328a15} 
+bool {\bfseries add\+Clause} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} q)
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_a44afcd300b2179defdb4384b022ccea2}\label{class_minisat_1_1_simp_solver_a44afcd300b2179defdb4384b022ccea2} 
+bool {\bfseries add\+Clause} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} q, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} r)
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_a5f8a59eecdb7d341b29c10be65d7b4df}\label{class_minisat_1_1_simp_solver_a5f8a59eecdb7d341b29c10be65d7b4df} 
+bool {\bfseries add\+Clause} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} q, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} r, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} s)
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_aa11ebc4d4bb46206417e6a1fb505672a}\label{class_minisat_1_1_simp_solver_aa11ebc4d4bb46206417e6a1fb505672a} 
+bool {\bfseries add\+Clause\+\_\+} (\mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} $>$ \&ps)
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_a29ecbb0011cbe37bd3b1d1071fd8e1ae}\label{class_minisat_1_1_simp_solver_a29ecbb0011cbe37bd3b1d1071fd8e1ae} 
+bool {\bfseries substitute} (Var v, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} x)
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_af2bab8894986d0599a91591616d1377d}\label{class_minisat_1_1_simp_solver_af2bab8894986d0599a91591616d1377d} 
+void {\bfseries set\+Frozen} (Var v, bool b)
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_ab3d2fd4c1a2dc56550c7b397ea4776c8}\label{class_minisat_1_1_simp_solver_ab3d2fd4c1a2dc56550c7b397ea4776c8} 
+bool {\bfseries is\+Eliminated} (Var v) const
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_a13fdf66f1148a8da5acb7a772159a862}\label{class_minisat_1_1_simp_solver_a13fdf66f1148a8da5acb7a772159a862} 
+void {\bfseries freeze\+Var} (Var v)
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_af4326c2313f0923519ce9afb4b7a454e}\label{class_minisat_1_1_simp_solver_af4326c2313f0923519ce9afb4b7a454e} 
+void {\bfseries thaw} ()
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_aa3b535fa597e83d07e88f3636dbf2fda}\label{class_minisat_1_1_simp_solver_aa3b535fa597e83d07e88f3636dbf2fda} 
+bool {\bfseries solve} (const \mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} $>$ \&assumps, bool do\+\_\+simp=true, bool turn\+\_\+off\+\_\+simp=false)
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_a0f48e782376555ff66bb500f40d273f9}\label{class_minisat_1_1_simp_solver_a0f48e782376555ff66bb500f40d273f9} 
+\mbox{\hyperlink{class_minisat_1_1lbool}{lbool}} {\bfseries solve\+Limited} (const \mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} $>$ \&assumps, bool do\+\_\+simp=true, bool turn\+\_\+off\+\_\+simp=false)
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_af74a9b2a6fc8d3add333ea95d8249fe1}\label{class_minisat_1_1_simp_solver_af74a9b2a6fc8d3add333ea95d8249fe1} 
+bool {\bfseries solve} (bool do\+\_\+simp=true, bool turn\+\_\+off\+\_\+simp=false)
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_aefd932810a243b3e4c2586570dd6a7ab}\label{class_minisat_1_1_simp_solver_aefd932810a243b3e4c2586570dd6a7ab} 
+bool {\bfseries solve} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p, bool do\+\_\+simp=true, bool turn\+\_\+off\+\_\+simp=false)
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_ac2e56f3fbeeb723d1729ca38685de81f}\label{class_minisat_1_1_simp_solver_ac2e56f3fbeeb723d1729ca38685de81f} 
+bool {\bfseries solve} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} q, bool do\+\_\+simp=true, bool turn\+\_\+off\+\_\+simp=false)
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_a274402dbb17f7734c4b95082ea239ddc}\label{class_minisat_1_1_simp_solver_a274402dbb17f7734c4b95082ea239ddc} 
+bool {\bfseries solve} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} q, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} r, bool do\+\_\+simp=true, bool turn\+\_\+off\+\_\+simp=false)
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_a5b617b7d5a6a621ccf9107fc41d4c4ee}\label{class_minisat_1_1_simp_solver_a5b617b7d5a6a621ccf9107fc41d4c4ee} 
+bool {\bfseries eliminate} (bool turn\+\_\+off\+\_\+elim=false)
+\item 
+virtual void \mbox{\hyperlink{class_minisat_1_1_simp_solver_ab65d808a2fc3f92db779e034d163df72}{garbage\+Collect}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_minisat_1_1_solver}{Minisat\+::\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+Var {\bfseries new\+Var} (\mbox{\hyperlink{class_minisat_1_1lbool}{lbool}} upol=l\+\_\+\+Undef, bool dvar=true)
+\item 
+void {\bfseries release\+Var} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} l)
+\item 
+bool {\bfseries add\+Clause} (const \mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} $>$ \&ps)
+\item 
+bool {\bfseries add\+Empty\+Clause} ()
+\item 
+bool {\bfseries add\+Clause} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p)
+\item 
+bool {\bfseries add\+Clause} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} q)
+\item 
+bool {\bfseries add\+Clause} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} q, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} r)
+\item 
+bool {\bfseries add\+Clause} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} q, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} r, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} s)
+\item 
+bool {\bfseries add\+Clause\+\_\+} (\mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} $>$ \&ps)
+\item 
+bool {\bfseries simplify} ()
+\item 
+bool {\bfseries solve} (const \mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} $>$ \&assumps)
+\item 
+\mbox{\hyperlink{class_minisat_1_1lbool}{lbool}} {\bfseries solve\+Limited} (const \mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} $>$ \&assumps)
+\item 
+bool {\bfseries solve} ()
+\item 
+bool {\bfseries solve} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p)
+\item 
+bool {\bfseries solve} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} q)
+\item 
+bool {\bfseries solve} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} q, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} r)
+\item 
+bool {\bfseries okay} () const
+\item 
+bool {\bfseries implies} (const \mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} $>$ \&assumps, \mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} $>$ \&out)
+\item 
+\mbox{\hyperlink{class_minisat_1_1_clause_iterator}{Clause\+Iterator}} {\bfseries clauses\+Begin} () const
+\item 
+\mbox{\hyperlink{class_minisat_1_1_clause_iterator}{Clause\+Iterator}} {\bfseries clauses\+End} () const
+\item 
+\mbox{\hyperlink{class_minisat_1_1_trail_iterator}{Trail\+Iterator}} {\bfseries trail\+Begin} () const
+\item 
+\mbox{\hyperlink{class_minisat_1_1_trail_iterator}{Trail\+Iterator}} {\bfseries trail\+End} () const
+\item 
+void {\bfseries to\+Dimacs} (FILE \texorpdfstring{$\ast$}{*}f, const \mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} $>$ \&assumps)
+\item 
+void {\bfseries to\+Dimacs} (const char \texorpdfstring{$\ast$}{*}file, const \mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} $>$ \&assumps)
+\item 
+void {\bfseries to\+Dimacs} (FILE \texorpdfstring{$\ast$}{*}f, \mbox{\hyperlink{class_minisat_1_1_clause}{Clause}} \&c, \mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ Var $>$ \&map, Var \&max)
+\item 
+void {\bfseries to\+Dimacs} (const char \texorpdfstring{$\ast$}{*}file)
+\item 
+void {\bfseries to\+Dimacs} (const char \texorpdfstring{$\ast$}{*}file, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p)
+\item 
+void {\bfseries to\+Dimacs} (const char \texorpdfstring{$\ast$}{*}file, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} q)
+\item 
+void {\bfseries to\+Dimacs} (const char \texorpdfstring{$\ast$}{*}file, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} q, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} r)
+\item 
+void {\bfseries set\+Polarity} (Var v, \mbox{\hyperlink{class_minisat_1_1lbool}{lbool}} b)
+\item 
+void {\bfseries set\+Decision\+Var} (Var v, bool b)
+\item 
+\mbox{\hyperlink{class_minisat_1_1lbool}{lbool}} {\bfseries value} (Var x) const
+\item 
+\mbox{\hyperlink{class_minisat_1_1lbool}{lbool}} {\bfseries value} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p) const
+\item 
+\mbox{\hyperlink{class_minisat_1_1lbool}{lbool}} {\bfseries model\+Value} (Var x) const
+\item 
+\mbox{\hyperlink{class_minisat_1_1lbool}{lbool}} {\bfseries model\+Value} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p) const
+\item 
+int {\bfseries n\+Assigns} () const
+\item 
+int {\bfseries n\+Clauses} () const
+\item 
+int {\bfseries n\+Learnts} () const
+\item 
+int {\bfseries n\+Vars} () const
+\item 
+int {\bfseries n\+Free\+Vars} () const
+\item 
+void {\bfseries print\+Stats} () const
+\item 
+void {\bfseries set\+Conf\+Budget} (int64\+\_\+t x)
+\item 
+void {\bfseries set\+Prop\+Budget} (int64\+\_\+t x)
+\item 
+void {\bfseries budget\+Off} ()
+\item 
+void {\bfseries interrupt} ()
+\item 
+void {\bfseries clear\+Interrupt} ()
+\item 
+void {\bfseries check\+Garbage} (double gf)
+\item 
+void {\bfseries check\+Garbage} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_ae099c843443a4f65f53a9c2bdbe74c13}\label{class_minisat_1_1_simp_solver_ae099c843443a4f65f53a9c2bdbe74c13} 
+int {\bfseries grow}
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_ae356fd5ef017e557a4f67ac7d16e551b}\label{class_minisat_1_1_simp_solver_ae356fd5ef017e557a4f67ac7d16e551b} 
+int {\bfseries clause\+\_\+lim}
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_a06243e2a14e6f3d563ab1144304df547}\label{class_minisat_1_1_simp_solver_a06243e2a14e6f3d563ab1144304df547} 
+int {\bfseries subsumption\+\_\+lim}
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_aa10fa4313ffe1b1649e05eee006a7f83}\label{class_minisat_1_1_simp_solver_aa10fa4313ffe1b1649e05eee006a7f83} 
+double {\bfseries simp\+\_\+garbage\+\_\+frac}
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_ab165e025af3ac6b8bf90fc1ae686ca60}\label{class_minisat_1_1_simp_solver_ab165e025af3ac6b8bf90fc1ae686ca60} 
+bool {\bfseries use\+\_\+asymm}
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_a8da01feea9e24aeb47c32b14bd45714d}\label{class_minisat_1_1_simp_solver_a8da01feea9e24aeb47c32b14bd45714d} 
+bool {\bfseries use\+\_\+rcheck}
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_ac259e0dc4a0f0233d9917a2d943cb4d3}\label{class_minisat_1_1_simp_solver_ac259e0dc4a0f0233d9917a2d943cb4d3} 
+bool {\bfseries use\+\_\+elim}
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_a11953651ed12a5972073036a37e44c97}\label{class_minisat_1_1_simp_solver_a11953651ed12a5972073036a37e44c97} 
+bool {\bfseries extend\+\_\+model}
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_ad29c5f65fae954d4ab588ed24228f666}\label{class_minisat_1_1_simp_solver_ad29c5f65fae954d4ab588ed24228f666} 
+int {\bfseries merges}
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_a5bfbefe7afd07f8bc6d7644e034e5390}\label{class_minisat_1_1_simp_solver_a5bfbefe7afd07f8bc6d7644e034e5390} 
+int {\bfseries asymm\+\_\+lits}
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_ab647947342a23e2458a3a046c626fff0}\label{class_minisat_1_1_simp_solver_ab647947342a23e2458a3a046c626fff0} 
+int {\bfseries eliminated\+\_\+vars}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{class_minisat_1_1_solver}{Minisat\+::\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{class_minisat_1_1lbool}{lbool}} $>$ {\bfseries model}
+\item 
+\mbox{\hyperlink{class_minisat_1_1_l_set}{LSet}} {\bfseries conflict}
+\item 
+int {\bfseries verbosity}
+\item 
+double {\bfseries var\+\_\+decay}
+\item 
+double {\bfseries clause\+\_\+decay}
+\item 
+double {\bfseries random\+\_\+var\+\_\+freq}
+\item 
+double {\bfseries random\+\_\+seed}
+\item 
+bool {\bfseries luby\+\_\+restart}
+\item 
+int {\bfseries ccmin\+\_\+mode}
+\item 
+int {\bfseries phase\+\_\+saving}
+\item 
+bool {\bfseries rnd\+\_\+pol}
+\item 
+bool {\bfseries rnd\+\_\+init\+\_\+act}
+\item 
+double {\bfseries garbage\+\_\+frac}
+\item 
+int {\bfseries min\+\_\+learnts\+\_\+lim}
+\item 
+int {\bfseries restart\+\_\+first}
+\item 
+double {\bfseries restart\+\_\+inc}
+\item 
+double {\bfseries learntsize\+\_\+factor}
+\item 
+double {\bfseries learntsize\+\_\+inc}
+\item 
+int {\bfseries learntsize\+\_\+adjust\+\_\+start\+\_\+confl}
+\item 
+double {\bfseries learntsize\+\_\+adjust\+\_\+inc}
+\item 
+uint64\+\_\+t {\bfseries solves}
+\item 
+uint64\+\_\+t {\bfseries starts}
+\item 
+uint64\+\_\+t {\bfseries decisions}
+\item 
+uint64\+\_\+t {\bfseries rnd\+\_\+decisions}
+\item 
+uint64\+\_\+t {\bfseries propagations}
+\item 
+uint64\+\_\+t {\bfseries conflicts}
+\item 
+uint64\+\_\+t {\bfseries dec\+\_\+vars}
+\item 
+uint64\+\_\+t {\bfseries num\+\_\+clauses}
+\item 
+uint64\+\_\+t {\bfseries num\+\_\+learnts}
+\item 
+uint64\+\_\+t {\bfseries clauses\+\_\+literals}
+\item 
+uint64\+\_\+t {\bfseries learnts\+\_\+literals}
+\item 
+uint64\+\_\+t {\bfseries max\+\_\+literals}
+\item 
+uint64\+\_\+t {\bfseries tot\+\_\+literals}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_a16a7cb46aaa5f4a8ec2da92755e9d748}\label{class_minisat_1_1_simp_solver_a16a7cb46aaa5f4a8ec2da92755e9d748} 
+\mbox{\hyperlink{class_minisat_1_1lbool}{lbool}} {\bfseries solve\+\_\+} (bool do\+\_\+simp=true, bool turn\+\_\+off\+\_\+simp=false)
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_a7dbf729733a538653bb31126ce0f2b27}\label{class_minisat_1_1_simp_solver_a7dbf729733a538653bb31126ce0f2b27} 
+bool {\bfseries asymm} (Var v, CRef cr)
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_a72c0557c9e296a62a6d859197809b775}\label{class_minisat_1_1_simp_solver_a72c0557c9e296a62a6d859197809b775} 
+bool {\bfseries asymm\+Var} (Var v)
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_a6ee3b033b5fb4b3b88cc926d4e9cf7fb}\label{class_minisat_1_1_simp_solver_a6ee3b033b5fb4b3b88cc926d4e9cf7fb} 
+void {\bfseries update\+Elim\+Heap} (Var v)
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_ad14b3bcc4622c98ebcaf02f0da50c730}\label{class_minisat_1_1_simp_solver_ad14b3bcc4622c98ebcaf02f0da50c730} 
+void {\bfseries gather\+Touched\+Clauses} ()
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_a8579d8cf20613067f4c27651fc3e5859}\label{class_minisat_1_1_simp_solver_a8579d8cf20613067f4c27651fc3e5859} 
+bool {\bfseries merge} (const \mbox{\hyperlink{class_minisat_1_1_clause}{Clause}} \&\+\_\+ps, const \mbox{\hyperlink{class_minisat_1_1_clause}{Clause}} \&\+\_\+qs, Var v, \mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} $>$ \&out\+\_\+clause)
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_a601f84ca6944a1474832ff37d97ce379}\label{class_minisat_1_1_simp_solver_a601f84ca6944a1474832ff37d97ce379} 
+bool {\bfseries merge} (const \mbox{\hyperlink{class_minisat_1_1_clause}{Clause}} \&\+\_\+ps, const \mbox{\hyperlink{class_minisat_1_1_clause}{Clause}} \&\+\_\+qs, Var v, int \&size)
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_abc4977137689b3a19fa6b1358ffd03bf}\label{class_minisat_1_1_simp_solver_abc4977137689b3a19fa6b1358ffd03bf} 
+bool {\bfseries backward\+Subsumption\+Check} (bool verbose=false)
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_a67c3066b769ee04d7f98fae22f595262}\label{class_minisat_1_1_simp_solver_a67c3066b769ee04d7f98fae22f595262} 
+bool {\bfseries eliminate\+Var} (Var v)
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_ad82b089f833c27258c6cb30427f67fee}\label{class_minisat_1_1_simp_solver_ad82b089f833c27258c6cb30427f67fee} 
+void {\bfseries extend\+Model} ()
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_a2dc83777b39bc8f187063508aee5f6a3}\label{class_minisat_1_1_simp_solver_a2dc83777b39bc8f187063508aee5f6a3} 
+void {\bfseries remove\+Clause} (CRef cr)
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_a669dbfd6e390e5a3120dbcaef15b8b6b}\label{class_minisat_1_1_simp_solver_a669dbfd6e390e5a3120dbcaef15b8b6b} 
+bool {\bfseries strengthen\+Clause} (CRef cr, \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} l)
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_a544b3bb4031dacd833bb7134af658895}\label{class_minisat_1_1_simp_solver_a544b3bb4031dacd833bb7134af658895} 
+bool {\bfseries implied} (const \mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} $>$ \&c)
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_ad9be07bc1c54c20f990dbf2cf835ff7e}\label{class_minisat_1_1_simp_solver_ad9be07bc1c54c20f990dbf2cf835ff7e} 
+void {\bfseries reloc\+All} (\mbox{\hyperlink{class_minisat_1_1_clause_allocator}{Clause\+Allocator}} \&to)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_minisat_1_1_solver}{Minisat\+::\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries insert\+Var\+Order} (Var x)
+\item 
+\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} {\bfseries pick\+Branch\+Lit} ()
+\item 
+void {\bfseries new\+Decision\+Level} ()
+\item 
+void {\bfseries unchecked\+Enqueue} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p, CRef from=CRef\+\_\+\+Undef)
+\item 
+bool {\bfseries enqueue} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p, CRef from=CRef\+\_\+\+Undef)
+\item 
+CRef {\bfseries propagate} ()
+\item 
+void {\bfseries cancel\+Until} (int level)
+\item 
+void {\bfseries analyze} (CRef confl, \mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} $>$ \&out\+\_\+learnt, int \&out\+\_\+btlevel)
+\item 
+void {\bfseries analyze\+Final} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p, \mbox{\hyperlink{class_minisat_1_1_l_set}{LSet}} \&out\+\_\+conflict)
+\item 
+bool {\bfseries lit\+Redundant} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p)
+\item 
+\mbox{\hyperlink{class_minisat_1_1lbool}{lbool}} \mbox{\hyperlink{class_minisat_1_1_solver_a16eaedf9b9c2d13d4ff5e93f759cfcf6}{search}} (int nof\+\_\+conflicts)
+\begin{DoxyCompactList}\small\item\em Searches for a model within a specified number of conflicts. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_minisat_1_1lbool}{lbool}} {\bfseries solve\+\_\+} ()
+\item 
+void {\bfseries reduce\+DB} ()
+\item 
+void {\bfseries remove\+Satisfied} (\mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ CRef $>$ \&cs)
+\item 
+void {\bfseries rebuild\+Order\+Heap} ()
+\item 
+void {\bfseries var\+Decay\+Activity} ()
+\item 
+void {\bfseries var\+Bump\+Activity} (Var v, double inc)
+\item 
+void {\bfseries var\+Bump\+Activity} (Var v)
+\item 
+void {\bfseries cla\+Decay\+Activity} ()
+\item 
+void {\bfseries cla\+Bump\+Activity} (\mbox{\hyperlink{class_minisat_1_1_clause}{Clause}} \&c)
+\item 
+void {\bfseries attach\+Clause} (CRef cr)
+\item 
+void {\bfseries detach\+Clause} (CRef cr, bool strict=false)
+\item 
+void {\bfseries remove\+Clause} (CRef cr)
+\item 
+bool {\bfseries is\+Removed} (CRef cr) const
+\item 
+bool {\bfseries locked} (const \mbox{\hyperlink{class_minisat_1_1_clause}{Clause}} \&c) const
+\item 
+bool {\bfseries satisfied} (const \mbox{\hyperlink{class_minisat_1_1_clause}{Clause}} \&c) const
+\item 
+int {\bfseries decision\+Level} () const
+\item 
+uint32\+\_\+t {\bfseries abstract\+Level} (Var x) const
+\item 
+CRef {\bfseries reason} (Var x) const
+\item 
+int {\bfseries level} (Var x) const
+\item 
+double {\bfseries progress\+Estimate} () const
+\item 
+bool {\bfseries within\+Budget} () const
+\item 
+void {\bfseries reloc\+All} (\mbox{\hyperlink{class_minisat_1_1_clause_allocator}{Clause\+Allocator}} \&to)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_a62232dd2179706b6c59b713aaae4eaca}\label{class_minisat_1_1_simp_solver_a62232dd2179706b6c59b713aaae4eaca} 
+int {\bfseries elimorder}
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_a8d95f635c47a010384c1161b66ad915d}\label{class_minisat_1_1_simp_solver_a8d95f635c47a010384c1161b66ad915d} 
+bool {\bfseries use\+\_\+simplification}
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_a0b8dc66369b7dea0198507a5a8d51cf9}\label{class_minisat_1_1_simp_solver_a0b8dc66369b7dea0198507a5a8d51cf9} 
+Var {\bfseries max\+\_\+simp\+\_\+var}
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_a75c777ec58d33e0af1f0a15006b54ca3}\label{class_minisat_1_1_simp_solver_a75c777ec58d33e0af1f0a15006b54ca3} 
+\mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ uint32\+\_\+t $>$ {\bfseries elimclauses}
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_a5ece7f2b5edd648f2e71f706c7d03388}\label{class_minisat_1_1_simp_solver_a5ece7f2b5edd648f2e71f706c7d03388} 
+\mbox{\hyperlink{class_minisat_1_1_v_map}{VMap}}$<$ char $>$ {\bfseries touched}
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_a2b0873a4c75af819c762843c5dfaa6ef}\label{class_minisat_1_1_simp_solver_a2b0873a4c75af819c762843c5dfaa6ef} 
+\mbox{\hyperlink{class_minisat_1_1_occ_lists}{Occ\+Lists}}$<$ Var, \mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ CRef $>$, \mbox{\hyperlink{struct_minisat_1_1_simp_solver_1_1_clause_deleted}{Clause\+Deleted}} $>$ {\bfseries occurs}
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_a14042acd636df77da1ef8383f0eaa2a6}\label{class_minisat_1_1_simp_solver_a14042acd636df77da1ef8383f0eaa2a6} 
+\mbox{\hyperlink{class_minisat_1_1_l_map}{LMap}}$<$ int $>$ {\bfseries n\+\_\+occ}
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_ac0d055124200a92c6483658eff746657}\label{class_minisat_1_1_simp_solver_ac0d055124200a92c6483658eff746657} 
+\mbox{\hyperlink{class_minisat_1_1_heap}{Heap}}$<$ Var, \mbox{\hyperlink{struct_minisat_1_1_simp_solver_1_1_elim_lt}{Elim\+Lt}} $>$ {\bfseries elim\+\_\+heap}
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_a4ed74f8bce7b505d292f083e57acb6f3}\label{class_minisat_1_1_simp_solver_a4ed74f8bce7b505d292f083e57acb6f3} 
+\mbox{\hyperlink{class_minisat_1_1_queue}{Queue}}$<$ CRef $>$ {\bfseries subsumption\+\_\+queue}
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_aca2553a4e46a42d63d92186438e5cb49}\label{class_minisat_1_1_simp_solver_aca2553a4e46a42d63d92186438e5cb49} 
+\mbox{\hyperlink{class_minisat_1_1_v_map}{VMap}}$<$ char $>$ {\bfseries frozen}
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_a4d5a1f20018860eb15b4d8f1c515eb3b}\label{class_minisat_1_1_simp_solver_a4d5a1f20018860eb15b4d8f1c515eb3b} 
+\mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ Var $>$ {\bfseries frozen\+\_\+vars}
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_afd643b00db90d81d6e080f1900c8256d}\label{class_minisat_1_1_simp_solver_afd643b00db90d81d6e080f1900c8256d} 
+\mbox{\hyperlink{class_minisat_1_1_v_map}{VMap}}$<$ char $>$ {\bfseries eliminated}
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_a645859ed8a8ac499395427fce8f003f5}\label{class_minisat_1_1_simp_solver_a645859ed8a8ac499395427fce8f003f5} 
+int {\bfseries bwdsub\+\_\+assigns}
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_a3a6ca504d1af2ca841170d1ee1cd69a8}\label{class_minisat_1_1_simp_solver_a3a6ca504d1af2ca841170d1ee1cd69a8} 
+int {\bfseries n\+\_\+touched}
+\item 
+\Hypertarget{class_minisat_1_1_simp_solver_a9f0e469fe653e7bb6f7cf0a8a325066a}\label{class_minisat_1_1_simp_solver_a9f0e469fe653e7bb6f7cf0a8a325066a} 
+CRef {\bfseries bwdsub\+\_\+tmpunit}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_minisat_1_1_solver}{Minisat\+::\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ CRef $>$ {\bfseries clauses}
+\item 
+\mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ CRef $>$ {\bfseries learnts}
+\item 
+\mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} $>$ {\bfseries trail}
+\item 
+\mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ int $>$ {\bfseries trail\+\_\+lim}
+\item 
+\mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} $>$ {\bfseries assumptions}
+\item 
+\mbox{\hyperlink{class_minisat_1_1_v_map}{VMap}}$<$ double $>$ {\bfseries activity}
+\item 
+\mbox{\hyperlink{class_minisat_1_1_v_map}{VMap}}$<$ \mbox{\hyperlink{class_minisat_1_1lbool}{lbool}} $>$ {\bfseries assigns}
+\item 
+\mbox{\hyperlink{class_minisat_1_1_v_map}{VMap}}$<$ char $>$ {\bfseries polarity}
+\item 
+\mbox{\hyperlink{class_minisat_1_1_v_map}{VMap}}$<$ \mbox{\hyperlink{class_minisat_1_1lbool}{lbool}} $>$ {\bfseries user\+\_\+pol}
+\item 
+\mbox{\hyperlink{class_minisat_1_1_v_map}{VMap}}$<$ char $>$ {\bfseries decision}
+\item 
+\mbox{\hyperlink{class_minisat_1_1_v_map}{VMap}}$<$ \mbox{\hyperlink{struct_minisat_1_1_solver_1_1_var_data}{Var\+Data}} $>$ {\bfseries vardata}
+\item 
+\mbox{\hyperlink{class_minisat_1_1_occ_lists}{Occ\+Lists}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}, \mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_solver_1_1_watcher}{Watcher}} $>$, \mbox{\hyperlink{struct_minisat_1_1_solver_1_1_watcher_deleted}{Watcher\+Deleted}}, \mbox{\hyperlink{struct_minisat_1_1_mk_index_lit}{Mk\+Index\+Lit}} $>$ {\bfseries watches}
+\item 
+\mbox{\hyperlink{class_minisat_1_1_heap}{Heap}}$<$ Var, \mbox{\hyperlink{struct_minisat_1_1_solver_1_1_var_order_lt}{Var\+Order\+Lt}} $>$ {\bfseries order\+\_\+heap}
+\item 
+bool {\bfseries ok}
+\item 
+double {\bfseries cla\+\_\+inc}
+\item 
+double {\bfseries var\+\_\+inc}
+\item 
+int {\bfseries qhead}
+\item 
+int {\bfseries simp\+DB\+\_\+assigns}
+\item 
+int64\+\_\+t {\bfseries simp\+DB\+\_\+props}
+\item 
+double {\bfseries progress\+\_\+estimate}
+\item 
+bool {\bfseries remove\+\_\+satisfied}
+\item 
+Var {\bfseries next\+\_\+var}
+\item 
+\mbox{\hyperlink{class_minisat_1_1_clause_allocator}{Clause\+Allocator}} {\bfseries ca}
+\item 
+\mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ Var $>$ {\bfseries released\+\_\+vars}
+\item 
+\mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ Var $>$ {\bfseries free\+\_\+vars}
+\item 
+\mbox{\hyperlink{class_minisat_1_1_v_map}{VMap}}$<$ char $>$ {\bfseries seen}
+\item 
+\mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_solver_1_1_shrink_stack_elem}{Shrink\+Stack\+Elem}} $>$ {\bfseries analyze\+\_\+stack}
+\item 
+\mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} $>$ {\bfseries analyze\+\_\+toclear}
+\item 
+\mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} $>$ {\bfseries add\+\_\+tmp}
+\item 
+double {\bfseries max\+\_\+learnts}
+\item 
+double {\bfseries learntsize\+\_\+adjust\+\_\+confl}
+\item 
+int {\bfseries learntsize\+\_\+adjust\+\_\+cnt}
+\item 
+int64\+\_\+t {\bfseries conflict\+\_\+budget}
+\item 
+int64\+\_\+t {\bfseries propagation\+\_\+budget}
+\item 
+bool {\bfseries asynch\+\_\+interrupt}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Protected Member Functions inherited from \mbox{\hyperlink{class_minisat_1_1_solver}{Minisat\+::\+Solver}}}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{struct_minisat_1_1_solver_1_1_var_data}{Var\+Data}} {\bfseries mk\+Var\+Data} (CRef cr, int l)
+\item 
+static double {\bfseries drand} (double \&seed)
+\item 
+static int {\bfseries irand} (double \&seed, int size)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_minisat_1_1_simp_solver_ab65d808a2fc3f92db779e034d163df72}\index{Minisat::SimpSolver@{Minisat::SimpSolver}!garbageCollect@{garbageCollect}}
+\index{garbageCollect@{garbageCollect}!Minisat::SimpSolver@{Minisat::SimpSolver}}
+\doxysubsubsection{\texorpdfstring{garbageCollect()}{garbageCollect()}}
+{\footnotesize\ttfamily \label{class_minisat_1_1_simp_solver_ab65d808a2fc3f92db779e034d163df72} 
+void Simp\+Solver\+::garbage\+Collect (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_minisat_1_1_solver}{Minisat\+::\+Solver}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+code/minisat/simp/Simp\+Solver.\+h\item 
+code/minisat/simp/Simp\+Solver.\+cc\end{DoxyCompactItemize}

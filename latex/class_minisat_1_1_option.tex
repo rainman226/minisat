@@ -1,0 +1,75 @@
+\doxysection{Minisat\+::Option Class Reference}
+\hypertarget{class_minisat_1_1_option}{}\label{class_minisat_1_1_option}\index{Minisat::Option@{Minisat::Option}}
+Inheritance diagram for Minisat\+::Option\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.566434cm]{class_minisat_1_1_option}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_minisat_1_1_option_1_1_option_lt}{Option\+Lt}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_minisat_1_1_option_a016dbf51dc6ca825523729970138b3cd}\label{class_minisat_1_1_option_a016dbf51dc6ca825523729970138b3cd} 
+virtual bool {\bfseries parse} (const char \texorpdfstring{$\ast$}{*}str)=0
+\item 
+\Hypertarget{class_minisat_1_1_option_a3d93dbf597cbacbde9d9607f1bbd202f}\label{class_minisat_1_1_option_a3d93dbf597cbacbde9d9607f1bbd202f} 
+virtual void {\bfseries help} (bool verbose=false)=0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_minisat_1_1_option_a40afda3ac4b35a255e9c96df0d0bfcaf}\label{class_minisat_1_1_option_a40afda3ac4b35a255e9c96df0d0bfcaf} 
+{\bfseries Option} (const char \texorpdfstring{$\ast$}{*}name\+\_\+, const char \texorpdfstring{$\ast$}{*}desc\+\_\+, const char \texorpdfstring{$\ast$}{*}cate\+\_\+, const char \texorpdfstring{$\ast$}{*}type\+\_\+)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_minisat_1_1_option_ae3bc57904ea9b069e993e3887019f7aa}\label{class_minisat_1_1_option_ae3bc57904ea9b069e993e3887019f7aa} 
+static \mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{class_minisat_1_1_option}{Option}} \texorpdfstring{$\ast$}{*} $>$ \& {\bfseries get\+Option\+List} ()
+\item 
+\Hypertarget{class_minisat_1_1_option_a8d3aee70d9972e1609c3625e05367dd8}\label{class_minisat_1_1_option_a8d3aee70d9972e1609c3625e05367dd8} 
+static const char \texorpdfstring{$\ast$}{*}\& {\bfseries get\+Usage\+String} ()
+\item 
+\Hypertarget{class_minisat_1_1_option_aba4c4a66d3e7d03e9d875b7cce21aa4c}\label{class_minisat_1_1_option_aba4c4a66d3e7d03e9d875b7cce21aa4c} 
+static const char \texorpdfstring{$\ast$}{*}\& {\bfseries get\+Help\+Prefix\+String} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_minisat_1_1_option_a30b7530a15d503a2704c20dc68977521}\label{class_minisat_1_1_option_a30b7530a15d503a2704c20dc68977521} 
+const char \texorpdfstring{$\ast$}{*} {\bfseries name}
+\item 
+\Hypertarget{class_minisat_1_1_option_ac0ccf7b96ec05ed3bd6de3a61bc67ffc}\label{class_minisat_1_1_option_ac0ccf7b96ec05ed3bd6de3a61bc67ffc} 
+const char \texorpdfstring{$\ast$}{*} {\bfseries description}
+\item 
+\Hypertarget{class_minisat_1_1_option_a5d2a42125cb8ed8af091fe46cd96432d}\label{class_minisat_1_1_option_a5d2a42125cb8ed8af091fe46cd96432d} 
+const char \texorpdfstring{$\ast$}{*} {\bfseries category}
+\item 
+\Hypertarget{class_minisat_1_1_option_a89f3c3c16fda78373c883902c43c34c0}\label{class_minisat_1_1_option_a89f3c3c16fda78373c883902c43c34c0} 
+const char \texorpdfstring{$\ast$}{*} {\bfseries type\+\_\+name}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_minisat_1_1_option_a22f6ce1c7b1fe77230e4f0954ad80cc8}\label{class_minisat_1_1_option_a22f6ce1c7b1fe77230e4f0954ad80cc8} 
+void {\bfseries parse\+Options} (int \&argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv, bool strict=false)
+\item 
+\Hypertarget{class_minisat_1_1_option_a21537f97f9a64f79980f9be6d056ecc4}\label{class_minisat_1_1_option_a21537f97f9a64f79980f9be6d056ecc4} 
+void {\bfseries print\+Usage\+And\+Exit} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv, bool verbose=false)
+\item 
+\Hypertarget{class_minisat_1_1_option_ae7ae63a221c59a6abe7b10e5c0d51fff}\label{class_minisat_1_1_option_ae7ae63a221c59a6abe7b10e5c0d51fff} 
+void {\bfseries set\+Usage\+Help} (const char \texorpdfstring{$\ast$}{*}str)
+\item 
+\Hypertarget{class_minisat_1_1_option_ad6d41be54ad05520f70befd92e72367d}\label{class_minisat_1_1_option_ad6d41be54ad05520f70befd92e72367d} 
+void {\bfseries set\+Help\+Prefix\+Str} (const char \texorpdfstring{$\ast$}{*}str)
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+code/minisat/utils/Options.\+h\end{DoxyCompactItemize}

@@ -1,0 +1,484 @@
+\doxysection{Solver\+Types.\+h}
+\hypertarget{_solver_types_8h_source}{}\label{_solver_types_8h_source}\index{code/minisat/core/SolverTypes.h@{code/minisat/core/SolverTypes.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/***********************************************************************************[SolverTypes.h]}}
+\DoxyCodeLine{00002\ \textcolor{comment}{Copyright\ (c)\ 2003-\/2006,\ Niklas\ Een,\ Niklas\ Sorensson}}
+\DoxyCodeLine{00003\ \textcolor{comment}{Copyright\ (c)\ 2007-\/2010,\ Niklas\ Sorensson}}
+\DoxyCodeLine{00004\ \textcolor{comment}{}}
+\DoxyCodeLine{00005\ \textcolor{comment}{Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of\ this\ software\ and}}
+\DoxyCodeLine{00006\ \textcolor{comment}{associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in\ the\ Software\ without\ restriction,}}
+\DoxyCodeLine{00007\ \textcolor{comment}{including\ without\ limitation\ the\ rights\ to\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,}}
+\DoxyCodeLine{00008\ \textcolor{comment}{sublicense,\ and/or\ sell\ copies\ of\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is}}
+\DoxyCodeLine{00009\ \textcolor{comment}{furnished\ to\ do\ so,\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{00010\ \textcolor{comment}{}}
+\DoxyCodeLine{00011\ \textcolor{comment}{The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all\ copies\ or}}
+\DoxyCodeLine{00012\ \textcolor{comment}{substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{}}
+\DoxyCodeLine{00014\ \textcolor{comment}{THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR\ IMPLIED,\ INCLUDING\ BUT}}
+\DoxyCodeLine{00015\ \textcolor{comment}{NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE\ AND}}
+\DoxyCodeLine{00016\ \textcolor{comment}{NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,}}
+\DoxyCodeLine{00017\ \textcolor{comment}{DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT}}
+\DoxyCodeLine{00018\ \textcolor{comment}{OF\ OR\ IN\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{00019\ \textcolor{comment}{**************************************************************************************************/}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#ifndef\ Minisat\_SolverTypes\_h}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#define\ Minisat\_SolverTypes\_h}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ <assert.h>}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#include\ "{}minisat/mtl/IntTypes.h"{}}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#include\ "{}minisat/mtl/Alg.h"{}}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}minisat/mtl/Vec.h"{}}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#include\ "{}minisat/mtl/IntMap.h"{}}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ "{}minisat/mtl/Map.h"{}}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#include\ "{}minisat/mtl/Alloc.h"{}}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{namespace\ }Minisat\ \{}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{comment}{//=================================================================================================}}
+\DoxyCodeLine{00037\ \textcolor{comment}{//\ Variables,\ literals,\ lifted\ booleans,\ clauses:}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{comment}{//\ NOTE!\ Variables\ are\ just\ integers.\ No\ abstraction\ here.\ They\ should\ be\ chosen\ from\ 0..N,}}
+\DoxyCodeLine{00041\ \textcolor{comment}{//\ so\ that\ they\ can\ be\ used\ as\ array\ indices.}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{int}\ Var;}
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#if\ defined(MINISAT\_CONSTANTS\_AS\_MACROS)}}
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#define\ var\_Undef\ (-\/1)}}
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00047\ \ \ \textcolor{keyword}{const}\ Var\ var\_Undef\ =\ -\/1;}
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ x;}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{comment}{//\ Use\ this\ as\ a\ constructor:}}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{friend}\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ mkLit(Var\ var,\ \textcolor{keywordtype}{bool}\ sign\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{bool}\ operator\ ==\ (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ p)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ x\ ==\ p.x;\ \}}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{bool}\ operator\ !=\ (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ p)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ x\ !=\ p.x;\ \}}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{bool}\ operator\ <\ \ (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ p)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ x\ <\ p.x;\ \ \}\ \textcolor{comment}{//\ '<'\ makes\ p,\ \string~p\ adjacent\ in\ the\ ordering.}}
+\DoxyCodeLine{00060\ \};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \textcolor{keyword}{inline}\ \ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ \ mkLit\ \ \ \ \ (Var\ var,\ \textcolor{keywordtype}{bool}\ sign)\ \{\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ p;\ p.x\ =\ var\ +\ var\ +\ (int)sign;\ \textcolor{keywordflow}{return}\ p;\ \}}
+\DoxyCodeLine{00064\ \textcolor{keyword}{inline}\ \ Lit\ \ operator\ \string~(Lit\ p)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ Lit\ q;\ q.x\ =\ p.x\ \string^\ 1;\ \textcolor{keywordflow}{return}\ q;\ \}}
+\DoxyCodeLine{00065\ \textcolor{keyword}{inline}\ \ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ \ operator\ \string^(\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ p,\ \textcolor{keywordtype}{bool}\ b)\ \ \ \ \ \ \{\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ q;\ q.x\ =\ p.x\ \string^\ (\textcolor{keywordtype}{unsigned}\ int)b;\ \textcolor{keywordflow}{return}\ q;\ \}}
+\DoxyCodeLine{00066\ \textcolor{keyword}{inline}\ \ \textcolor{keywordtype}{bool}\ sign\ \ \ \ \ \ (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ p)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{keywordflow}{return}\ p.x\ \&\ 1;\ \}}
+\DoxyCodeLine{00067\ \textcolor{keyword}{inline}\ \ \textcolor{keywordtype}{int}\ \ var\ \ \ \ \ \ \ (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ p)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{keywordflow}{return}\ p.x\ >>\ 1;\ \}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \textcolor{comment}{//\ Mapping\ Literals\ to\ and\ from\ compact\ integers\ suitable\ for\ array\ indexing:}}
+\DoxyCodeLine{00070\ \textcolor{keyword}{inline}\ \ \textcolor{keywordtype}{int}\ \ toInt\ \ \ \ \ (Var\ v)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{keywordflow}{return}\ v;\ \}\ }
+\DoxyCodeLine{00071\ \textcolor{keyword}{inline}\ \ \textcolor{keywordtype}{int}\ \ toInt\ \ \ \ \ (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ p)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{keywordflow}{return}\ p.x;\ \}\ }
+\DoxyCodeLine{00072\ \textcolor{keyword}{inline}\ \ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ \ toLit\ \ \ \ \ (\textcolor{keywordtype}{int}\ i)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ p;\ p.x\ =\ i;\ \textcolor{keywordflow}{return}\ p;\ \}\ }
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \textcolor{comment}{//const\ Lit\ lit\_Undef\ =\ mkLit(var\_Undef,\ false);\ \ //\ \}-\/\ Useful\ special\ constants.}}
+\DoxyCodeLine{00075\ \textcolor{comment}{//const\ Lit\ lit\_Error\ =\ mkLit(var\_Undef,\ true\ );\ \ //\ \}}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ lit\_Undef\ =\ \{\ -\/2\ \};\ \ \textcolor{comment}{//\ \}-\/\ Useful\ special\ constants.}}
+\DoxyCodeLine{00078\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ lit\_Error\ =\ \{\ -\/1\ \};\ \ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_minisat_1_1_mk_index_lit}{MkIndexLit}}\ \{\ vec<Lit>::Size\ operator()(\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ l)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ vec<Lit>::Size(l.x);\ \}\ \};}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T>\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_minisat_1_1_v_map}{VMap}}\ :\ \textcolor{keyword}{public}\ IntMap<Var,\ T>\{\};}
+\DoxyCodeLine{00083\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T>\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_minisat_1_1_l_map}{LMap}}\ :\ \textcolor{keyword}{public}\ IntMap<Lit,\ T,\ MkIndexLit>\{\};}
+\DoxyCodeLine{00084\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_minisat_1_1_l_set}{LSet}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_minisat_1_1_int_set}{IntSet}}<Lit,\ MkIndexLit>\{\};}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \textcolor{comment}{//=================================================================================================}}
+\DoxyCodeLine{00087\ \textcolor{comment}{//\ Lifted\ booleans:}}
+\DoxyCodeLine{00088\ \textcolor{comment}{//}}
+\DoxyCodeLine{00089\ \textcolor{comment}{//\ NOTE:\ this\ implementation\ is\ optimized\ for\ the\ case\ when\ comparisons\ between\ values\ are\ mostly}}
+\DoxyCodeLine{00090\ \textcolor{comment}{//\ \ \ \ \ \ \ between\ one\ variable\ and\ one\ constant.\ Some\ care\ had\ to\ be\ taken\ to\ make\ sure\ that\ gcc\ }}
+\DoxyCodeLine{00091\ \textcolor{comment}{//\ \ \ \ \ \ \ does\ enough\ constant\ propagation\ to\ produce\ sensible\ code,\ and\ this\ appears\ to\ be\ somewhat}}
+\DoxyCodeLine{00092\ \textcolor{comment}{//\ \ \ \ \ \ \ fragile\ unfortunately.}}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \textcolor{keyword}{class\ }lbool\ \{}
+\DoxyCodeLine{00095\ \ \ \ \ uint8\_t\ value;}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keyword}{explicit}\ lbool(uint8\_t\ v)\ :\ value(v)\ \{\ \}}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \ \ \ \ lbool()\ \ \ \ \ \ \ :\ value(0)\ \{\ \}}
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keyword}{explicit}\ lbool(\textcolor{keywordtype}{bool}\ x)\ :\ value(!x)\ \{\ \}}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ operator\ ==\ (lbool\ b)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ ((b.value\&2)\ \&\ (value\&2))\ |\ (!(b.value\&2)\&(value\ ==\ b.value));\ \}}
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ operator\ !=\ (lbool\ b)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ !(*\textcolor{keyword}{this}\ ==\ b);\ \}}
+\DoxyCodeLine{00105\ \ \ \ \ lbool\ operator\ \string^\ \ (\textcolor{keywordtype}{bool}\ \ b)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ lbool((uint8\_t)(value\string^(uint8\_t)b));\ \}}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \ \ \ \ lbool\ operator\ \&\&\ (lbool\ b)\textcolor{keyword}{\ const\ }\{\ }
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ uint8\_t\ sel\ =\ (this-\/>value\ <<\ 1)\ |\ (b.value\ <<\ 3);}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ uint8\_t\ v\ \ \ =\ (0xF7F755F4\ >>\ sel)\ \&\ 3;}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ lbool(v);\ \}}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \ \ \ \ lbool\ operator\ ||\ (lbool\ b)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ uint8\_t\ sel\ =\ (this-\/>value\ <<\ 1)\ |\ (b.value\ <<\ 3);}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ uint8\_t\ v\ \ \ =\ (0xFCFCF400\ >>\ sel)\ \&\ 3;}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ lbool(v);\ \}}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keywordtype}{int}\ \ \ toInt\ \ (lbool\ l);}
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keyword}{friend}\ lbool\ toLbool(\textcolor{keywordtype}{int}\ \ \ v);}
+\DoxyCodeLine{00119\ \};}
+\DoxyCodeLine{00120\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{int}\ \ \ toInt\ \ (\mbox{\hyperlink{class_minisat_1_1lbool}{lbool}}\ l)\ \{\ \textcolor{keywordflow}{return}\ l.value;\ \}}
+\DoxyCodeLine{00121\ \textcolor{keyword}{inline}\ lbool\ toLbool(\textcolor{keywordtype}{int}\ \ \ v)\ \{\ \textcolor{keywordflow}{return}\ lbool((uint8\_t)v);\ \ \}}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \textcolor{preprocessor}{\#if\ defined(MINISAT\_CONSTANTS\_AS\_MACROS)}}
+\DoxyCodeLine{00124\ \textcolor{preprocessor}{\ \ \#define\ l\_True\ \ (lbool((uint8\_t)0))\ }\textcolor{comment}{//\ gcc\ does\ not\ do\ constant\ propagation\ if\ these\ are\ real\ constants.}}
+\DoxyCodeLine{00125\ \textcolor{preprocessor}{\ \ \#define\ l\_False\ (lbool((uint8\_t)1))}}
+\DoxyCodeLine{00126\ \textcolor{preprocessor}{\ \ \#define\ l\_Undef\ (lbool((uint8\_t)2))}}
+\DoxyCodeLine{00127\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00128\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_minisat_1_1lbool}{lbool}}\ l\_True\ ((uint8\_t)0);}
+\DoxyCodeLine{00129\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_minisat_1_1lbool}{lbool}}\ l\_False((uint8\_t)1);}
+\DoxyCodeLine{00130\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_minisat_1_1lbool}{lbool}}\ l\_Undef((uint8\_t)2);}
+\DoxyCodeLine{00131\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00134\ \textcolor{comment}{//=================================================================================================}}
+\DoxyCodeLine{00135\ \textcolor{comment}{//\ Clause\ -\/-\/\ a\ simple\ class\ for\ representing\ a\ clause:}}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_minisat_1_1_clause}{Clause}};}
+\DoxyCodeLine{00138\ \textcolor{keyword}{typedef}\ RegionAllocator<uint32\_t>::Ref\ CRef;}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00140\ \textcolor{keyword}{class\ }Clause\ \{}
+\DoxyCodeLine{00141\ \ \ \ \ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ mark\ \ \ \ \ \ :\ 2;}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ learnt\ \ \ \ :\ 1;}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ has\_extra\ :\ 1;}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ reloced\ \ \ :\ 1;}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ size\ \ \ \ \ \ :\ 27;\ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ header;}
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keyword}{union\ }\{\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ lit;\ \textcolor{keywordtype}{float}\ act;\ uint32\_t\ abs;\ CRef\ rel;\ \}\ data[0];}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }ClauseAllocator;}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{comment}{//\ NOTE:\ This\ constructor\ cannot\ be\ used\ directly\ (doesn't\ allocate\ enough\ memory).}}
+\DoxyCodeLine{00152\ \ \ \ \ Clause(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_minisat_1_1vec}{vec<Lit>}}\&\ ps,\ \textcolor{keywordtype}{bool}\ use\_extra,\ \textcolor{keywordtype}{bool}\ learnt)\ \{}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ header.mark\ \ \ \ \ \ =\ 0;}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ header.learnt\ \ \ \ =\ learnt;}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ header.has\_extra\ =\ use\_extra;}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ header.reloced\ \ \ =\ 0;}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ header.size\ \ \ \ \ \ =\ ps.size();}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ ps.size();\ i++)\ }
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ data[i].lit\ =\ ps[i];}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (header.has\_extra)\{}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (header.learnt)}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ data[header.size].act\ =\ 0;}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ calcAbstraction();}
+\DoxyCodeLine{00167\ \ \ \ \ \}}
+\DoxyCodeLine{00168\ \ \ \ \ \}}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00170\ \ \ \ \ \textcolor{comment}{//\ NOTE:\ This\ constructor\ cannot\ be\ used\ directly\ (doesn't\ allocate\ enough\ memory).}}
+\DoxyCodeLine{00171\ \ \ \ \ Clause(\textcolor{keyword}{const}\ Clause\&\ from,\ \textcolor{keywordtype}{bool}\ use\_extra)\{}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ header\ \ \ \ \ \ \ \ \ \ \ =\ from.header;}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ header.has\_extra\ =\ use\_extra;\ \ \ \textcolor{comment}{//\ NOTE:\ the\ copied\ clause\ may\ lose\ the\ extra\ field.}}
+\DoxyCodeLine{00174\ }
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ from.size();\ i++)}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \ \ \ \ data[i].lit\ =\ from[i];}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (header.has\_extra)\{}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (header.learnt)}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ data[header.size].act\ =\ from.data[header.size].act;}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ }
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ data[header.size].abs\ =\ from.data[header.size].abs;}
+\DoxyCodeLine{00183\ \ \ \ \ \}}
+\DoxyCodeLine{00184\ \ \ \ \ \}}
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00186\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00187\ \ \ \ \ \textcolor{keywordtype}{void}\ calcAbstraction()\ \{}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ assert(header.has\_extra);}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ uint32\_t\ abstraction\ =\ 0;}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ size();\ i++)}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \ \ \ \ abstraction\ |=\ 1\ <<\ (var(data[i].lit)\ \&\ 31);}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ data[header.size].abs\ =\ abstraction;\ \ \}}
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00195\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \ size\ \ \ \ \ \ \ \ ()\textcolor{keyword}{\ \ \ \ \ \ const\ \ \ }\{\ \textcolor{keywordflow}{return}\ header.size;\ \}}
+\DoxyCodeLine{00196\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ shrink\ \ \ \ \ \ (\textcolor{keywordtype}{int}\ i)\ \ \ \ \ \ \ \ \ \{\ assert(i\ <=\ size());\ \textcolor{keywordflow}{if}\ (header.has\_extra)\ data[header.size-\/i]\ =\ data[header.size];\ header.size\ -\/=\ i;\ \}}
+\DoxyCodeLine{00197\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ pop\ \ \ \ \ \ \ \ \ ()\ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ shrink(1);\ \}}
+\DoxyCodeLine{00198\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ learnt\ \ \ \ \ \ ()\textcolor{keyword}{\ \ \ \ \ \ const\ \ \ }\{\ \textcolor{keywordflow}{return}\ header.learnt;\ \}}
+\DoxyCodeLine{00199\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ has\_extra\ \ \ ()\textcolor{keyword}{\ \ \ \ \ \ const\ \ \ }\{\ \textcolor{keywordflow}{return}\ header.has\_extra;\ \}}
+\DoxyCodeLine{00200\ \ \ \ \ uint32\_t\ \ \ \ \ mark\ \ \ \ \ \ \ \ ()\textcolor{keyword}{\ \ \ \ \ \ const\ \ \ }\{\ \textcolor{keywordflow}{return}\ header.mark;\ \}}
+\DoxyCodeLine{00201\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ mark\ \ \ \ \ \ \ \ (uint32\_t\ m)\ \ \ \ \{\ header.mark\ =\ m;\ \}}
+\DoxyCodeLine{00202\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\&\ \ \ last\ \ \ \ \ \ \ \ ()\textcolor{keyword}{\ \ \ \ \ \ const\ \ \ }\{\ \textcolor{keywordflow}{return}\ data[header.size-\/1].lit;\ \}}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00204\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ reloced\ \ \ \ \ ()\textcolor{keyword}{\ \ \ \ \ \ const\ \ \ }\{\ \textcolor{keywordflow}{return}\ header.reloced;\ \}}
+\DoxyCodeLine{00205\ \ \ \ \ CRef\ \ \ \ \ \ \ \ \ relocation\ \ ()\textcolor{keyword}{\ \ \ \ \ \ const\ \ \ }\{\ \textcolor{keywordflow}{return}\ data[0].rel;\ \}}
+\DoxyCodeLine{00206\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ relocate\ \ \ \ (CRef\ c)\ \ \ \ \ \ \ \ \{\ header.reloced\ =\ 1;\ data[0].rel\ =\ c;\ \}}
+\DoxyCodeLine{00207\ }
+\DoxyCodeLine{00208\ \ \ \ \ \textcolor{comment}{//\ NOTE:\ somewhat\ unsafe\ to\ change\ the\ clause\ in-\/place!\ Must\ manually\ call\ 'calcAbstraction'\ afterwards\ for}}
+\DoxyCodeLine{00209\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ subsumption\ operations\ to\ behave\ correctly.}}
+\DoxyCodeLine{00210\ \ \ \ \ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\&\ \ \ \ \ \ \ \ \ operator\ []\ (\textcolor{keywordtype}{int}\ i)\ \ \ \ \ \ \ \ \ \{\ \textcolor{keywordflow}{return}\ data[i].lit;\ \}}
+\DoxyCodeLine{00211\ \ \ \ \ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ \ \ \ \ \ \ \ \ \ operator\ []\ (\textcolor{keywordtype}{int}\ i)\textcolor{keyword}{\ const\ \ \ }\{\ \textcolor{keywordflow}{return}\ data[i].lit;\ \}}
+\DoxyCodeLine{00212\ \ \ \ \ \textcolor{keyword}{operator}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}*\ (void)\ \textcolor{keyword}{const}\ \ \ \ \ \ \ \ \ \{\ \textcolor{keywordflow}{return}\ (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}*)data;\ \}}
+\DoxyCodeLine{00213\ }
+\DoxyCodeLine{00214\ \ \ \ \ \textcolor{keywordtype}{float}\&\ \ \ \ \ \ \ activity\ \ \ \ ()\ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ assert(header.has\_extra);\ \textcolor{keywordflow}{return}\ data[header.size].act;\ \}}
+\DoxyCodeLine{00215\ \ \ \ \ uint32\_t\ \ \ \ \ abstraction\ ()\textcolor{keyword}{\ const\ \ \ \ \ \ \ \ }\{\ assert(header.has\_extra);\ \textcolor{keywordflow}{return}\ data[header.size].abs;\ \}}
+\DoxyCodeLine{00216\ }
+\DoxyCodeLine{00217\ \ \ \ \ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ \ \ \ \ \ \ \ \ \ subsumes\ \ \ \ (\textcolor{keyword}{const}\ Clause\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00218\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ strengthen\ \ (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ p);}
+\DoxyCodeLine{00219\ \};}
+\DoxyCodeLine{00220\ }
+\DoxyCodeLine{00221\ }
+\DoxyCodeLine{00222\ \textcolor{comment}{//=================================================================================================}}
+\DoxyCodeLine{00223\ \textcolor{comment}{//\ ClauseAllocator\ -\/-\/\ a\ simple\ class\ for\ allocating\ memory\ for\ clauses:}}
+\DoxyCodeLine{00224\ }
+\DoxyCodeLine{00225\ \textcolor{keyword}{const}\ CRef\ CRef\_Undef\ =\ RegionAllocator<uint32\_t>::Ref\_Undef;}
+\DoxyCodeLine{00226\ \textcolor{keyword}{class\ }ClauseAllocator}
+\DoxyCodeLine{00227\ \{}
+\DoxyCodeLine{00228\ \ \ \ \ \mbox{\hyperlink{class_minisat_1_1_region_allocator}{RegionAllocator<uint32\_t>}}\ ra;}
+\DoxyCodeLine{00229\ }
+\DoxyCodeLine{00230\ \ \ \ \ \textcolor{keyword}{static}\ uint32\_t\ clauseWord32Size(\textcolor{keywordtype}{int}\ size,\ \textcolor{keywordtype}{bool}\ has\_extra)\{}
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keyword}{sizeof}(\mbox{\hyperlink{class_minisat_1_1_clause}{Clause}})\ +\ (\textcolor{keyword}{sizeof}(\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}})\ *\ (size\ +\ (\textcolor{keywordtype}{int})has\_extra)))\ /\ \textcolor{keyword}{sizeof}(uint32\_t);\ \}}
+\DoxyCodeLine{00232\ }
+\DoxyCodeLine{00233\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00234\ \ \ \ \ \textcolor{keyword}{enum}\ \{\ Unit\_Size\ =\ RegionAllocator<uint32\_t>::Unit\_Size\ \};}
+\DoxyCodeLine{00235\ }
+\DoxyCodeLine{00236\ \ \ \ \ \textcolor{keywordtype}{bool}\ extra\_clause\_field;}
+\DoxyCodeLine{00237\ }
+\DoxyCodeLine{00238\ \ \ \ \ ClauseAllocator(uint32\_t\ start\_cap)\ :\ ra(start\_cap),\ extra\_clause\_field(\textcolor{keyword}{false})\{\}}
+\DoxyCodeLine{00239\ \ \ \ \ ClauseAllocator()\ :\ extra\_clause\_field(\textcolor{keyword}{false})\{\}}
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00241\ \ \ \ \ \textcolor{keywordtype}{void}\ moveTo(ClauseAllocator\&\ to)\{}
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ to.extra\_clause\_field\ =\ extra\_clause\_field;}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ ra.moveTo(to.ra);\ \}}
+\DoxyCodeLine{00244\ }
+\DoxyCodeLine{00245\ \ \ \ \ CRef\ alloc(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_minisat_1_1vec}{vec<Lit>}}\&\ ps,\ \textcolor{keywordtype}{bool}\ learnt\ =\ \textcolor{keyword}{false})}
+\DoxyCodeLine{00246\ \ \ \ \ \{}
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ assert(\textcolor{keyword}{sizeof}(\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}})\ \ \ \ \ \ ==\ \textcolor{keyword}{sizeof}(uint32\_t));}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ assert(\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{float})\ \ \ \ ==\ \textcolor{keyword}{sizeof}(uint32\_t));}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ use\_extra\ =\ learnt\ |\ extra\_clause\_field;}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ CRef\ cid\ \ \ \ \ \ \ =\ ra.alloc(clauseWord32Size(ps.size(),\ use\_extra));}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ (lea(cid))\ \mbox{\hyperlink{class_minisat_1_1_clause}{Clause}}(ps,\ use\_extra,\ learnt);}
+\DoxyCodeLine{00252\ }
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ cid;}
+\DoxyCodeLine{00254\ \ \ \ \ \}}
+\DoxyCodeLine{00255\ }
+\DoxyCodeLine{00256\ \ \ \ \ CRef\ alloc(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_minisat_1_1_clause}{Clause}}\&\ from)}
+\DoxyCodeLine{00257\ \ \ \ \ \{}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ use\_extra\ =\ from.learnt()\ |\ extra\_clause\_field;}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ CRef\ cid\ \ \ \ \ \ \ =\ ra.alloc(clauseWord32Size(from.size(),\ use\_extra));}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ (lea(cid))\ \mbox{\hyperlink{class_minisat_1_1_clause}{Clause}}(from,\ use\_extra);}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ cid;\ \}}
+\DoxyCodeLine{00262\ }
+\DoxyCodeLine{00263\ \ \ \ \ uint32\_t\ size\ \ \ \ \ \ ()\textcolor{keyword}{\ const\ \ \ \ \ \ }\{\ \textcolor{keywordflow}{return}\ ra.size();\ \}}
+\DoxyCodeLine{00264\ \ \ \ \ uint32\_t\ wasted\ \ \ \ ()\textcolor{keyword}{\ const\ \ \ \ \ \ }\{\ \textcolor{keywordflow}{return}\ ra.wasted();\ \}}
+\DoxyCodeLine{00265\ }
+\DoxyCodeLine{00266\ \ \ \ \ \textcolor{comment}{//\ Deref,\ Load\ Effective\ Address\ (LEA),\ Inverse\ of\ LEA\ (AEL):}}
+\DoxyCodeLine{00267\ \ \ \ \ \mbox{\hyperlink{class_minisat_1_1_clause}{Clause}}\&\ \ \ \ \ \ \ operator[](CRef\ r)\ \ \ \ \ \ \ \ \ \{\ \textcolor{keywordflow}{return}\ (\mbox{\hyperlink{class_minisat_1_1_clause}{Clause}}\&)ra[r];\ \}}
+\DoxyCodeLine{00268\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_minisat_1_1_clause}{Clause}}\&\ operator[](CRef\ r)\textcolor{keyword}{\ const\ \ \ }\{\ \textcolor{keywordflow}{return}\ (\mbox{\hyperlink{class_minisat_1_1_clause}{Clause}}\&)ra[r];\ \}}
+\DoxyCodeLine{00269\ \ \ \ \ \mbox{\hyperlink{class_minisat_1_1_clause}{Clause}}*\ \ \ \ \ \ \ lea\ \ \ \ \ \ \ (CRef\ r)\ \ \ \ \ \ \ \ \ \{\ \textcolor{keywordflow}{return}\ (\mbox{\hyperlink{class_minisat_1_1_clause}{Clause}}*)ra.lea(r);\ \}}
+\DoxyCodeLine{00270\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_minisat_1_1_clause}{Clause}}*\ lea\ \ \ \ \ \ \ (CRef\ r)\textcolor{keyword}{\ const\ \ \ }\{\ \textcolor{keywordflow}{return}\ (\mbox{\hyperlink{class_minisat_1_1_clause}{Clause}}*)ra.lea(r);;\ \}}
+\DoxyCodeLine{00271\ \ \ \ \ CRef\ \ \ \ \ \ \ \ \ \ ael\ \ \ \ \ \ \ (\textcolor{keyword}{const}\ \mbox{\hyperlink{class_minisat_1_1_clause}{Clause}}*\ t)\{\ \textcolor{keywordflow}{return}\ ra.ael((uint32\_t*)t);\ \}}
+\DoxyCodeLine{00272\ }
+\DoxyCodeLine{00273\ \ \ \ \ \textcolor{keywordtype}{void}\ free(CRef\ cid)}
+\DoxyCodeLine{00274\ \ \ \ \ \{}
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_minisat_1_1_clause}{Clause}}\&\ c\ =\ operator[](cid);}
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ ra.free(clauseWord32Size(c.size(),\ c.has\_extra()));}
+\DoxyCodeLine{00277\ \ \ \ \ \}}
+\DoxyCodeLine{00278\ }
+\DoxyCodeLine{00279\ \ \ \ \ \textcolor{keywordtype}{void}\ reloc(CRef\&\ cr,\ ClauseAllocator\&\ to)}
+\DoxyCodeLine{00280\ \ \ \ \ \{}
+\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_minisat_1_1_clause}{Clause}}\&\ c\ =\ operator[](cr);}
+\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (c.reloced())\ \{\ cr\ =\ c.relocation();\ \textcolor{keywordflow}{return};\ \}}
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ cr\ =\ to.alloc(c);}
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ c.relocate(cr);}
+\DoxyCodeLine{00287\ \ \ \ \ \}}
+\DoxyCodeLine{00288\ \};}
+\DoxyCodeLine{00289\ }
+\DoxyCodeLine{00290\ \textcolor{comment}{//=================================================================================================}}
+\DoxyCodeLine{00291\ \textcolor{comment}{//\ Simple\ iterator\ classes\ (for\ iterating\ over\ clauses\ and\ top-\/level\ assignments):}}
+\DoxyCodeLine{00292\ }
+\DoxyCodeLine{00293\ \textcolor{keyword}{class\ }ClauseIterator\ \{}
+\DoxyCodeLine{00294\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_minisat_1_1_clause_allocator}{ClauseAllocator}}\&\ ca;}
+\DoxyCodeLine{00295\ \ \ \ \ \textcolor{keyword}{const}\ CRef*\ \ \ \ \ \ \ \ \ \ \ \ crefs;}
+\DoxyCodeLine{00296\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00297\ \ \ \ \ ClauseIterator(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_minisat_1_1_clause_allocator}{ClauseAllocator}}\&\ \_ca,\ \textcolor{keyword}{const}\ CRef*\ \_crefs)\ :\ ca(\_ca),\ crefs(\_crefs)\{\}}
+\DoxyCodeLine{00298\ }
+\DoxyCodeLine{00299\ \ \ \ \ \textcolor{keywordtype}{void}\ operator++()\{\ crefs++;\ \}}
+\DoxyCodeLine{00300\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_minisat_1_1_clause}{Clause}}\&\ operator*()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ ca[*crefs];\ \}}
+\DoxyCodeLine{00301\ }
+\DoxyCodeLine{00302\ \ \ \ \ \textcolor{comment}{//\ NOTE:\ does\ not\ compare\ that\ references\ use\ the\ same\ clause-\/allocator:}}
+\DoxyCodeLine{00303\ \ \ \ \ \textcolor{keywordtype}{bool}\ operator==(\textcolor{keyword}{const}\ ClauseIterator\&\ ci)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ crefs\ ==\ ci.crefs;\ \}}
+\DoxyCodeLine{00304\ \ \ \ \ \textcolor{keywordtype}{bool}\ operator!=(\textcolor{keyword}{const}\ ClauseIterator\&\ ci)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ crefs\ !=\ ci.crefs;\ \}}
+\DoxyCodeLine{00305\ \};}
+\DoxyCodeLine{00306\ }
+\DoxyCodeLine{00307\ }
+\DoxyCodeLine{00308\ \textcolor{keyword}{class\ }TrailIterator\ \{}
+\DoxyCodeLine{00309\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}*\ lits;}
+\DoxyCodeLine{00310\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00311\ \ \ \ \ TrailIterator(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}*\ \_lits)\ :\ lits(\_lits)\{\}}
+\DoxyCodeLine{00312\ }
+\DoxyCodeLine{00313\ \ \ \ \ \textcolor{keywordtype}{void}\ operator++()\ \ \ \{\ lits++;\ \}}
+\DoxyCodeLine{00314\ \ \ \ \ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ \ operator*()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ *lits;\ \}}
+\DoxyCodeLine{00315\ }
+\DoxyCodeLine{00316\ \ \ \ \ \textcolor{keywordtype}{bool}\ operator==(\textcolor{keyword}{const}\ TrailIterator\&\ ti)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ lits\ ==\ ti.lits;\ \}}
+\DoxyCodeLine{00317\ \ \ \ \ \textcolor{keywordtype}{bool}\ operator!=(\textcolor{keyword}{const}\ TrailIterator\&\ ti)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ lits\ !=\ ti.lits;\ \}}
+\DoxyCodeLine{00318\ \};}
+\DoxyCodeLine{00319\ }
+\DoxyCodeLine{00320\ }
+\DoxyCodeLine{00321\ \textcolor{comment}{//=================================================================================================}}
+\DoxyCodeLine{00322\ \textcolor{comment}{//\ OccLists\ -\/-\/\ a\ class\ for\ maintaining\ occurence\ lists\ with\ lazy\ deletion:}}
+\DoxyCodeLine{00323\ }
+\DoxyCodeLine{00324\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ K,\ \textcolor{keyword}{class}\ Vec,\ \textcolor{keyword}{class}\ Deleted,\ \textcolor{keyword}{class}\ MkIndex\ =\ MkIndexDefault<K>\ >}
+\DoxyCodeLine{00325\ \textcolor{keyword}{class\ }OccLists}
+\DoxyCodeLine{00326\ \{}
+\DoxyCodeLine{00327\ \ \ \ \ \mbox{\hyperlink{class_minisat_1_1_int_map}{IntMap<K,\ Vec,\ \ MkIndex>}}\ occs;}
+\DoxyCodeLine{00328\ \ \ \ \ \mbox{\hyperlink{class_minisat_1_1_int_map}{IntMap<K,\ char,\ MkIndex>}}\ dirty;}
+\DoxyCodeLine{00329\ \ \ \ \ \mbox{\hyperlink{class_minisat_1_1vec}{vec<K>}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dirties;}
+\DoxyCodeLine{00330\ \ \ \ \ Deleted\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ deleted;}
+\DoxyCodeLine{00331\ }
+\DoxyCodeLine{00332\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00333\ \ \ \ \ OccLists(\textcolor{keyword}{const}\ Deleted\&\ d,\ MkIndex\ \_index\ =\ MkIndex())\ :}
+\DoxyCodeLine{00334\ \ \ \ \ \ \ \ \ occs(\_index),\ }
+\DoxyCodeLine{00335\ \ \ \ \ \ \ \ \ dirty(\_index),\ }
+\DoxyCodeLine{00336\ \ \ \ \ \ \ \ \ deleted(d)\{\}}
+\DoxyCodeLine{00337\ \ \ \ \ }
+\DoxyCodeLine{00338\ \ \ \ \ \textcolor{keywordtype}{void}\ \ init\ \ \ \ \ \ (\textcolor{keyword}{const}\ K\&\ idx)\{\ occs.reserve(idx);\ occs[idx].clear();\ dirty.reserve(idx,\ 0);\ \}}
+\DoxyCodeLine{00339\ \ \ \ \ Vec\&\ \ operator[](\textcolor{keyword}{const}\ K\&\ idx)\{\ \textcolor{keywordflow}{return}\ occs[idx];\ \}}
+\DoxyCodeLine{00340\ \ \ \ \ Vec\&\ \ lookup\ \ \ \ (\textcolor{keyword}{const}\ K\&\ idx)\{\ \textcolor{keywordflow}{if}\ (dirty[idx])\ clean(idx);\ \textcolor{keywordflow}{return}\ occs[idx];\ \}}
+\DoxyCodeLine{00341\ }
+\DoxyCodeLine{00342\ \ \ \ \ \textcolor{keywordtype}{void}\ \ cleanAll\ \ ();}
+\DoxyCodeLine{00343\ \ \ \ \ \textcolor{keywordtype}{void}\ \ clean\ \ \ \ \ (\textcolor{keyword}{const}\ K\&\ idx);}
+\DoxyCodeLine{00344\ \ \ \ \ \textcolor{keywordtype}{void}\ \ smudge\ \ \ \ (\textcolor{keyword}{const}\ K\&\ idx)\{}
+\DoxyCodeLine{00345\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dirty[idx]\ ==\ 0)\{}
+\DoxyCodeLine{00346\ \ \ \ \ \ \ \ \ \ \ \ \ dirty[idx]\ =\ 1;}
+\DoxyCodeLine{00347\ \ \ \ \ \ \ \ \ \ \ \ \ dirties.push(idx);}
+\DoxyCodeLine{00348\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00349\ \ \ \ \ \}}
+\DoxyCodeLine{00350\ }
+\DoxyCodeLine{00351\ \ \ \ \ \textcolor{keywordtype}{void}\ \ clear(\textcolor{keywordtype}{bool}\ free\ =\ \textcolor{keyword}{true})\{}
+\DoxyCodeLine{00352\ \ \ \ \ \ \ \ \ occs\ \ \ .clear(free);}
+\DoxyCodeLine{00353\ \ \ \ \ \ \ \ \ dirty\ \ .clear(free);}
+\DoxyCodeLine{00354\ \ \ \ \ \ \ \ \ dirties.clear(free);}
+\DoxyCodeLine{00355\ \ \ \ \ \}}
+\DoxyCodeLine{00356\ \};}
+\DoxyCodeLine{00357\ }
+\DoxyCodeLine{00358\ }
+\DoxyCodeLine{00359\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ K,\ \textcolor{keyword}{class}\ Vec,\ \textcolor{keyword}{class}\ Deleted,\ \textcolor{keyword}{class}\ MkIndex>}
+\DoxyCodeLine{00360\ \textcolor{keywordtype}{void}\ OccLists<K,Vec,Deleted,MkIndex>::cleanAll()}
+\DoxyCodeLine{00361\ \{}
+\DoxyCodeLine{00362\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ dirties.size();\ i++)}
+\DoxyCodeLine{00363\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Dirties\ may\ contain\ duplicates\ so\ check\ here\ if\ a\ variable\ is\ already\ cleaned:}}
+\DoxyCodeLine{00364\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (dirty[dirties[i]])}
+\DoxyCodeLine{00365\ \ \ \ \ \ \ \ \ \ \ \ \ clean(dirties[i]);}
+\DoxyCodeLine{00366\ \ \ \ \ dirties.clear();}
+\DoxyCodeLine{00367\ \}}
+\DoxyCodeLine{00368\ }
+\DoxyCodeLine{00369\ }
+\DoxyCodeLine{00370\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ K,\ \textcolor{keyword}{class}\ Vec,\ \textcolor{keyword}{class}\ Deleted,\ \textcolor{keyword}{class}\ MkIndex>}
+\DoxyCodeLine{00371\ \textcolor{keywordtype}{void}\ OccLists<K,Vec,Deleted,MkIndex>::clean(\textcolor{keyword}{const}\ K\&\ idx)}
+\DoxyCodeLine{00372\ \{}
+\DoxyCodeLine{00373\ \ \ \ \ Vec\&\ vec\ =\ occs[idx];}
+\DoxyCodeLine{00374\ \ \ \ \ \textcolor{keywordtype}{int}\ \ i,\ j;}
+\DoxyCodeLine{00375\ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ j\ =\ 0;\ i\ <\ vec.size();\ i++)}
+\DoxyCodeLine{00376\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!deleted(vec[i]))}
+\DoxyCodeLine{00377\ \ \ \ \ \ \ \ \ \ \ \ \ vec[j++]\ =\ vec[i];}
+\DoxyCodeLine{00378\ \ \ \ \ vec.shrink(i\ -\/\ j);}
+\DoxyCodeLine{00379\ \ \ \ \ dirty[idx]\ =\ 0;}
+\DoxyCodeLine{00380\ \}}
+\DoxyCodeLine{00381\ }
+\DoxyCodeLine{00382\ }
+\DoxyCodeLine{00383\ \textcolor{comment}{//=================================================================================================}}
+\DoxyCodeLine{00384\ \textcolor{comment}{//\ CMap\ -\/-\/\ a\ class\ for\ mapping\ clauses\ to\ values:}}
+\DoxyCodeLine{00385\ }
+\DoxyCodeLine{00386\ }
+\DoxyCodeLine{00387\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00388\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_minisat_1_1_c_map}{CMap}}}
+\DoxyCodeLine{00389\ \{}
+\DoxyCodeLine{00390\ \ \ \ \ \textcolor{keyword}{struct\ }CRefHash\ \{}
+\DoxyCodeLine{00391\ \ \ \ \ \ \ \ \ uint32\_t\ operator()(CRef\ cr)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ (uint32\_t)cr;\ \}\ \};}
+\DoxyCodeLine{00392\ }
+\DoxyCodeLine{00393\ \ \ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{class_minisat_1_1_map}{Map<CRef,\ T,\ CRefHash>}}\ HashTable;}
+\DoxyCodeLine{00394\ \ \ \ \ HashTable\ map;}
+\DoxyCodeLine{00395\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00396\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00397\ \ \ \ \ \textcolor{comment}{//\ Size-\/operations:}}
+\DoxyCodeLine{00398\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ clear\ \ \ \ \ \ \ ()\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ map.clear();\ \}}
+\DoxyCodeLine{00399\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ size\ \ \ \ \ \ \ \ ()\textcolor{keyword}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ const\ \ \ \ \ \ }\{\ \textcolor{keywordflow}{return}\ map.elems();\ \}}
+\DoxyCodeLine{00400\ }
+\DoxyCodeLine{00401\ \ \ \ \ }
+\DoxyCodeLine{00402\ \ \ \ \ \textcolor{comment}{//\ Insert/Remove/Test\ mapping:}}
+\DoxyCodeLine{00403\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ insert\ \ \ \ \ \ (CRef\ cr,\ \textcolor{keyword}{const}\ T\&\ t)\{\ map.insert(cr,\ t);\ \}}
+\DoxyCodeLine{00404\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ growTo\ \ \ \ \ \ (CRef\ cr,\ \textcolor{keyword}{const}\ T\&\ t)\{\ map.insert(cr,\ t);\ \}\ \textcolor{comment}{//\ NOTE:\ for\ compatibility}}
+\DoxyCodeLine{00405\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ remove\ \ \ \ \ \ (CRef\ cr)\ \ \ \ \ \ \ \ \ \ \ \ \{\ map.remove(cr);\ \}}
+\DoxyCodeLine{00406\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ \ has\ \ \ \ \ \ \ \ \ (CRef\ cr,\ T\&\ t)\ \ \ \ \ \ \{\ \textcolor{keywordflow}{return}\ map.peek(cr,\ t);\ \}}
+\DoxyCodeLine{00407\ }
+\DoxyCodeLine{00408\ \ \ \ \ \textcolor{comment}{//\ Vector\ interface\ (the\ clause\ 'c'\ must\ already\ exist):}}
+\DoxyCodeLine{00409\ \ \ \ \ \textcolor{keyword}{const}\ T\&\ operator\ []\ (CRef\ cr)\textcolor{keyword}{\ const\ \ \ \ \ \ }\{\ \textcolor{keywordflow}{return}\ map[cr];\ \}}
+\DoxyCodeLine{00410\ \ \ \ \ T\&\ \ \ \ \ \ \ operator\ []\ (CRef\ cr)\ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{keywordflow}{return}\ map[cr];\ \}}
+\DoxyCodeLine{00411\ }
+\DoxyCodeLine{00412\ \ \ \ \ \textcolor{comment}{//\ Iteration\ (not\ transparent\ at\ all\ at\ the\ moment):}}
+\DoxyCodeLine{00413\ \ \ \ \ \textcolor{keywordtype}{int}\ \ bucket\_count()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ map.bucket\_count();\ \}}
+\DoxyCodeLine{00414\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_minisat_1_1vec}{vec<typename\ HashTable::Pair>}}\&\ bucket(\textcolor{keywordtype}{int}\ i)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ map.bucket(i);\ \}}
+\DoxyCodeLine{00415\ }
+\DoxyCodeLine{00416\ \ \ \ \ \textcolor{comment}{//\ Move\ contents\ to\ other\ map:}}
+\DoxyCodeLine{00417\ \ \ \ \ \textcolor{keywordtype}{void}\ moveTo(\mbox{\hyperlink{class_minisat_1_1_c_map}{CMap}}\&\ other)\{\ map.moveTo(other.map);\ \}}
+\DoxyCodeLine{00418\ }
+\DoxyCodeLine{00419\ \ \ \ \ \textcolor{comment}{//\ TMP\ debug:}}
+\DoxyCodeLine{00420\ \ \ \ \ \textcolor{keywordtype}{void}\ debug()\{}
+\DoxyCodeLine{00421\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ -\/-\/-\/\ size\ =\ \%d,\ bucket\_count\ =\ \%d\(\backslash\)n"{}},\ size(),\ map.bucket\_count());\ \}}
+\DoxyCodeLine{00422\ \};}
+\DoxyCodeLine{00423\ }
+\DoxyCodeLine{00424\ }
+\DoxyCodeLine{00425\ \textcolor{comment}{/*\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}}
+\DoxyCodeLine{00426\ \textcolor{comment}{|}}
+\DoxyCodeLine{00427\ \textcolor{comment}{|\ \ subsumes\ :\ (other\ :\ const\ Clause\&)\ \ -\/>\ \ Lit}}
+\DoxyCodeLine{00428\ \textcolor{comment}{|\ \ }}
+\DoxyCodeLine{00429\ \textcolor{comment}{|\ \ Description:}}
+\DoxyCodeLine{00430\ \textcolor{comment}{|\ \ \ \ \ \ \ Checks\ if\ clause\ subsumes\ 'other',\ and\ at\ the\ same\ time,\ if\ it\ can\ be\ used\ to\ simplify\ 'other'}}
+\DoxyCodeLine{00431\ \textcolor{comment}{|\ \ \ \ \ \ \ by\ subsumption\ resolution.}}
+\DoxyCodeLine{00432\ \textcolor{comment}{|\ \ }}
+\DoxyCodeLine{00433\ \textcolor{comment}{|\ \ \ \ Result:}}
+\DoxyCodeLine{00434\ \textcolor{comment}{|\ \ \ \ \ \ \ lit\_Error\ \ -\/\ No\ subsumption\ or\ simplification}}
+\DoxyCodeLine{00435\ \textcolor{comment}{|\ \ \ \ \ \ \ lit\_Undef\ \ -\/\ Clause\ subsumes\ 'other'}}
+\DoxyCodeLine{00436\ \textcolor{comment}{|\ \ \ \ \ \ \ p\ \ \ \ \ \ \ \ \ \ -\/\ The\ literal\ p\ can\ be\ deleted\ from\ 'other'}}
+\DoxyCodeLine{00437\ \textcolor{comment}{|\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_@*/}}
+\DoxyCodeLine{00438\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ Clause::subsumes(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_minisat_1_1_clause}{Clause}}\&\ other)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00439\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00440\ \ \ \ \ \textcolor{comment}{//if\ (other.size()\ <\ size()\ ||\ (extra.abst\ \&\ \string~other.extra.abst)\ !=\ 0)}}
+\DoxyCodeLine{00441\ \ \ \ \ \textcolor{comment}{//if\ (other.size()\ <\ size()\ ||\ (!learnt()\ \&\&\ !other.learnt()\ \&\&\ (extra.abst\ \&\ \string~other.extra.abst)\ !=\ 0))}}
+\DoxyCodeLine{00442\ \ \ \ \ assert(!header.learnt);\ \ \ assert(!other.header.learnt);}
+\DoxyCodeLine{00443\ \ \ \ \ assert(header.has\_extra);\ assert(other.header.has\_extra);}
+\DoxyCodeLine{00444\ \ \ \ \ \textcolor{keywordflow}{if}\ (other.header.size\ <\ header.size\ ||\ (data[header.size].abs\ \&\ \string~other.data[other.header.size].abs)\ !=\ 0)}
+\DoxyCodeLine{00445\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ lit\_Error;}
+\DoxyCodeLine{00446\ }
+\DoxyCodeLine{00447\ \ \ \ \ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ \ \ \ \ \ \ \ ret\ =\ lit\_Undef;}
+\DoxyCodeLine{00448\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}*\ c\ \ \ =\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}*)(*\textcolor{keyword}{this});}
+\DoxyCodeLine{00449\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}*\ d\ \ \ =\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}*)other;}
+\DoxyCodeLine{00450\ }
+\DoxyCodeLine{00451\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ i\ =\ 0;\ i\ <\ header.size;\ i++)\ \{}
+\DoxyCodeLine{00452\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ search\ for\ c[i]\ or\ \string~c[i]}}
+\DoxyCodeLine{00453\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ j\ =\ 0;\ j\ <\ other.header.size;\ j++)}
+\DoxyCodeLine{00454\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (c[i]\ ==\ d[j])}
+\DoxyCodeLine{00455\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{goto}\ ok;}
+\DoxyCodeLine{00456\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (ret\ ==\ lit\_Undef\ \&\&\ c[i]\ ==\ \string~d[j])\{}
+\DoxyCodeLine{00457\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ret\ =\ c[i];}
+\DoxyCodeLine{00458\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{goto}\ ok;}
+\DoxyCodeLine{00459\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00460\ }
+\DoxyCodeLine{00461\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ did\ not\ find\ it}}
+\DoxyCodeLine{00462\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ lit\_Error;}
+\DoxyCodeLine{00463\ \ \ \ \ ok:;}
+\DoxyCodeLine{00464\ \ \ \ \ \}}
+\DoxyCodeLine{00465\ }
+\DoxyCodeLine{00466\ \ \ \ \ \textcolor{keywordflow}{return}\ ret;}
+\DoxyCodeLine{00467\ \}}
+\DoxyCodeLine{00468\ }
+\DoxyCodeLine{00469\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ Clause::strengthen(\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ p)}
+\DoxyCodeLine{00470\ \{}
+\DoxyCodeLine{00471\ \ \ \ \ remove(*\textcolor{keyword}{this},\ p);}
+\DoxyCodeLine{00472\ \ \ \ \ calcAbstraction();}
+\DoxyCodeLine{00473\ \}}
+\DoxyCodeLine{00474\ }
+\DoxyCodeLine{00475\ \textcolor{comment}{//=================================================================================================}}
+\DoxyCodeLine{00476\ \}}
+\DoxyCodeLine{00477\ }
+\DoxyCodeLine{00478\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,0 +1,73 @@
+\doxysection{Minisat\+::Clause Class Reference}
+\hypertarget{class_minisat_1_1_clause}{}\label{class_minisat_1_1_clause}\index{Minisat::Clause@{Minisat::Clause}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_minisat_1_1_clause_abc60102b38f379a0a9cdc3535061afc2}\label{class_minisat_1_1_clause_abc60102b38f379a0a9cdc3535061afc2} 
+void {\bfseries calc\+Abstraction} ()
+\item 
+\Hypertarget{class_minisat_1_1_clause_a32e11a8cfbce9f61dc9e8fee390bf963}\label{class_minisat_1_1_clause_a32e11a8cfbce9f61dc9e8fee390bf963} 
+int {\bfseries size} () const
+\item 
+\Hypertarget{class_minisat_1_1_clause_a4a6fe487c395f0da0522706ed8658ba7}\label{class_minisat_1_1_clause_a4a6fe487c395f0da0522706ed8658ba7} 
+void {\bfseries shrink} (int i)
+\item 
+\Hypertarget{class_minisat_1_1_clause_ab9c7d64a2451db6c0efd203e963680b3}\label{class_minisat_1_1_clause_ab9c7d64a2451db6c0efd203e963680b3} 
+void {\bfseries pop} ()
+\item 
+\Hypertarget{class_minisat_1_1_clause_a0f825cae2c76ce4ec7f63cf9ccc3428f}\label{class_minisat_1_1_clause_a0f825cae2c76ce4ec7f63cf9ccc3428f} 
+bool {\bfseries learnt} () const
+\item 
+\Hypertarget{class_minisat_1_1_clause_ae5d0dc2634e24c5f4ae58831251ce5f6}\label{class_minisat_1_1_clause_ae5d0dc2634e24c5f4ae58831251ce5f6} 
+bool {\bfseries has\+\_\+extra} () const
+\item 
+\Hypertarget{class_minisat_1_1_clause_aaf887908aac19be2a6c2f2b9fb347407}\label{class_minisat_1_1_clause_aaf887908aac19be2a6c2f2b9fb347407} 
+uint32\+\_\+t {\bfseries mark} () const
+\item 
+\Hypertarget{class_minisat_1_1_clause_a23f559592d112e68f576f62e71c4872b}\label{class_minisat_1_1_clause_a23f559592d112e68f576f62e71c4872b} 
+void {\bfseries mark} (uint32\+\_\+t m)
+\item 
+\Hypertarget{class_minisat_1_1_clause_aaf6b4f227162b720746fca313ce94b0c}\label{class_minisat_1_1_clause_aaf6b4f227162b720746fca313ce94b0c} 
+const \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} \& {\bfseries last} () const
+\item 
+\Hypertarget{class_minisat_1_1_clause_a06d4de6f8426583dc6bf12e2e1a76e3b}\label{class_minisat_1_1_clause_a06d4de6f8426583dc6bf12e2e1a76e3b} 
+bool {\bfseries reloced} () const
+\item 
+\Hypertarget{class_minisat_1_1_clause_ae05962e4aee75e8a73101ca21894b567}\label{class_minisat_1_1_clause_ae05962e4aee75e8a73101ca21894b567} 
+CRef {\bfseries relocation} () const
+\item 
+\Hypertarget{class_minisat_1_1_clause_a25e958a88b74a4ac445a22c7c13a5670}\label{class_minisat_1_1_clause_a25e958a88b74a4ac445a22c7c13a5670} 
+void {\bfseries relocate} (CRef c)
+\item 
+\Hypertarget{class_minisat_1_1_clause_aa0daf9bfe6530fc6a6be72aebf58a7e9}\label{class_minisat_1_1_clause_aa0daf9bfe6530fc6a6be72aebf58a7e9} 
+\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} \& {\bfseries operator\mbox{[}$\,$\mbox{]}} (int i)
+\item 
+\Hypertarget{class_minisat_1_1_clause_a15905770146068939c4f1df69c8c6141}\label{class_minisat_1_1_clause_a15905770146068939c4f1df69c8c6141} 
+\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} {\bfseries operator\mbox{[}$\,$\mbox{]}} (int i) const
+\item 
+\Hypertarget{class_minisat_1_1_clause_a24a0d0b60077ddbd96f605be974f9c95}\label{class_minisat_1_1_clause_a24a0d0b60077ddbd96f605be974f9c95} 
+{\bfseries operator const Lit \texorpdfstring{$\ast$}{*}} (void) const
+\item 
+\Hypertarget{class_minisat_1_1_clause_a39a752fe4f1747af7ef2843fe31ca8fc}\label{class_minisat_1_1_clause_a39a752fe4f1747af7ef2843fe31ca8fc} 
+float \& {\bfseries activity} ()
+\item 
+\Hypertarget{class_minisat_1_1_clause_aa1076ed374e7a816e68ac77ec91599c6}\label{class_minisat_1_1_clause_aa1076ed374e7a816e68ac77ec91599c6} 
+uint32\+\_\+t {\bfseries abstraction} () const
+\item 
+\Hypertarget{class_minisat_1_1_clause_ad3d7869cbf6edbcdc0590787863de235}\label{class_minisat_1_1_clause_ad3d7869cbf6edbcdc0590787863de235} 
+\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} {\bfseries subsumes} (const \mbox{\hyperlink{class_minisat_1_1_clause}{Clause}} \&other) const
+\item 
+\Hypertarget{class_minisat_1_1_clause_a23c6f6a39f26b1d55f7f352aacfb19d9}\label{class_minisat_1_1_clause_a23c6f6a39f26b1d55f7f352aacfb19d9} 
+void {\bfseries strengthen} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_minisat_1_1_clause_a4b58c002d425db12e1a8d49499359d69}\label{class_minisat_1_1_clause_a4b58c002d425db12e1a8d49499359d69} 
+class {\bfseries Clause\+Allocator}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+code/minisat/core/Solver\+Types.\+h\end{DoxyCompactItemize}

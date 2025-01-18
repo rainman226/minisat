@@ -1,0 +1,228 @@
+\doxysection{Simp\+Solver.\+h}
+\hypertarget{_simp_solver_8h_source}{}\label{_simp_solver_8h_source}\index{code/minisat/simp/SimpSolver.h@{code/minisat/simp/SimpSolver.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/************************************************************************************[SimpSolver.h]}}
+\DoxyCodeLine{00002\ \textcolor{comment}{Copyright\ (c)\ 2006,\ \ \ \ \ \ Niklas\ Een,\ Niklas\ Sorensson}}
+\DoxyCodeLine{00003\ \textcolor{comment}{Copyright\ (c)\ 2007-\/2010,\ Niklas\ Sorensson}}
+\DoxyCodeLine{00004\ \textcolor{comment}{}}
+\DoxyCodeLine{00005\ \textcolor{comment}{Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of\ this\ software\ and}}
+\DoxyCodeLine{00006\ \textcolor{comment}{associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in\ the\ Software\ without\ restriction,}}
+\DoxyCodeLine{00007\ \textcolor{comment}{including\ without\ limitation\ the\ rights\ to\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,}}
+\DoxyCodeLine{00008\ \textcolor{comment}{sublicense,\ and/or\ sell\ copies\ of\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is}}
+\DoxyCodeLine{00009\ \textcolor{comment}{furnished\ to\ do\ so,\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{00010\ \textcolor{comment}{}}
+\DoxyCodeLine{00011\ \textcolor{comment}{The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all\ copies\ or}}
+\DoxyCodeLine{00012\ \textcolor{comment}{substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{}}
+\DoxyCodeLine{00014\ \textcolor{comment}{THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR\ IMPLIED,\ INCLUDING\ BUT}}
+\DoxyCodeLine{00015\ \textcolor{comment}{NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE\ AND}}
+\DoxyCodeLine{00016\ \textcolor{comment}{NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,}}
+\DoxyCodeLine{00017\ \textcolor{comment}{DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT}}
+\DoxyCodeLine{00018\ \textcolor{comment}{OF\ OR\ IN\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{00019\ \textcolor{comment}{**************************************************************************************************/}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#ifndef\ Minisat\_SimpSolver\_h}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#define\ Minisat\_SimpSolver\_h}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ "{}minisat/mtl/Queue.h"{}}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ "{}minisat/core/Solver.h"{}}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{namespace\ }Minisat\ \{}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{comment}{//=================================================================================================}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{class\ }SimpSolver\ :\ \textcolor{keyword}{public}\ Solver\ \{}
+\DoxyCodeLine{00034\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{comment}{//\ Constructor/Destructor:}}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00037\ \ \ \ \ SimpSolver();}
+\DoxyCodeLine{00038\ \ \ \ \ \string~SimpSolver();}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{comment}{//\ Problem\ specification:}}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00042\ \ \ \ \ Var\ \ \ \ \ newVar\ \ \ \ (\mbox{\hyperlink{class_minisat_1_1lbool}{lbool}}\ upol\ =\ l\_Undef,\ \textcolor{keywordtype}{bool}\ dvar\ =\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ releaseVar(\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ l);}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ addClause\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{class_minisat_1_1vec}{vec<Lit>}}\&\ ps);}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ addEmptyClause();\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ the\ empty\ clause\ to\ the\ solver.}}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ addClause\ (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ p);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ a\ unit\ clause\ to\ the\ solver.}}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ addClause\ (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ p,\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ q);\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ a\ binary\ clause\ to\ the\ solver.}}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ addClause\ (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ p,\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ q,\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ r);\ \textcolor{comment}{//\ Add\ a\ ternary\ clause\ to\ the\ solver.}}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ addClause\ (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ p,\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ q,\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ r,\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ s);\ \textcolor{comment}{//\ Add\ a\ quaternary\ clause\ to\ the\ solver.\ }}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ addClause\_(\ \ \ \ \ \ \mbox{\hyperlink{class_minisat_1_1vec}{vec<Lit>}}\&\ ps);}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ substitute(Var\ v,\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ x);\ \ \textcolor{comment}{//\ Replace\ all\ occurences\ of\ v\ with\ x\ (may\ cause\ a\ contradiction).}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{comment}{//\ Variable\ mode:}}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{comment}{//\ }}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ setFrozen\ (Var\ v,\ \textcolor{keywordtype}{bool}\ b);\ \textcolor{comment}{//\ If\ a\ variable\ is\ frozen\ it\ will\ not\ be\ eliminated.}}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ isEliminated(Var\ v)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{comment}{//\ Alternative\ freeze\ interface\ (may\ replace\ 'setFrozen()'):}}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ freezeVar\ (Var\ v);\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Freeze\ one\ variable\ so\ it\ will\ not\ be\ eliminated.}}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ thaw\ \ \ \ \ \ ();\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Thaw\ all\ frozen\ variables.}}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{comment}{//\ Solving:}}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ solve\ \ \ \ \ \ \ (\textcolor{keyword}{const}\ \mbox{\hyperlink{class_minisat_1_1vec}{vec<Lit>}}\&\ assumps,\ \textcolor{keywordtype}{bool}\ do\_simp\ =\ \textcolor{keyword}{true},\ \textcolor{keywordtype}{bool}\ turn\_off\_simp\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00066\ \ \ \ \ \mbox{\hyperlink{class_minisat_1_1lbool}{lbool}}\ \ \ solveLimited(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_minisat_1_1vec}{vec<Lit>}}\&\ assumps,\ \textcolor{keywordtype}{bool}\ do\_simp\ =\ \textcolor{keyword}{true},\ \textcolor{keywordtype}{bool}\ turn\_off\_simp\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ solve\ \ \ \ \ \ \ (\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ do\_simp\ =\ \textcolor{keyword}{true},\ \textcolor{keywordtype}{bool}\ turn\_off\_simp\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ solve\ \ \ \ \ \ \ (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ p\ \ \ \ \ \ \ ,\ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ do\_simp\ =\ \textcolor{keyword}{true},\ \textcolor{keywordtype}{bool}\ turn\_off\_simp\ =\ \textcolor{keyword}{false});\ \ \ \ \ \ \ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ solve\ \ \ \ \ \ \ (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ p,\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ q,\ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ do\_simp\ =\ \textcolor{keyword}{true},\ \textcolor{keywordtype}{bool}\ turn\_off\_simp\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ solve\ \ \ \ \ \ \ (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ p,\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ q,\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ r,\ \textcolor{keywordtype}{bool}\ do\_simp\ =\ \textcolor{keyword}{true},\ \textcolor{keywordtype}{bool}\ turn\_off\_simp\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ eliminate\ \ \ (\textcolor{keywordtype}{bool}\ turn\_off\_elim\ =\ \textcolor{keyword}{false});\ \ \textcolor{comment}{//\ Perform\ variable\ elimination\ based\ simplification.\ }}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{comment}{//\ Memory\ managment:}}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ garbageCollect();}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{comment}{//\ Generate\ a\ (possibly\ simplified)\ DIMACS\ file:}}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00080\ \textcolor{preprocessor}{\#if\ 0}}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ toDimacs\ \ (\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ file,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_minisat_1_1vec}{vec<Lit>}}\&\ assumps);}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ toDimacs\ \ (\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ file);}
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ toDimacs\ \ (\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ file,\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ p);}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ toDimacs\ \ (\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ file,\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ p,\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ q);}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ toDimacs\ \ (\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ file,\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ p,\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ q,\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ r);}
+\DoxyCodeLine{00086\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{comment}{//\ Mode\ of\ operation:}}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ grow;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Allow\ a\ variable\ elimination\ step\ to\ grow\ by\ a\ number\ of\ clauses\ (default\ to\ zero).}}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ clause\_lim;\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Variables\ are\ not\ eliminated\ if\ it\ produces\ a\ resolvent\ with\ a\ length\ above\ this\ limit.}}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/1\ means\ no\ limit.}}
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ subsumption\_lim;\ \ \ \textcolor{comment}{//\ Do\ not\ check\ if\ subsumption\ against\ a\ clause\ larger\ than\ this.\ -\/1\ means\ no\ limit.}}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordtype}{double}\ \ simp\_garbage\_frac;\ \textcolor{comment}{//\ A\ different\ limit\ for\ when\ to\ issue\ a\ GC\ during\ simplification\ (Also\ see\ 'garbage\_frac').}}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ use\_asymm;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Shrink\ clauses\ by\ asymmetric\ branching.}}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ use\_rcheck;\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ a\ clause\ is\ already\ implied.\ Prett\ costly,\ and\ subsumes\ subsumptions\ :)}}
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ use\_elim;\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Perform\ variable\ elimination.}}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ extend\_model;\ \ \ \ \ \ \textcolor{comment}{//\ Flag\ to\ indicate\ whether\ the\ user\ needs\ to\ look\ at\ the\ full\ model.}}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{comment}{//\ Statistics:}}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ merges;}
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ asymm\_lits;}
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ eliminated\_vars;}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{comment}{//\ Helper\ structures:}}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keyword}{struct\ }ElimLt\ \{}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_minisat_1_1_l_map}{LMap<int>}}\&\ n\_occ;}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ ElimLt(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_minisat_1_1_l_map}{LMap<int>}}\&\ no)\ :\ n\_occ(no)\ \{\}}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ TODO:\ are\ 64-\/bit\ operations\ here\ noticably\ bad\ on\ 32-\/bit\ platforms?\ Could\ use\ a\ saturating}}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 32-\/bit\ implementation\ instead\ then,\ but\ this\ will\ have\ to\ do\ for\ now.}}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ uint64\_t\ cost\ \ (Var\ x)\textcolor{keyword}{\ \ \ \ \ \ \ \ const\ }\{\ \textcolor{keywordflow}{return}\ (uint64\_t)n\_occ[mkLit(x)]\ *\ (uint64\_t)n\_occ[\string~mkLit(x)];\ \}}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ operator()(Var\ x,\ Var\ y)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ cost(x)\ <\ cost(y);\ \}}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ TODO:\ investigate\ this\ order\ alternative\ more.}}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ bool\ operator()(Var\ x,\ Var\ y)\ const\ \{\ }}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ int\ c\_x\ =\ cost(x);}}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ int\ c\_y\ =\ cost(y);}}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ return\ c\_x\ <\ c\_y\ ||\ c\_x\ ==\ c\_y\ \&\&\ x\ <\ y;\ \}}}
+\DoxyCodeLine{00125\ \ \ \ \ \};}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ \ \ \ \ \textcolor{keyword}{struct\ }ClauseDeleted\ \{}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_minisat_1_1_clause_allocator}{ClauseAllocator}}\&\ ca;}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ ClauseDeleted(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_minisat_1_1_clause_allocator}{ClauseAllocator}}\&\ \_ca)\ :\ ca(\_ca)\ \{\}}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ operator()(\textcolor{keyword}{const}\ CRef\&\ cr)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ ca[cr].mark()\ ==\ 1;\ \}\ \};}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{comment}{//\ Solver\ state:}}
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ elimorder;}
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ use\_simplification;}
+\DoxyCodeLine{00136\ \ \ \ \ Var\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ max\_simp\_var;\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Max\ variable\ at\ the\ point\ simplification\ was\ turned\ off.}}
+\DoxyCodeLine{00137\ \ \ \ \ \mbox{\hyperlink{class_minisat_1_1vec}{vec<uint32\_t>}}\ \ \ \ \ \ \ elimclauses;}
+\DoxyCodeLine{00138\ \ \ \ \ \mbox{\hyperlink{class_minisat_1_1_v_map}{VMap<char>}}\ \ \ \ \ \ \ \ \ \ touched;}
+\DoxyCodeLine{00139\ \ \ \ \ \mbox{\hyperlink{class_minisat_1_1_occ_lists}{OccLists<Var,\ vec<CRef>}},\ \mbox{\hyperlink{struct_minisat_1_1_simp_solver_1_1_clause_deleted}{ClauseDeleted}}>}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ occurs;}
+\DoxyCodeLine{00141\ \ \ \ \ \mbox{\hyperlink{class_minisat_1_1_l_map}{LMap<int>}}\ \ \ \ \ \ \ \ \ \ \ n\_occ;}
+\DoxyCodeLine{00142\ \ \ \ \ \mbox{\hyperlink{class_minisat_1_1_heap}{Heap<Var,ElimLt>}}\ \ \ \ elim\_heap;}
+\DoxyCodeLine{00143\ \ \ \ \ \mbox{\hyperlink{class_minisat_1_1_queue}{Queue<CRef>}}\ \ \ \ \ \ \ \ \ subsumption\_queue;}
+\DoxyCodeLine{00144\ \ \ \ \ \mbox{\hyperlink{class_minisat_1_1_v_map}{VMap<char>}}\ \ \ \ \ \ \ \ \ \ frozen;}
+\DoxyCodeLine{00145\ \ \ \ \ \mbox{\hyperlink{class_minisat_1_1vec}{vec<Var>}}\ \ \ \ \ \ \ \ \ \ \ \ frozen\_vars;}
+\DoxyCodeLine{00146\ \ \ \ \ \mbox{\hyperlink{class_minisat_1_1_v_map}{VMap<char>}}\ \ \ \ \ \ \ \ \ \ eliminated;}
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bwdsub\_assigns;}
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ n\_touched;}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{comment}{//\ Temporaries:}}
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00152\ \ \ \ \ CRef\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bwdsub\_tmpunit;}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{comment}{//\ Main\ internal\ methods:}}
+\DoxyCodeLine{00155\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00156\ \ \ \ \ \mbox{\hyperlink{class_minisat_1_1lbool}{lbool}}\ \ \ \ \ \ \ \ \ solve\_\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{bool}\ do\_simp\ =\ \textcolor{keyword}{true},\ \textcolor{keywordtype}{bool}\ turn\_off\_simp\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00157\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ \ asymm\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (Var\ v,\ CRef\ cr);}
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ \ asymmVar\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (Var\ v);}
+\DoxyCodeLine{00159\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ updateElimHeap\ \ \ \ \ \ \ \ \ \ \ (Var\ v);}
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ gatherTouchedClauses\ \ \ \ \ ();}
+\DoxyCodeLine{00161\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ \ merge\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keyword}{const}\ \mbox{\hyperlink{class_minisat_1_1_clause}{Clause}}\&\ \_ps,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_minisat_1_1_clause}{Clause}}\&\ \_qs,\ Var\ v,\ \mbox{\hyperlink{class_minisat_1_1vec}{vec<Lit>}}\&\ out\_clause);}
+\DoxyCodeLine{00162\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ \ merge\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keyword}{const}\ \mbox{\hyperlink{class_minisat_1_1_clause}{Clause}}\&\ \_ps,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_minisat_1_1_clause}{Clause}}\&\ \_qs,\ Var\ v,\ \textcolor{keywordtype}{int}\&\ size);}
+\DoxyCodeLine{00163\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ \ backwardSubsumptionCheck\ (\textcolor{keywordtype}{bool}\ verbose\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00164\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ \ eliminateVar\ \ \ \ \ \ \ \ \ \ \ \ \ (Var\ v);}
+\DoxyCodeLine{00165\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ extendModel\ \ \ \ \ \ \ \ \ \ \ \ \ \ ();}
+\DoxyCodeLine{00166\ }
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ removeClause\ \ \ \ \ \ \ \ \ \ \ \ \ (CRef\ cr);}
+\DoxyCodeLine{00168\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ \ strengthenClause\ \ \ \ \ \ \ \ \ (CRef\ cr,\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ l);}
+\DoxyCodeLine{00169\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ \ implied\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keyword}{const}\ \mbox{\hyperlink{class_minisat_1_1vec}{vec<Lit>}}\&\ c);}
+\DoxyCodeLine{00170\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ relocAll\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\mbox{\hyperlink{class_minisat_1_1_clause_allocator}{ClauseAllocator}}\&\ to);}
+\DoxyCodeLine{00171\ \};}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00174\ \textcolor{comment}{//=================================================================================================}}
+\DoxyCodeLine{00175\ \textcolor{comment}{//\ Implementation\ of\ inline\ methods:}}
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00178\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ SimpSolver::isEliminated\ (Var\ v)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ eliminated[v];\ \}}
+\DoxyCodeLine{00179\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ SimpSolver::updateElimHeap(Var\ v)\ \{}
+\DoxyCodeLine{00180\ \ \ \ \ assert(use\_simplification);}
+\DoxyCodeLine{00181\ \ \ \ \ \textcolor{comment}{//\ if\ (!frozen[v]\ \&\&\ !isEliminated(v)\ \&\&\ value(v)\ ==\ l\_Undef)}}
+\DoxyCodeLine{00182\ \ \ \ \ \textcolor{keywordflow}{if}\ (elim\_heap.inHeap(v)\ ||\ (!frozen[v]\ \&\&\ !isEliminated(v)\ \&\&\ value(v)\ ==\ l\_Undef))}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ elim\_heap.update(v);\ \}}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00186\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ SimpSolver::addClause\ \ \ \ (\textcolor{keyword}{const}\ \mbox{\hyperlink{class_minisat_1_1vec}{vec<Lit>}}\&\ ps)\ \ \ \ \{\ ps.copyTo(add\_tmp);\ \textcolor{keywordflow}{return}\ addClause\_(add\_tmp);\ \}}
+\DoxyCodeLine{00187\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ SimpSolver::addEmptyClause()\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ add\_tmp.clear();\ \textcolor{keywordflow}{return}\ addClause\_(add\_tmp);\ \}}
+\DoxyCodeLine{00188\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ SimpSolver::addClause\ \ \ \ (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ p)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ add\_tmp.clear();\ add\_tmp.push(p);\ \textcolor{keywordflow}{return}\ addClause\_(add\_tmp);\ \}}
+\DoxyCodeLine{00189\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ SimpSolver::addClause\ \ \ \ (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ p,\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ q)\ \ \ \ \ \ \ \ \ \ \{\ add\_tmp.clear();\ add\_tmp.push(p);\ add\_tmp.push(q);\ \textcolor{keywordflow}{return}\ addClause\_(add\_tmp);\ \}}
+\DoxyCodeLine{00190\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ SimpSolver::addClause\ \ \ \ (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ p,\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ q,\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ r)\ \ \ \{\ add\_tmp.clear();\ add\_tmp.push(p);\ add\_tmp.push(q);\ add\_tmp.push(r);\ \textcolor{keywordflow}{return}\ addClause\_(add\_tmp);\ \}}
+\DoxyCodeLine{00191\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ SimpSolver::addClause\ \ \ \ (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ p,\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ q,\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ r,\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ s)\{\ add\_tmp.clear();\ add\_tmp.push(p);\ add\_tmp.push(q);\ add\_tmp.push(r);\ add\_tmp.push(s);\ \textcolor{keywordflow}{return}\ addClause\_(add\_tmp);\ \}}
+\DoxyCodeLine{00192\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ SimpSolver::setFrozen\ \ \ \ (Var\ v,\ \textcolor{keywordtype}{bool}\ b)\ \{\ frozen[v]\ =\ (char)b;\ \textcolor{keywordflow}{if}\ (use\_simplification\ \&\&\ !b)\ \{\ updateElimHeap(v);\ \}\ \}}
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00194\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ SimpSolver::freezeVar(Var\ v)\{}
+\DoxyCodeLine{00195\ \ \ \ \ \textcolor{keywordflow}{if}\ (!frozen[v])\{}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ frozen[v]\ =\ 1;}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ frozen\_vars.push(v);\ }
+\DoxyCodeLine{00198\ \ \ \ \ \}\ \}}
+\DoxyCodeLine{00199\ }
+\DoxyCodeLine{00200\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ SimpSolver::thaw()\{}
+\DoxyCodeLine{00201\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ frozen\_vars.size();\ i++)\{}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ Var\ v\ =\ frozen\_vars[i];}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ frozen[v]\ =\ 0;}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (use\_simplification)}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \ \ \ \ updateElimHeap(v);}
+\DoxyCodeLine{00206\ \ \ \ \ \}}
+\DoxyCodeLine{00207\ \ \ \ \ frozen\_vars.clear();\ \}}
+\DoxyCodeLine{00208\ }
+\DoxyCodeLine{00209\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ SimpSolver::solve\ \ \ \ \ \ \ \ (\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ do\_simp,\ \textcolor{keywordtype}{bool}\ turn\_off\_simp)\ \ \{\ budgetOff();\ assumptions.clear();\ \textcolor{keywordflow}{return}\ solve\_(do\_simp,\ turn\_off\_simp)\ ==\ l\_True;\ \}}
+\DoxyCodeLine{00210\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ SimpSolver::solve\ \ \ \ \ \ \ \ (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ p\ \ \ \ \ \ \ ,\ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ do\_simp,\ \textcolor{keywordtype}{bool}\ turn\_off\_simp)\ \ \{\ budgetOff();\ assumptions.clear();\ assumptions.push(p);\ \textcolor{keywordflow}{return}\ solve\_(do\_simp,\ turn\_off\_simp)\ ==\ l\_True;\ \}}
+\DoxyCodeLine{00211\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ SimpSolver::solve\ \ \ \ \ \ \ \ (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ p,\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ q,\ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ do\_simp,\ \textcolor{keywordtype}{bool}\ turn\_off\_simp)\ \ \{\ budgetOff();\ assumptions.clear();\ assumptions.push(p);\ assumptions.push(q);\ \textcolor{keywordflow}{return}\ solve\_(do\_simp,\ turn\_off\_simp)\ ==\ l\_True;\ \}}
+\DoxyCodeLine{00212\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ SimpSolver::solve\ \ \ \ \ \ \ \ (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ p,\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ q,\ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}}\ r,\ \textcolor{keywordtype}{bool}\ do\_simp,\ \textcolor{keywordtype}{bool}\ turn\_off\_simp)\ \ \{\ budgetOff();\ assumptions.clear();\ assumptions.push(p);\ assumptions.push(q);\ assumptions.push(r);\ \textcolor{keywordflow}{return}\ solve\_(do\_simp,\ turn\_off\_simp)\ ==\ l\_True;\ \}}
+\DoxyCodeLine{00213\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ SimpSolver::solve\ \ \ \ \ \ \ \ (\textcolor{keyword}{const}\ \mbox{\hyperlink{class_minisat_1_1vec}{vec<Lit>}}\&\ assumps,\ \textcolor{keywordtype}{bool}\ do\_simp,\ \textcolor{keywordtype}{bool}\ turn\_off\_simp)\{\ }
+\DoxyCodeLine{00214\ \ \ \ \ budgetOff();\ assumps.copyTo(assumptions);\ \textcolor{keywordflow}{return}\ solve\_(do\_simp,\ turn\_off\_simp)\ ==\ l\_True;\ \}}
+\DoxyCodeLine{00215\ }
+\DoxyCodeLine{00216\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{class_minisat_1_1lbool}{lbool}}\ SimpSolver::solveLimited\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{class_minisat_1_1vec}{vec<Lit>}}\&\ assumps,\ \textcolor{keywordtype}{bool}\ do\_simp,\ \textcolor{keywordtype}{bool}\ turn\_off\_simp)\{\ }
+\DoxyCodeLine{00217\ \ \ \ \ assumps.copyTo(assumptions);\ \textcolor{keywordflow}{return}\ solve\_(do\_simp,\ turn\_off\_simp);\ \}}
+\DoxyCodeLine{00218\ }
+\DoxyCodeLine{00219\ \textcolor{comment}{//=================================================================================================}}
+\DoxyCodeLine{00220\ \}}
+\DoxyCodeLine{00221\ }
+\DoxyCodeLine{00222\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

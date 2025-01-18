@@ -1,0 +1,75 @@
+\doxysection{Queue.\+h}
+\hypertarget{_queue_8h_source}{}\label{_queue_8h_source}\index{code/minisat/mtl/Queue.h@{code/minisat/mtl/Queue.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*****************************************************************************************[Queue.h]}}
+\DoxyCodeLine{00002\ \textcolor{comment}{Copyright\ (c)\ 2003-\/2006,\ Niklas\ Een,\ Niklas\ Sorensson}}
+\DoxyCodeLine{00003\ \textcolor{comment}{Copyright\ (c)\ 2007-\/2010,\ Niklas\ Sorensson}}
+\DoxyCodeLine{00004\ \textcolor{comment}{}}
+\DoxyCodeLine{00005\ \textcolor{comment}{Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of\ this\ software\ and}}
+\DoxyCodeLine{00006\ \textcolor{comment}{associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in\ the\ Software\ without\ restriction,}}
+\DoxyCodeLine{00007\ \textcolor{comment}{including\ without\ limitation\ the\ rights\ to\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,}}
+\DoxyCodeLine{00008\ \textcolor{comment}{sublicense,\ and/or\ sell\ copies\ of\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is}}
+\DoxyCodeLine{00009\ \textcolor{comment}{furnished\ to\ do\ so,\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{00010\ \textcolor{comment}{}}
+\DoxyCodeLine{00011\ \textcolor{comment}{The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all\ copies\ or}}
+\DoxyCodeLine{00012\ \textcolor{comment}{substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{}}
+\DoxyCodeLine{00014\ \textcolor{comment}{THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR\ IMPLIED,\ INCLUDING\ BUT}}
+\DoxyCodeLine{00015\ \textcolor{comment}{NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE\ AND}}
+\DoxyCodeLine{00016\ \textcolor{comment}{NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,}}
+\DoxyCodeLine{00017\ \textcolor{comment}{DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT}}
+\DoxyCodeLine{00018\ \textcolor{comment}{OF\ OR\ IN\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{00019\ \textcolor{comment}{**************************************************************************************************/}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#ifndef\ Minisat\_Queue\_h}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#define\ Minisat\_Queue\_h}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ "{}minisat/mtl/Vec.h"{}}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{namespace\ }Minisat\ \{}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{comment}{//=================================================================================================}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00031\ \textcolor{keyword}{class\ }Queue\ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{class_minisat_1_1vec}{vec<T>}}\ \ buf;}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ first;}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ end;}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{typedef}\ T\ Key;}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ Queue()\ :\ buf(1),\ first(0),\ end(0)\ \{\}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{void}\ clear\ (\textcolor{keywordtype}{bool}\ dealloc\ =\ \textcolor{keyword}{false})\ \{\ buf.clear(dealloc);\ buf.growTo(1);\ first\ =\ end\ =\ 0;\ \}}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{int}\ \ size\ \ ()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ (end\ >=\ first)\ ?\ end\ -\/\ first\ :\ end\ -\/\ first\ +\ buf.size();\ \}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{const}\ T\&\ operator\ []\ (\textcolor{keywordtype}{int}\ index)\textcolor{keyword}{\ const\ \ }\{\ assert(index\ >=\ 0);\ assert(index\ <\ size());\ \textcolor{keywordflow}{return}\ buf[(first\ +\ index)\ \%\ buf.size()];\ \}}
+\DoxyCodeLine{00045\ \ \ \ \ T\&\ \ \ \ \ \ \ operator\ []\ (\textcolor{keywordtype}{int}\ index)\ \ \ \ \ \ \ \ \{\ assert(index\ >=\ 0);\ assert(index\ <\ size());\ \textcolor{keywordflow}{return}\ buf[(first\ +\ index)\ \%\ buf.size()];\ \}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ T\ \ \ \ peek\ \ ()\textcolor{keyword}{\ const\ }\{\ assert(first\ !=\ end);\ \textcolor{keywordflow}{return}\ buf[first];\ \}}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{void}\ pop\ \ \ ()\ \{\ assert(first\ !=\ end);\ first++;\ \textcolor{keywordflow}{if}\ (first\ ==\ buf.size())\ first\ =\ 0;\ \}}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{void}\ insert(T\ elem)\ \{\ \ \ \textcolor{comment}{//\ INVARIANT:\ buf[end]\ is\ always\ unused}}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ buf[end++]\ =\ elem;}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (end\ ==\ buf.size())\ end\ =\ 0;}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (first\ ==\ end)\{\ \ \textcolor{comment}{//\ Resize:}}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_minisat_1_1vec}{vec<T>}}\ \ tmp((buf.size()*3\ +\ 1)\ >>\ 1);}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//**/printf("{}queue\ alloc:\ \%d\ elems\ (\%.1f\ MB)\(\backslash\)n"{},\ tmp.size(),\ tmp.size()\ *\ sizeof(T)\ /\ 1000000.0);}}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ i\ =\ 0;}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ first;\ j\ <\ buf.size();\ j++)\ tmp[i++]\ =\ buf[j];}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0\ \ \ \ ;\ j\ <\ end\ \ \ \ \ \ \ ;\ j++)\ tmp[i++]\ =\ buf[j];}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ first\ =\ 0;}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ end\ \ \ =\ buf.size();}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ tmp.moveTo(buf);}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00062\ \ \ \ \ \}}
+\DoxyCodeLine{00063\ \};}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \textcolor{comment}{//=================================================================================================}}
+\DoxyCodeLine{00067\ \}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

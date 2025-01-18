@@ -1,0 +1,392 @@
+\doxysection{Options.\+h}
+\hypertarget{_options_8h_source}{}\label{_options_8h_source}\index{code/minisat/utils/Options.h@{code/minisat/utils/Options.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/***************************************************************************************[Options.h]}}
+\DoxyCodeLine{00002\ \textcolor{comment}{Copyright\ (c)\ 2008-\/2010,\ Niklas\ Sorensson}}
+\DoxyCodeLine{00003\ \textcolor{comment}{}}
+\DoxyCodeLine{00004\ \textcolor{comment}{Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of\ this\ software\ and}}
+\DoxyCodeLine{00005\ \textcolor{comment}{associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in\ the\ Software\ without\ restriction,}}
+\DoxyCodeLine{00006\ \textcolor{comment}{including\ without\ limitation\ the\ rights\ to\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,}}
+\DoxyCodeLine{00007\ \textcolor{comment}{sublicense,\ and/or\ sell\ copies\ of\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is}}
+\DoxyCodeLine{00008\ \textcolor{comment}{furnished\ to\ do\ so,\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{00009\ \textcolor{comment}{}}
+\DoxyCodeLine{00010\ \textcolor{comment}{The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all\ copies\ or}}
+\DoxyCodeLine{00011\ \textcolor{comment}{substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{00012\ \textcolor{comment}{}}
+\DoxyCodeLine{00013\ \textcolor{comment}{THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR\ IMPLIED,\ INCLUDING\ BUT}}
+\DoxyCodeLine{00014\ \textcolor{comment}{NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE\ AND}}
+\DoxyCodeLine{00015\ \textcolor{comment}{NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,}}
+\DoxyCodeLine{00016\ \textcolor{comment}{DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT}}
+\DoxyCodeLine{00017\ \textcolor{comment}{OF\ OR\ IN\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{00018\ \textcolor{comment}{**************************************************************************************************/}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#ifndef\ Minisat\_Options\_h}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#define\ Minisat\_Options\_h}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ <math.h>}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#include\ "{}minisat/mtl/IntTypes.h"{}}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}minisat/mtl/Vec.h"{}}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#include\ "{}minisat/utils/ParseUtils.h"{}}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{keyword}{namespace\ }Minisat\ \{}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{comment}{//==================================================================================================}}
+\DoxyCodeLine{00035\ \textcolor{comment}{//\ Top-\/level\ option\ parse/help\ functions:}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ parseOptions\ \ \ \ \ (\textcolor{keywordtype}{int}\&\ argc,\ \textcolor{keywordtype}{char}**\ argv,\ \textcolor{keywordtype}{bool}\ strict\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00039\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ printUsageAndExit(\textcolor{keywordtype}{int}\ \ argc,\ \textcolor{keywordtype}{char}**\ argv,\ \textcolor{keywordtype}{bool}\ verbose\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00040\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ setUsageHelp\ \ \ \ \ (\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ str);}
+\DoxyCodeLine{00041\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ setHelpPrefixStr\ (\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ str);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \textcolor{comment}{//==================================================================================================}}
+\DoxyCodeLine{00045\ \textcolor{comment}{//\ Options\ is\ an\ abstract\ class\ that\ gives\ the\ interface\ for\ all\ types\ options:}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{keyword}{class\ }Option}
+\DoxyCodeLine{00049\ \{}
+\DoxyCodeLine{00050\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ name;}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ description;}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ category;}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ type\_name;}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_minisat_1_1vec}{vec<Option*>}}\&\ getOptionList\ ()\ \{\ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_minisat_1_1vec}{vec<Option*>}}\ options;\ \textcolor{keywordflow}{return}\ options;\ \}}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\&\ \ getUsageString()\ \{\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ usage\_str;\ \textcolor{keywordflow}{return}\ usage\_str;\ \}}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\&\ \ getHelpPrefixString()\ \{\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ help\_prefix\_str\ =\ \textcolor{stringliteral}{"{}"{}};\ \textcolor{keywordflow}{return}\ help\_prefix\_str;\ \}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_minisat_1_1_option_1_1_option_lt}{OptionLt}}\ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ operator()(\textcolor{keyword}{const}\ Option*\ x,\ \textcolor{keyword}{const}\ Option*\ y)\ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ test1\ =\ strcmp(x-\/>category,\ y-\/>category);}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ test1\ <\ 0\ ||\ (test1\ ==\ 0\ \&\&\ strcmp(x-\/>type\_name,\ y-\/>type\_name)\ <\ 0);}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00065\ \ \ \ \ \};}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ Option(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ name\_,\ }
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ desc\_,}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ cate\_,}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ type\_)\ :\ }
+\DoxyCodeLine{00071\ \ \ \ \ \ \ name\ \ \ \ \ \ \ (name\_)}
+\DoxyCodeLine{00072\ \ \ \ \ ,\ description(desc\_)}
+\DoxyCodeLine{00073\ \ \ \ \ ,\ category\ \ \ (cate\_)}
+\DoxyCodeLine{00074\ \ \ \ \ ,\ type\_name\ \ (type\_)}
+\DoxyCodeLine{00075\ \ \ \ \ \{\ }
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ getOptionList().push(\textcolor{keyword}{this});\ }
+\DoxyCodeLine{00077\ \ \ \ \ \}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_minisat_1_1_option}{\string~Option}}()\ \{\}}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ parse\ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ str)\ \ \ \ \ \ =\ 0;}
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ help\ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{bool}\ verbose\ =\ \textcolor{keyword}{false})\ =\ 0;}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keyword}{friend}\ \ \textcolor{keywordtype}{void}\ parseOptions\ \ \ \ \ \ (\textcolor{keywordtype}{int}\&\ argc,\ \textcolor{keywordtype}{char}**\ argv,\ \textcolor{keywordtype}{bool}\ strict);}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keyword}{friend}\ \ \textcolor{keywordtype}{void}\ printUsageAndExit\ (\textcolor{keywordtype}{int}\ \ argc,\ \textcolor{keywordtype}{char}**\ argv,\ \textcolor{keywordtype}{bool}\ verbose);}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keyword}{friend}\ \ \textcolor{keywordtype}{void}\ setUsageHelp\ \ \ \ \ \ (\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ str);}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keyword}{friend}\ \ \textcolor{keywordtype}{void}\ setHelpPrefixStr\ \ (\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ str);}
+\DoxyCodeLine{00089\ \};}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \textcolor{comment}{//==================================================================================================}}
+\DoxyCodeLine{00093\ \textcolor{comment}{//\ Range\ classes\ with\ specialization\ for\ floating\ types:}}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \textcolor{keyword}{struct\ }IntRange\ \{}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordtype}{int}\ begin;}
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordtype}{int}\ end;}
+\DoxyCodeLine{00099\ \ \ \ \ IntRange(\textcolor{keywordtype}{int}\ b,\ \textcolor{keywordtype}{int}\ e)\ :\ begin(b),\ end(e)\ \{\}}
+\DoxyCodeLine{00100\ \};}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \textcolor{keyword}{struct\ }Int64Range\ \{}
+\DoxyCodeLine{00103\ \ \ \ \ int64\_t\ begin;}
+\DoxyCodeLine{00104\ \ \ \ \ int64\_t\ end;}
+\DoxyCodeLine{00105\ \ \ \ \ Int64Range(int64\_t\ b,\ int64\_t\ e)\ :\ begin(b),\ end(e)\ \{\}}
+\DoxyCodeLine{00106\ \};}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \textcolor{keyword}{struct\ }DoubleRange\ \{}
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordtype}{double}\ begin;}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordtype}{double}\ end;}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ begin\_inclusive;}
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ end\_inclusive;}
+\DoxyCodeLine{00113\ \ \ \ \ DoubleRange(\textcolor{keywordtype}{double}\ b,\ \textcolor{keywordtype}{bool}\ binc,\ \textcolor{keywordtype}{double}\ e,\ \textcolor{keywordtype}{bool}\ einc)\ :\ begin(b),\ end(e),\ begin\_inclusive(binc),\ end\_inclusive(einc)\ \{\}}
+\DoxyCodeLine{00114\ \};}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \textcolor{comment}{//==================================================================================================}}
+\DoxyCodeLine{00118\ \textcolor{comment}{//\ Double\ options:}}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \textcolor{keyword}{class\ }DoubleOption\ :\ \textcolor{keyword}{public}\ Option}
+\DoxyCodeLine{00122\ \{}
+\DoxyCodeLine{00123\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00124\ \ \ \ \ \mbox{\hyperlink{struct_minisat_1_1_double_range}{DoubleRange}}\ range;}
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordtype}{double}\ \ \ \ \ \ value;}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00128\ \ \ \ \ DoubleOption(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ c,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ n,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ d,\ \textcolor{keywordtype}{double}\ def\ =\ \textcolor{keywordtype}{double}(),\ \mbox{\hyperlink{struct_minisat_1_1_double_range}{DoubleRange}}\ r\ =\ \mbox{\hyperlink{struct_minisat_1_1_double_range}{DoubleRange}}(-\/HUGE\_VAL,\ \textcolor{keyword}{false},\ HUGE\_VAL,\ \textcolor{keyword}{false}))}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ :\ Option(n,\ d,\ c,\ \textcolor{stringliteral}{"{}<double>"{}}),\ range(r),\ value(def)\ \{}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ FIXME:\ set\ LC\_NUMERIC\ to\ "{}C"{}\ to\ make\ sure\ that\ strtof/strtod\ parses\ decimal\ point\ correctly.}}
+\DoxyCodeLine{00131\ \ \ \ \ \}}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keyword}{operator}\ \ \ \ \ \ double\ \ \ (\textcolor{keywordtype}{void})\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ value;\ \}}
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keyword}{operator}\ \ \ \ \ \ \textcolor{keywordtype}{double}\&\ \ (void)\ \ \ \ \ \ \ \{\ \textcolor{keywordflow}{return}\ value;\ \}}
+\DoxyCodeLine{00135\ \ \ \ \ DoubleOption\&\ operator=(\textcolor{keywordtype}{double}\ x)\ \ \ \{\ value\ =\ x;\ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};\ \}}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ parse(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ str)\{}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ span\ =\ str;\ }
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!match(span,\ \textcolor{stringliteral}{"{}-\/"{}})\ ||\ !match(span,\ name)\ ||\ !match(span,\ \textcolor{stringliteral}{"{}="{}}))}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}*\ \ end;}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ tmp\ =\ strtod(span,\ \&end);}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (end\ ==\ NULL)\ }
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (tmp\ >=\ range.end\ \&\&\ (!range.end\_inclusive\ ||\ tmp\ !=\ range.end))\{}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}ERROR!\ value\ <\%s>\ is\ too\ large\ for\ option\ \(\backslash\)"{}\%s\(\backslash\)"{}.\(\backslash\)n"{}},\ span,\ name);}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \ \ \ exit(1);}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \}\textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (tmp\ <=\ range.begin\ \&\&\ (!range.begin\_inclusive\ ||\ tmp\ !=\ range.begin))\{}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}ERROR!\ value\ <\%s>\ is\ too\ small\ for\ option\ \(\backslash\)"{}\%s\(\backslash\)"{}.\(\backslash\)n"{}},\ span,\ name);}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \ exit(1);\ \}}
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ value\ =\ tmp;}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ fprintf(stderr,\ "{}READ\ VALUE:\ \%g\(\backslash\)n"{},\ value);}}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00159\ \ \ \ \ \}}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00161\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ help\ (\textcolor{keywordtype}{bool}\ verbose\ =\ \textcolor{keyword}{false})\{}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}\ \ -\/\%-\/12s\ =\ \%-\/8s\ \%c\%4.2g\ ..\ \%4.2g\%c\ (default:\ \%g)\(\backslash\)n"{}},\ }
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ name,\ type\_name,\ }
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ range.begin\_inclusive\ ?\ \textcolor{charliteral}{'['}\ :\ \textcolor{charliteral}{'('},\ }
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ range.begin,}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ range.end,}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ range.end\_inclusive\ ?\ \textcolor{charliteral}{']'}\ :\ \textcolor{charliteral}{')'},\ }
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ value);}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (verbose)\{}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \ \ \ \ \ \ \ \%s\(\backslash\)n"{}},\ description);}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00173\ \ \ \ \ \}}
+\DoxyCodeLine{00174\ \};}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00177\ \textcolor{comment}{//==================================================================================================}}
+\DoxyCodeLine{00178\ \textcolor{comment}{//\ Int\ options:}}
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00181\ \textcolor{keyword}{class\ }IntOption\ :\ \textcolor{keyword}{public}\ Option}
+\DoxyCodeLine{00182\ \{}
+\DoxyCodeLine{00183\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00184\ \ \ \ \ \mbox{\hyperlink{struct_minisat_1_1_int_range}{IntRange}}\ range;}
+\DoxyCodeLine{00185\ \ \ \ \ int32\_t\ \ value;}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00187\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00188\ \ \ \ \ IntOption(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ c,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ n,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ d,\ int32\_t\ def\ =\ int32\_t(),\ \mbox{\hyperlink{struct_minisat_1_1_int_range}{IntRange}}\ r\ =\ \mbox{\hyperlink{struct_minisat_1_1_int_range}{IntRange}}(INT32\_MIN,\ INT32\_MAX))}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ :\ Option(n,\ d,\ c,\ \textcolor{stringliteral}{"{}<int32>"{}}),\ range(r),\ value(def)\ \{\}}
+\DoxyCodeLine{00190\ \ }
+\DoxyCodeLine{00191\ \ \ \ \ \textcolor{keyword}{operator}\ \ \ int32\_t\ \ \ (\textcolor{keywordtype}{void})\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ value;\ \}}
+\DoxyCodeLine{00192\ \ \ \ \ \textcolor{keyword}{operator}\ \ \ int32\_t\&\ \ (void)\ \ \ \ \ \ \ \{\ \textcolor{keywordflow}{return}\ value;\ \}}
+\DoxyCodeLine{00193\ \ \ \ \ IntOption\&\ operator=\ (int32\_t\ x)\ \ \{\ value\ =\ x;\ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};\ \}}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00195\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ parse(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ str)\{}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ span\ =\ str;\ }
+\DoxyCodeLine{00197\ }
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!match(span,\ \textcolor{stringliteral}{"{}-\/"{}})\ ||\ !match(span,\ name)\ ||\ !match(span,\ \textcolor{stringliteral}{"{}="{}}))}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00200\ }
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}*\ \ \ end;}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ int32\_t\ tmp\ =\ strtol(span,\ \&end,\ 10);}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (end\ ==\ NULL)\ }
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (tmp\ >\ range.end)\{}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}ERROR!\ value\ <\%s>\ is\ too\ large\ for\ option\ \(\backslash\)"{}\%s\(\backslash\)"{}.\(\backslash\)n"{}},\ span,\ name);}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \ \ \ \ exit(1);}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \}\textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (tmp\ <\ range.begin)\{}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}ERROR!\ value\ <\%s>\ is\ too\ small\ for\ option\ \(\backslash\)"{}\%s\(\backslash\)"{}.\(\backslash\)n"{}},\ span,\ name);}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \ \ \ \ exit(1);\ \}}
+\DoxyCodeLine{00212\ }
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ value\ =\ tmp;}
+\DoxyCodeLine{00214\ }
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00216\ \ \ \ \ \}}
+\DoxyCodeLine{00217\ }
+\DoxyCodeLine{00218\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ help\ (\textcolor{keywordtype}{bool}\ verbose\ =\ \textcolor{keyword}{false})\{}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}\ \ -\/\%-\/12s\ =\ \%-\/8s\ ["{}},\ name,\ type\_name);}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (range.begin\ ==\ INT32\_MIN)}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}imin"{}});}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}\%4d"{}},\ range.begin);}
+\DoxyCodeLine{00224\ }
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}\ ..\ "{}});}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (range.end\ ==\ INT32\_MAX)}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}imax"{}});}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}\%4d"{}},\ range.end);}
+\DoxyCodeLine{00230\ }
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}]\ (default:\ \%d)\(\backslash\)n"{}},\ value);}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (verbose)\{}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \ \ \ \ \ \ \ \%s\(\backslash\)n"{}},\ description);}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00236\ \ \ \ \ \}}
+\DoxyCodeLine{00237\ \};}
+\DoxyCodeLine{00238\ }
+\DoxyCodeLine{00239\ }
+\DoxyCodeLine{00240\ \textcolor{comment}{//\ Leave\ this\ out\ for\ visual\ C++\ until\ Microsoft\ implements\ C99\ and\ gets\ support\ for\ strtoll.}}
+\DoxyCodeLine{00241\ \textcolor{preprocessor}{\#ifndef\ \_MSC\_VER}}
+\DoxyCodeLine{00242\ }
+\DoxyCodeLine{00243\ \textcolor{keyword}{class\ }Int64Option\ :\ \textcolor{keyword}{public}\ Option}
+\DoxyCodeLine{00244\ \{}
+\DoxyCodeLine{00245\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00246\ \ \ \ \ \mbox{\hyperlink{struct_minisat_1_1_int64_range}{Int64Range}}\ range;}
+\DoxyCodeLine{00247\ \ \ \ \ int64\_t\ \ value;}
+\DoxyCodeLine{00248\ }
+\DoxyCodeLine{00249\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00250\ \ \ \ \ Int64Option(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ c,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ n,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ d,\ int64\_t\ def\ =\ int64\_t(),\ \mbox{\hyperlink{struct_minisat_1_1_int64_range}{Int64Range}}\ r\ =\ \mbox{\hyperlink{struct_minisat_1_1_int64_range}{Int64Range}}(INT64\_MIN,\ INT64\_MAX))}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ :\ Option(n,\ d,\ c,\ \textcolor{stringliteral}{"{}<int64>"{}}),\ range(r),\ value(def)\ \{\}}
+\DoxyCodeLine{00252\ \ }
+\DoxyCodeLine{00253\ \ \ \ \ \textcolor{keyword}{operator}\ \ \ \ \ int64\_t\ \ \ (\textcolor{keywordtype}{void})\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ value;\ \}}
+\DoxyCodeLine{00254\ \ \ \ \ \textcolor{keyword}{operator}\ \ \ \ \ int64\_t\&\ \ (void)\ \ \ \ \ \ \ \{\ \textcolor{keywordflow}{return}\ value;\ \}}
+\DoxyCodeLine{00255\ \ \ \ \ Int64Option\&\ operator=\ (int64\_t\ x)\ \ \{\ value\ =\ x;\ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};\ \}}
+\DoxyCodeLine{00256\ }
+\DoxyCodeLine{00257\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ parse(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ str)\{}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ span\ =\ str;\ }
+\DoxyCodeLine{00259\ }
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!match(span,\ \textcolor{stringliteral}{"{}-\/"{}})\ ||\ !match(span,\ name)\ ||\ !match(span,\ \textcolor{stringliteral}{"{}="{}}))}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00262\ }
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}*\ \ \ end;}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ int64\_t\ tmp\ =\ strtoll(span,\ \&end,\ 10);}
+\DoxyCodeLine{00265\ }
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (end\ ==\ NULL)\ }
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (tmp\ >\ range.end)\{}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}ERROR!\ value\ <\%s>\ is\ too\ large\ for\ option\ \(\backslash\)"{}\%s\(\backslash\)"{}.\(\backslash\)n"{}},\ span,\ name);}
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \ \ \ \ exit(1);}
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \}\textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (tmp\ <\ range.begin)\{}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}ERROR!\ value\ <\%s>\ is\ too\ small\ for\ option\ \(\backslash\)"{}\%s\(\backslash\)"{}.\(\backslash\)n"{}},\ span,\ name);}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \ \ \ \ exit(1);\ \}}
+\DoxyCodeLine{00274\ }
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ value\ =\ tmp;}
+\DoxyCodeLine{00276\ }
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00278\ \ \ \ \ \}}
+\DoxyCodeLine{00279\ }
+\DoxyCodeLine{00280\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ help\ (\textcolor{keywordtype}{bool}\ verbose\ =\ \textcolor{keyword}{false})\{}
+\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}\ \ -\/\%-\/12s\ =\ \%-\/8s\ ["{}},\ name,\ type\_name);}
+\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (range.begin\ ==\ INT64\_MIN)}
+\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}imin"{}});}
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}\%4"{}}PRIi64,\ range.begin);}
+\DoxyCodeLine{00286\ }
+\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}\ ..\ "{}});}
+\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (range.end\ ==\ INT64\_MAX)}
+\DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}imax"{}});}
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}\%4"{}}PRIi64,\ range.end);}
+\DoxyCodeLine{00292\ }
+\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}]\ (default:\ \%"{}}PRIi64\textcolor{stringliteral}{"{})\(\backslash\)n"{}},\ value);}
+\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (verbose)\{}
+\DoxyCodeLine{00295\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \ \ \ \ \ \ \ \%s\(\backslash\)n"{}},\ description);}
+\DoxyCodeLine{00296\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00298\ \ \ \ \ \}}
+\DoxyCodeLine{00299\ \};}
+\DoxyCodeLine{00300\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00301\ }
+\DoxyCodeLine{00302\ \textcolor{comment}{//==================================================================================================}}
+\DoxyCodeLine{00303\ \textcolor{comment}{//\ String\ option:}}
+\DoxyCodeLine{00304\ }
+\DoxyCodeLine{00305\ }
+\DoxyCodeLine{00306\ \textcolor{keyword}{class\ }StringOption\ :\ \textcolor{keyword}{public}\ Option}
+\DoxyCodeLine{00307\ \{}
+\DoxyCodeLine{00308\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ value;}
+\DoxyCodeLine{00309\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00310\ \ \ \ \ StringOption(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ c,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ n,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ d,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ def\ =\ NULL)\ }
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ :\ Option(n,\ d,\ c,\ \textcolor{stringliteral}{"{}<string>"{}}),\ value(def)\ \{\}}
+\DoxyCodeLine{00312\ }
+\DoxyCodeLine{00313\ \ \ \ \ \textcolor{keyword}{operator}\ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \ (void)\ \textcolor{keyword}{const}\ \ \ \ \ \{\ \textcolor{keywordflow}{return}\ value;\ \}}
+\DoxyCodeLine{00314\ \ \ \ \ \textcolor{keyword}{operator}\ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\&\ (void)\ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{keywordflow}{return}\ value;\ \}}
+\DoxyCodeLine{00315\ \ \ \ \ StringOption\&\ operator=\ \ \ \ (\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ x)\ \ \{\ value\ =\ x;\ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};\ \}}
+\DoxyCodeLine{00316\ }
+\DoxyCodeLine{00317\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ parse(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ str)\{}
+\DoxyCodeLine{00318\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ span\ =\ str;\ }
+\DoxyCodeLine{00319\ }
+\DoxyCodeLine{00320\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!match(span,\ \textcolor{stringliteral}{"{}-\/"{}})\ ||\ !match(span,\ name)\ ||\ !match(span,\ \textcolor{stringliteral}{"{}="{}}))}
+\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00322\ }
+\DoxyCodeLine{00323\ \ \ \ \ \ \ \ \ value\ =\ span;}
+\DoxyCodeLine{00324\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00325\ \ \ \ \ \}}
+\DoxyCodeLine{00326\ }
+\DoxyCodeLine{00327\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ help\ (\textcolor{keywordtype}{bool}\ verbose\ =\ \textcolor{keyword}{false})\{}
+\DoxyCodeLine{00328\ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}\ \ -\/\%-\/10s\ =\ \%8s\(\backslash\)n"{}},\ name,\ type\_name);}
+\DoxyCodeLine{00329\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (verbose)\{}
+\DoxyCodeLine{00330\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \ \ \ \ \ \ \ \%s\(\backslash\)n"{}},\ description);}
+\DoxyCodeLine{00331\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00332\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00333\ \ \ \ \ \}\ \ \ \ }
+\DoxyCodeLine{00334\ \};}
+\DoxyCodeLine{00335\ }
+\DoxyCodeLine{00336\ }
+\DoxyCodeLine{00337\ \textcolor{comment}{//==================================================================================================}}
+\DoxyCodeLine{00338\ \textcolor{comment}{//\ Bool\ option:}}
+\DoxyCodeLine{00339\ }
+\DoxyCodeLine{00340\ }
+\DoxyCodeLine{00341\ \textcolor{keyword}{class\ }BoolOption\ :\ \textcolor{keyword}{public}\ Option}
+\DoxyCodeLine{00342\ \{}
+\DoxyCodeLine{00343\ \ \ \ \ \textcolor{keywordtype}{bool}\ value;}
+\DoxyCodeLine{00344\ }
+\DoxyCodeLine{00345\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00346\ \ \ \ \ BoolOption(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ c,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ n,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ d,\ \textcolor{keywordtype}{bool}\ v)\ }
+\DoxyCodeLine{00347\ \ \ \ \ \ \ \ \ :\ Option(n,\ d,\ c,\ \textcolor{stringliteral}{"{}<bool>"{}}),\ value(v)\ \{\}}
+\DoxyCodeLine{00348\ }
+\DoxyCodeLine{00349\ \ \ \ \ \textcolor{keyword}{operator}\ \ \ \ bool\ \ \ \ \ (\textcolor{keywordtype}{void})\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ value;\ \}}
+\DoxyCodeLine{00350\ \ \ \ \ \textcolor{keyword}{operator}\ \ \ \ \textcolor{keywordtype}{bool}\&\ \ \ \ (void)\ \ \ \ \ \ \ \{\ \textcolor{keywordflow}{return}\ value;\ \}}
+\DoxyCodeLine{00351\ \ \ \ \ BoolOption\&\ operator=(\textcolor{keywordtype}{bool}\ b)\ \ \ \ \ \{\ value\ =\ b;\ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};\ \}}
+\DoxyCodeLine{00352\ }
+\DoxyCodeLine{00353\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ parse(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ str)\{}
+\DoxyCodeLine{00354\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ span\ =\ str;\ }
+\DoxyCodeLine{00355\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00356\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (match(span,\ \textcolor{stringliteral}{"{}-\/"{}}))\{}
+\DoxyCodeLine{00357\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ b\ =\ !match(span,\ \textcolor{stringliteral}{"{}no-\/"{}});}
+\DoxyCodeLine{00358\ }
+\DoxyCodeLine{00359\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (strcmp(span,\ name)\ ==\ 0)\{}
+\DoxyCodeLine{00360\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ value\ =\ b;}
+\DoxyCodeLine{00361\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};\ \}}
+\DoxyCodeLine{00362\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00363\ }
+\DoxyCodeLine{00364\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00365\ \ \ \ \ \}}
+\DoxyCodeLine{00366\ }
+\DoxyCodeLine{00367\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ help\ (\textcolor{keywordtype}{bool}\ verbose\ =\ \textcolor{keyword}{false})\{}
+\DoxyCodeLine{00368\ }
+\DoxyCodeLine{00369\ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}\ \ -\/\%s,\ -\/no-\/\%s"{}},\ name,\ name);}
+\DoxyCodeLine{00370\ }
+\DoxyCodeLine{00371\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (uint32\_t\ i\ =\ 0;\ i\ <\ 32\ -\/\ strlen(name)*2;\ i++)}
+\DoxyCodeLine{00372\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}\ "{}});}
+\DoxyCodeLine{00373\ }
+\DoxyCodeLine{00374\ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}\ "{}});}
+\DoxyCodeLine{00375\ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}(default:\ \%s)\(\backslash\)n"{}},\ value\ ?\ \textcolor{stringliteral}{"{}on"{}}\ :\ \textcolor{stringliteral}{"{}off"{}});}
+\DoxyCodeLine{00376\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (verbose)\{}
+\DoxyCodeLine{00377\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \ \ \ \ \ \ \ \%s\(\backslash\)n"{}},\ description);}
+\DoxyCodeLine{00378\ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(stderr,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00379\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00380\ \ \ \ \ \}}
+\DoxyCodeLine{00381\ \};}
+\DoxyCodeLine{00382\ }
+\DoxyCodeLine{00383\ \textcolor{comment}{//=================================================================================================}}
+\DoxyCodeLine{00384\ \}}
+\DoxyCodeLine{00385\ }
+\DoxyCodeLine{00386\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

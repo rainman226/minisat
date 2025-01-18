@@ -1,0 +1,93 @@
+\doxysection{Dimacs.\+h}
+\hypertarget{_dimacs_8h_source}{}\label{_dimacs_8h_source}\index{code/minisat/core/Dimacs.h@{code/minisat/core/Dimacs.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/****************************************************************************************[Dimacs.h]}}
+\DoxyCodeLine{00002\ \textcolor{comment}{Copyright\ (c)\ 2003-\/2006,\ Niklas\ Een,\ Niklas\ Sorensson}}
+\DoxyCodeLine{00003\ \textcolor{comment}{Copyright\ (c)\ 2007-\/2010,\ Niklas\ Sorensson}}
+\DoxyCodeLine{00004\ \textcolor{comment}{}}
+\DoxyCodeLine{00005\ \textcolor{comment}{Permission\ is\ hereby\ granted,\ free\ of\ charge,\ to\ any\ person\ obtaining\ a\ copy\ of\ this\ software\ and}}
+\DoxyCodeLine{00006\ \textcolor{comment}{associated\ documentation\ files\ (the\ "{}Software"{}),\ to\ deal\ in\ the\ Software\ without\ restriction,}}
+\DoxyCodeLine{00007\ \textcolor{comment}{including\ without\ limitation\ the\ rights\ to\ use,\ copy,\ modify,\ merge,\ publish,\ distribute,}}
+\DoxyCodeLine{00008\ \textcolor{comment}{sublicense,\ and/or\ sell\ copies\ of\ the\ Software,\ and\ to\ permit\ persons\ to\ whom\ the\ Software\ is}}
+\DoxyCodeLine{00009\ \textcolor{comment}{furnished\ to\ do\ so,\ subject\ to\ the\ following\ conditions:}}
+\DoxyCodeLine{00010\ \textcolor{comment}{}}
+\DoxyCodeLine{00011\ \textcolor{comment}{The\ above\ copyright\ notice\ and\ this\ permission\ notice\ shall\ be\ included\ in\ all\ copies\ or}}
+\DoxyCodeLine{00012\ \textcolor{comment}{substantial\ portions\ of\ the\ Software.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{}}
+\DoxyCodeLine{00014\ \textcolor{comment}{THE\ SOFTWARE\ IS\ PROVIDED\ "{}AS\ IS"{},\ WITHOUT\ WARRANTY\ OF\ ANY\ KIND,\ EXPRESS\ OR\ IMPLIED,\ INCLUDING\ BUT}}
+\DoxyCodeLine{00015\ \textcolor{comment}{NOT\ LIMITED\ TO\ THE\ WARRANTIES\ OF\ MERCHANTABILITY,\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE\ AND}}
+\DoxyCodeLine{00016\ \textcolor{comment}{NONINFRINGEMENT.\ IN\ NO\ EVENT\ SHALL\ THE\ AUTHORS\ OR\ COPYRIGHT\ HOLDERS\ BE\ LIABLE\ FOR\ ANY\ CLAIM,}}
+\DoxyCodeLine{00017\ \textcolor{comment}{DAMAGES\ OR\ OTHER\ LIABILITY,\ WHETHER\ IN\ AN\ ACTION\ OF\ CONTRACT,\ TORT\ OR\ OTHERWISE,\ ARISING\ FROM,\ OUT}}
+\DoxyCodeLine{00018\ \textcolor{comment}{OF\ OR\ IN\ CONNECTION\ WITH\ THE\ SOFTWARE\ OR\ THE\ USE\ OR\ OTHER\ DEALINGS\ IN\ THE\ SOFTWARE.}}
+\DoxyCodeLine{00019\ \textcolor{comment}{**************************************************************************************************/}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#ifndef\ Minisat\_Dimacs\_h}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#define\ Minisat\_Dimacs\_h}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ "{}minisat/utils/ParseUtils.h"{}}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#include\ "{}minisat/core/SolverTypes.h"{}}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{keyword}{namespace\ }Minisat\ \{}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{comment}{//=================================================================================================}}
+\DoxyCodeLine{00032\ \textcolor{comment}{//\ DIMACS\ Parser:}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ B,\ \textcolor{keyword}{class}\ Solver>}
+\DoxyCodeLine{00035\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ readClause(B\&\ in,\ \mbox{\hyperlink{class_minisat_1_1_solver}{Solver}}\&\ S,\ \mbox{\hyperlink{class_minisat_1_1vec}{vec<Lit>}}\&\ lits)\ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ parsed\_lit,\ var;}
+\DoxyCodeLine{00037\ \ \ \ \ lits.clear();}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordflow}{for}\ (;;)\{}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ parsed\_lit\ =\ parseInt(in);}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (parsed\_lit\ ==\ 0)\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ var\ =\ abs(parsed\_lit)-\/1;}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (var\ >=\ S.nVars())\ S.newVar();}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ lits.push(\ (parsed\_lit\ >\ 0)\ ?\ mkLit(var)\ :\ \string~mkLit(var)\ );}
+\DoxyCodeLine{00044\ \ \ \ \ \}}
+\DoxyCodeLine{00045\ \}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ B,\ \textcolor{keyword}{class}\ Solver>}
+\DoxyCodeLine{00048\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ parse\_DIMACS\_main(B\&\ in,\ \mbox{\hyperlink{class_minisat_1_1_solver}{Solver}}\&\ S,\ \textcolor{keywordtype}{bool}\ strictp\ =\ \textcolor{keyword}{false})\ \{}
+\DoxyCodeLine{00049\ \ \ \ \ \mbox{\hyperlink{class_minisat_1_1vec}{vec<Lit>}}\ lits;}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{int}\ vars\ \ \ \ =\ 0;}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{int}\ clauses\ =\ 0;}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{int}\ cnt\ \ \ \ \ =\ 0;}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordflow}{for}\ (;;)\{}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ skipWhitespace(in);}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (*in\ ==\ EOF)\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (*in\ ==\ \textcolor{charliteral}{'p'})\{}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (eagerMatch(in,\ \textcolor{stringliteral}{"{}p\ cnf"{}}))\{}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vars\ \ \ \ =\ parseInt(in);}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ clauses\ =\ parseInt(in);}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ SATRACE'06\ hack}}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ if\ (clauses\ >\ 4000000)}}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ S.eliminate(true);}}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \}\textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}PARSE\ ERROR!\ Unexpected\ char:\ \%c\(\backslash\)n"{}},\ *in),\ exit(3);}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (*in\ ==\ \textcolor{charliteral}{'c'}\ ||\ *in\ ==\ \textcolor{charliteral}{'p'})}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ skipLine(in);}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ cnt++;}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ readClause(in,\ S,\ lits);}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ S.addClause\_(lits);\ \}}
+\DoxyCodeLine{00072\ \ \ \ \ \}}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordflow}{if}\ (strictp\ \&\&\ cnt\ !=\ clauses)}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}PARSE\ ERROR!\ DIMACS\ header\ mismatch:\ wrong\ number\ of\ clauses\(\backslash\)n"{}});}
+\DoxyCodeLine{00075\ \}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \textcolor{comment}{//\ Inserts\ problem\ into\ solver.}}
+\DoxyCodeLine{00078\ \textcolor{comment}{//}}
+\DoxyCodeLine{00079\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ Solver>}
+\DoxyCodeLine{00080\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ parse\_DIMACS(gzFile\ input\_stream,\ \mbox{\hyperlink{class_minisat_1_1_solver}{Solver}}\&\ S,\ \textcolor{keywordtype}{bool}\ strictp\ =\ \textcolor{keyword}{false})\ \{}
+\DoxyCodeLine{00081\ \ \ \ \ \mbox{\hyperlink{class_minisat_1_1_stream_buffer}{StreamBuffer}}\ in(input\_stream);}
+\DoxyCodeLine{00082\ \ \ \ \ parse\_DIMACS\_main(in,\ S,\ strictp);\ \}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \textcolor{comment}{//=================================================================================================}}
+\DoxyCodeLine{00085\ \}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}
