@@ -298,6 +298,26 @@ Lit Solver::pickBranchLit()
 |        rest of literals. There may be others from the same level though.
 |  
 |________________________________________________________________________________________________@*/
+/**
+ * @brief Analyzes a conflict and produces a reason clause.
+ * 
+ * @param confl The reference to the conflicting clause.
+ * @param out_learnt A vector to store the learnt clause.
+ * @param out_btlevel The backtrack level determined by the conflict analysis.
+ * 
+ * @details
+ * The `analyze` method examines the conflict and extracts a new clause that prevents
+ * the same conflict from reoccurring. It uses techniques like UIP (Unique Implication
+ * Point) to generate minimal and effective learnt clauses. The learnt clause is added
+ * to the clause database and helps prune the search space.
+ * 
+ * ### Complexity
+ * - Linear in the size of the implication graph related to the conflict.
+ * 
+ * ### Contribution to SAT solving
+ * - Generates conflict clauses that guide the solver away from previously explored paths.
+ * - Plays a crucial role in the CDCL algorithm by preventing redundant conflicts.
+ */
 void Solver::analyze(CRef confl, vec<Lit>& out_learnt, int& out_btlevel)
 {
     int pathC = 0;
@@ -508,6 +528,23 @@ void Solver::uncheckedEnqueue(Lit p, CRef from)
 |    Post-conditions:
 |      * the propagation queue is empty, even if there was a conflict.
 |________________________________________________________________________________________________@*/
+/**
+ * @brief Propagates all enqueued facts.
+ * 
+ * @return CRef - A reference to the conflicting clause if a conflict arises; otherwise, CRef_Undef.
+ * 
+ * @details
+ * The `propagate` method performs unit propagation using the two-watched literals scheme.
+ * For each literal in the trail, it examines all watched clauses and ensures they remain
+ * satisfied or finds new watchers. If a clause cannot be satisfied, a conflict is detected.
+ * 
+ * ### Complexity
+ * - Amortized linear in the number of watched clauses per literal.
+ * 
+ * ### Contribution to SAT solving
+ * - Detects conflicts early by propagating unit clauses.
+ * - Ensures the solver respects the constraints of the problem.
+ */
 CRef Solver::propagate()
 {
     CRef    confl     = CRef_Undef;
@@ -583,6 +620,22 @@ struct reduceDB_lt {
     bool operator () (CRef x, CRef y) { 
         return ca[x].size() > 2 && (ca[y].size() == 2 || ca[x].activity() < ca[y].activity()); } 
 };
+/**
+ * @brief Reduces the database of learnt clauses.
+ * 
+ * @details
+ * The `reduceDB` method removes less useful learnt clauses to maintain solver efficiency.
+ * Clauze are evaluated based on their activity (frequency of use in conflicts). Locked
+ * and binary clauses are always preserved.
+ * 
+ * ### Complexity
+ * - Linear in the number of learnt clauses.
+ * 
+ * ### Contribution to SAT solving
+ * - Prevents memory overflow and performance degradation by controlling the size of the
+ *   clause database.
+ * - Focuses computational resources on the most impactful clauses.
+ */
 void Solver::reduceDB()
 {
     int     i, j;
@@ -707,8 +760,21 @@ bool Solver::simplify()
 /**
  * @brief Searches for a model within a specified number of conflicts.
  * 
- * @param nof_conflicts The number of conflicts to allow before stopping.
- * @return The result of the search: satisfiable, unsatisfiable, or undefined.
+ * @param nof_conflicts The number of conflicts allowed before stopping the search.
+ * @return lbool - The result of the search: satisfiable (l_True), unsatisfiable (l_False), or undefined (l_Undef).
+ * 
+ * @details
+ * The `search` method is the primary loop of the SAT solver. It repeatedly propagates
+ * unit clauses, analyzes conflicts, learns new clauses, and adjusts the decision stack.
+ * If no conflict is detected, it makes new decisions to explore the search space.
+ * 
+ * ### Complexity
+ * - Worst case: Exponential in the number of variables (inherent to SAT problems).
+ * - Practical performance depends on heuristics and the problem structure.
+ * 
+ * ### Contribution to SAT solving
+ * - Implements the core logic for finding a satisfying assignment or proving unsatisfiability.
+ * - Combines propagation, conflict analysis, and clause learning for efficient exploration.
  */
 lbool Solver::search(int nof_conflicts)
 {
@@ -829,7 +895,17 @@ double Solver::progressEstimate() const
 
 
  */
-
+/**
+ * @brief Utility for restart management.
+ * 
+ * @details
+ * Uses the Luby sequence to determine the intervals for restarting the solver.
+ * Restarting helps explore diverse regions of the search space, improving overall performance.
+ * 
+ * ### Contribution
+ * - Avoids solver stagnation in challenging regions.
+ * - Facilitates better utilization of learnt clauses.
+ */
 static double luby(double y, int x){
 
     // Find the finite subsequence that contains index 'x', and the
