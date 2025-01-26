@@ -1,6 +1,6 @@
 # Formal verification using MiniSat
 
-In this project we will be looking into the implementation of **MiniSat**, a popular SAT solver, to figure out how this works. Our goal is to better understand how it implements the algorithms and how they work, and also runing some benchmarks to see how it behaves.
+In this project we will be looking into the implementation of **MiniSat**, a popular SAT solver, to figure out how this works. Our goal is to better understand how it implements the algorithms and how they work, and also runing some benchmarks to see how it behaves. A video explaining the technical part is available [here](https://youtu.be/NZ37P3IyjR4).
 
 ## What is MiniSat?
 
