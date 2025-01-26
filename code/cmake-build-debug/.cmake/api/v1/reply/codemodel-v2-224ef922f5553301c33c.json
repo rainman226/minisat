@@ -1,0 +1,97 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-8bf4d8ee62c913cadb99.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "minisat",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "minisat-lib::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-minisat-lib-Debug-d44721bb24ce9e685699.json",
+					"name" : "minisat-lib",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "minisat-lib-shared::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-minisat-lib-shared-Debug-fd4ccdcae924fd6a8623.json",
+					"name" : "minisat-lib-shared",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "minisat-lib-static::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-minisat-lib-static-Debug-b6c52577499c4a094055.json",
+					"name" : "minisat-lib-static",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "minisat_core::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-minisat_core-Debug-eb9d2ba24d71bb2ab634.json",
+					"name" : "minisat_core",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "minisat_simp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-minisat_simp-Debug-39aaaef63075c13fa8d6.json",
+					"name" : "minisat_simp",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/michellehaiosta/Desktop/code/cmake-build-debug",
+		"source" : "/Users/michellehaiosta/Desktop/code"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

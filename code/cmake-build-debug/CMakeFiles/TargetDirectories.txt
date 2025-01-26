@@ -1,0 +1,11 @@
+/Users/michellehaiosta/Desktop/code/cmake-build-debug/CMakeFiles/minisat-lib-static.dir
+/Users/michellehaiosta/Desktop/code/cmake-build-debug/CMakeFiles/minisat-lib-shared.dir
+/Users/michellehaiosta/Desktop/code/cmake-build-debug/CMakeFiles/minisat-lib.dir
+/Users/michellehaiosta/Desktop/code/cmake-build-debug/CMakeFiles/minisat_core.dir
+/Users/michellehaiosta/Desktop/code/cmake-build-debug/CMakeFiles/minisat_simp.dir
+/Users/michellehaiosta/Desktop/code/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/michellehaiosta/Desktop/code/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/michellehaiosta/Desktop/code/cmake-build-debug/CMakeFiles/list_install_components.dir
+/Users/michellehaiosta/Desktop/code/cmake-build-debug/CMakeFiles/install.dir
+/Users/michellehaiosta/Desktop/code/cmake-build-debug/CMakeFiles/install/local.dir
+/Users/michellehaiosta/Desktop/code/cmake-build-debug/CMakeFiles/install/strip.dir

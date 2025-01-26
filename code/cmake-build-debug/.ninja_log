@@ -1,0 +1,23 @@
+# ninja log v6
+2	87	1737887519448196615	CMakeFiles/minisat-lib-static.dir/minisat/utils/System.cc.o	f573cca786842810
+2	125	1737887519447807400	CMakeFiles/minisat-lib-static.dir/minisat/utils/Options.cc.o	da79e34731a273e1
+9	297	1737887947424854287	CMakeFiles/minisat_core.dir/minisat/core/Main.cc.o	4876eae430fd57e9
+8	345	1737887947424610783	CMakeFiles/minisat-lib-static.dir/minisat/simp/SimpSolver.cc.o	a51c55a07902fbf0
+8	368	1737887947423962106	CMakeFiles/minisat-lib-static.dir/minisat/core/Solver.cc.o	67e28af74fcafd88
+368	469	1737887947784388200	libminisat.a	d2cc4cf7b6f6ddf1
+469	538	1737887947885305283	minisat_core	f8cb542904a6ccfc
+4	347	1737888017119509798	CMakeFiles/minisat_simp.dir/minisat/simp/Main.cc.o	dc133e80084f68de
+347	433	1737888017462227648	minisat	9c98989ae961eebc
+8	449	1737889395732286491	CMakeFiles/minisat_simp.dir/minisat/simp/Main.cc.o	dc133e80084f68de
+449	523	1737889396173114983	minisat	9c98989ae961eebc
+8	340	1737889749746074304	CMakeFiles/minisat_simp.dir/minisat/simp/Main.cc.o	dc133e80084f68de
+340	405	1737889750078190604	minisat	9c98989ae961eebc
+11	1923	1737896650567645743	CMakeFiles/minisat-lib-static.dir/minisat/core/Solver.cc.o	67e28af74fcafd88
+1926	1968	1737896652481486357	libminisat.a	d2cc4cf7b6f6ddf1
+1969	2047	1737896652524397390	minisat	9c98989ae961eebc
+10	638	1737896722944269998	CMakeFiles/minisat-lib-static.dir/minisat/core/Solver.cc.o	67e28af74fcafd88
+638	673	1737896723572385650	libminisat.a	d2cc4cf7b6f6ddf1
+673	738	1737896723607179876	minisat	9c98989ae961eebc
+15	692	1737896794484034537	CMakeFiles/minisat-lib-static.dir/minisat/core/Solver.cc.o	67e28af74fcafd88
+693	728	1737896795161876345	libminisat.a	d2cc4cf7b6f6ddf1
+728	794	1737896795197246143	minisat	9c98989ae961eebc
