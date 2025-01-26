@@ -289,15 +289,13 @@ void {\bfseries unchecked\+Enqueue} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Li
 \Hypertarget{class_minisat_1_1_solver_af5db45c871f89859da8c2f0697988ccd}\label{class_minisat_1_1_solver_af5db45c871f89859da8c2f0697988ccd} 
 bool {\bfseries enqueue} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p, CRef from=CRef\+\_\+\+Undef)
 \item 
-\Hypertarget{class_minisat_1_1_solver_a152b3ab287308a53e677f73c5cc79157}\label{class_minisat_1_1_solver_a152b3ab287308a53e677f73c5cc79157} 
-CRef {\bfseries propagate} ()
-\item 
+CRef \mbox{\hyperlink{class_minisat_1_1_solver_a152b3ab287308a53e677f73c5cc79157}{propagate}} ()
+\begin{DoxyCompactList}\small\item\em Propagates all enqueued facts. \end{DoxyCompactList}\item 
 \Hypertarget{class_minisat_1_1_solver_a2fb2d91a89d728cdf90f04703d2f51d7}\label{class_minisat_1_1_solver_a2fb2d91a89d728cdf90f04703d2f51d7} 
 void {\bfseries cancel\+Until} (int level)
 \item 
-\Hypertarget{class_minisat_1_1_solver_a6d3e78b95132a09eaa210f514571e9aa}\label{class_minisat_1_1_solver_a6d3e78b95132a09eaa210f514571e9aa} 
-void {\bfseries analyze} (CRef confl, \mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} $>$ \&out\+\_\+learnt, int \&out\+\_\+btlevel)
-\item 
+void \mbox{\hyperlink{class_minisat_1_1_solver_a6d3e78b95132a09eaa210f514571e9aa}{analyze}} (CRef confl, \mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} $>$ \&out\+\_\+learnt, int \&out\+\_\+btlevel)
+\begin{DoxyCompactList}\small\item\em Analyzes a conflict and produces a reason clause. \end{DoxyCompactList}\item 
 \Hypertarget{class_minisat_1_1_solver_a4bc629492593940fee7c81c54106e707}\label{class_minisat_1_1_solver_a4bc629492593940fee7c81c54106e707} 
 void {\bfseries analyze\+Final} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p, \mbox{\hyperlink{class_minisat_1_1_l_set}{LSet}} \&out\+\_\+conflict)
 \item 
@@ -309,9 +307,8 @@ bool {\bfseries lit\+Redundant} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} 
 \Hypertarget{class_minisat_1_1_solver_ac3a707bbcbfcd0b3b4b2fc5dc399c1cd}\label{class_minisat_1_1_solver_ac3a707bbcbfcd0b3b4b2fc5dc399c1cd} 
 \mbox{\hyperlink{class_minisat_1_1lbool}{lbool}} {\bfseries solve\+\_\+} ()
 \item 
-\Hypertarget{class_minisat_1_1_solver_a62eea2c00917497fbfb843bf9ca4482e}\label{class_minisat_1_1_solver_a62eea2c00917497fbfb843bf9ca4482e} 
-void {\bfseries reduce\+DB} ()
-\item 
+void \mbox{\hyperlink{class_minisat_1_1_solver_a62eea2c00917497fbfb843bf9ca4482e}{reduce\+DB}} ()
+\begin{DoxyCompactList}\small\item\em Reduces the database of learnt clauses. \end{DoxyCompactList}\item 
 \Hypertarget{class_minisat_1_1_solver_a8158cf7db6c80fe89b31b87e731a1716}\label{class_minisat_1_1_solver_a8158cf7db6c80fe89b31b87e731a1716} 
 void {\bfseries remove\+Satisfied} (\mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ CRef $>$ \&cs)
 \item 
@@ -495,7 +492,76 @@ bool {\bfseries asynch\+\_\+interrupt}
 
 
 \doxysubsection{Member Function Documentation}
-\Hypertarget{class_minisat_1_1_solver_a16eaedf9b9c2d13d4ff5e93f759cfcf6}\index{Minisat::Solver@{Minisat::Solver}!search@{search}}
+\Hypertarget{class_minisat_1_1_solver_a6d3e78b95132a09eaa210f514571e9aa}\index{Minisat::Solver@{Minisat::Solver}!analyze@{analyze}}
+\index{analyze@{analyze}!Minisat::Solver@{Minisat::Solver}}
+\doxysubsubsection{\texorpdfstring{analyze()}{analyze()}}
+{\footnotesize\ttfamily \label{class_minisat_1_1_solver_a6d3e78b95132a09eaa210f514571e9aa} 
+void Solver\+::analyze (\begin{DoxyParamCaption}\item[{CRef}]{confl}{, }\item[{\mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} $>$ \&}]{out\+\_\+learnt}{, }\item[{int \&}]{out\+\_\+btlevel}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Analyzes a conflict and produces a reason clause. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em confl} & The reference to the conflicting clause. \\
+\hline
+{\em out\+\_\+learnt} & A vector to store the learnt clause. \\
+\hline
+{\em out\+\_\+btlevel} & The backtrack level determined by the conflict analysis.\\
+\hline
+\end{DoxyParams}
+The {\ttfamily analyze} method examines the conflict and extracts a new clause that prevents the same conflict from reoccurring. It uses techniques like UIP (Unique Implication Point) to generate minimal and effective learnt clauses. The learnt clause is added to the clause database and helps prune the search space.\hypertarget{class_minisat_1_1_solver_autotoc_md0}{}\doxysubsubsubsection{\texorpdfstring{Complexity}{Complexity}}\label{class_minisat_1_1_solver_autotoc_md0}
+
+\begin{DoxyItemize}
+\item Linear in the size of the implication graph related to the conflict.
+\end{DoxyItemize}\hypertarget{class_minisat_1_1_solver_autotoc_md1}{}\doxysubsubsubsection{\texorpdfstring{Contribution to SAT solving}{Contribution to SAT solving}}\label{class_minisat_1_1_solver_autotoc_md1}
+
+\begin{DoxyItemize}
+\item Generates conflict clauses that guide the solver away from previously explored paths.
+\item Plays a crucial role in the CDCL algorithm by preventing redundant conflicts. 
+\end{DoxyItemize}\Hypertarget{class_minisat_1_1_solver_a152b3ab287308a53e677f73c5cc79157}\index{Minisat::Solver@{Minisat::Solver}!propagate@{propagate}}
+\index{propagate@{propagate}!Minisat::Solver@{Minisat::Solver}}
+\doxysubsubsection{\texorpdfstring{propagate()}{propagate()}}
+{\footnotesize\ttfamily \label{class_minisat_1_1_solver_a152b3ab287308a53e677f73c5cc79157} 
+CRef Solver\+::propagate (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Propagates all enqueued facts. 
+
+\begin{DoxyReturn}{Returns}
+CRef -\/ A reference to the conflicting clause if a conflict arises; otherwise, CRef\+\_\+\+Undef.
+\end{DoxyReturn}
+The {\ttfamily propagate} method performs unit propagation using the two-\/watched literals scheme. For each literal in the trail, it examines all watched clauses and ensures they remain satisfied or finds new watchers. If a clause cannot be satisfied, a conflict is detected.\hypertarget{class_minisat_1_1_solver_autotoc_md2}{}\doxysubsubsubsection{\texorpdfstring{Complexity}{Complexity}}\label{class_minisat_1_1_solver_autotoc_md2}
+
+\begin{DoxyItemize}
+\item Amortized linear in the number of watched clauses per literal.
+\end{DoxyItemize}\hypertarget{class_minisat_1_1_solver_autotoc_md3}{}\doxysubsubsubsection{\texorpdfstring{Contribution to SAT solving}{Contribution to SAT solving}}\label{class_minisat_1_1_solver_autotoc_md3}
+
+\begin{DoxyItemize}
+\item Detects conflicts early by propagating unit clauses.
+\item Ensures the solver respects the constraints of the problem. 
+\end{DoxyItemize}\Hypertarget{class_minisat_1_1_solver_a62eea2c00917497fbfb843bf9ca4482e}\index{Minisat::Solver@{Minisat::Solver}!reduceDB@{reduceDB}}
+\index{reduceDB@{reduceDB}!Minisat::Solver@{Minisat::Solver}}
+\doxysubsubsection{\texorpdfstring{reduceDB()}{reduceDB()}}
+{\footnotesize\ttfamily \label{class_minisat_1_1_solver_a62eea2c00917497fbfb843bf9ca4482e} 
+void Solver\+::reduce\+DB (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Reduces the database of learnt clauses. 
+
+The {\ttfamily reduce\+DB} method removes less useful learnt clauses to maintain solver efficiency. Clauze are evaluated based on their activity (frequency of use in conflicts). Locked and binary clauses are always preserved.\hypertarget{class_minisat_1_1_solver_autotoc_md4}{}\doxysubsubsubsection{\texorpdfstring{Complexity}{Complexity}}\label{class_minisat_1_1_solver_autotoc_md4}
+
+\begin{DoxyItemize}
+\item Linear in the number of learnt clauses.
+\end{DoxyItemize}\hypertarget{class_minisat_1_1_solver_autotoc_md5}{}\doxysubsubsubsection{\texorpdfstring{Contribution to SAT solving}{Contribution to SAT solving}}\label{class_minisat_1_1_solver_autotoc_md5}
+
+\begin{DoxyItemize}
+\item Prevents memory overflow and performance degradation by controlling the size of the clause database.
+\item Focuses computational resources on the most impactful clauses. 
+\end{DoxyItemize}\Hypertarget{class_minisat_1_1_solver_a16eaedf9b9c2d13d4ff5e93f759cfcf6}\index{Minisat::Solver@{Minisat::Solver}!search@{search}}
 \index{search@{search}!Minisat::Solver@{Minisat::Solver}}
 \doxysubsubsection{\texorpdfstring{search()}{search()}}
 {\footnotesize\ttfamily \label{class_minisat_1_1_solver_a16eaedf9b9c2d13d4ff5e93f759cfcf6} 
@@ -507,13 +573,23 @@ Searches for a model within a specified number of conflicts.
 
 
 \begin{DoxyParams}{Parameters}
-{\em nof\+\_\+conflicts} & The number of conflicts to allow before stopping. \\
+{\em nof\+\_\+conflicts} & The number of conflicts allowed before stopping the search. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-The result of the search\+: satisfiable, unsatisfiable, or undefined. 
+lbool -\/ The result of the search\+: satisfiable (l\+\_\+\+True), unsatisfiable (l\+\_\+\+False), or undefined (l\+\_\+\+Undef).
 \end{DoxyReturn}
+The {\ttfamily search} method is the primary loop of the SAT solver. It repeatedly propagates unit clauses, analyzes conflicts, learns new clauses, and adjusts the decision stack. If no conflict is detected, it makes new decisions to explore the search space.\hypertarget{class_minisat_1_1_solver_autotoc_md6}{}\doxysubsubsubsection{\texorpdfstring{Complexity}{Complexity}}\label{class_minisat_1_1_solver_autotoc_md6}
 
+\begin{DoxyItemize}
+\item Worst case\+: Exponential in the number of variables (inherent to SAT problems).
+\item Practical performance depends on heuristics and the problem structure.
+\end{DoxyItemize}\hypertarget{class_minisat_1_1_solver_autotoc_md7}{}\doxysubsubsubsection{\texorpdfstring{Contribution to SAT solving}{Contribution to SAT solving}}\label{class_minisat_1_1_solver_autotoc_md7}
+
+\begin{DoxyItemize}
+\item Implements the core logic for finding a satisfying assignment or proving unsatisfiability.
+\item Combines propagation, conflict analysis, and clause learning for efficient exploration. 
+\end{DoxyItemize}
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

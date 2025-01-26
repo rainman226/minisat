@@ -26,9 +26,9 @@ var NAVTREE =
 [
   [ "My Project", "index.html", [
     [ "Formal verification using MiniSat", "md_readme.html", [
-      [ "What is MiniSat?", "md_readme.html#autotoc_md1", null ],
-      [ "Getting started: Installing MiniSat", "md_readme.html#autotoc_md2", null ],
-      [ "About the benchmarks", "md_readme.html#autotoc_md3", null ]
+      [ "What is MiniSat?", "md_readme.html#autotoc_md10", null ],
+      [ "Getting started: Installing MiniSat", "md_readme.html#autotoc_md11", null ],
+      [ "About the benchmarks", "md_readme.html#autotoc_md12", null ]
     ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],

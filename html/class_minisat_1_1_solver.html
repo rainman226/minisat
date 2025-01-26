@@ -405,14 +405,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>uncheckedEnqueue</b> 
 <tr class="memitem:af5db45c871f89859da8c2f0697988ccd" id="r_af5db45c871f89859da8c2f0697988ccd"><td class="memItemLeft" align="right" valign="top"><a id="af5db45c871f89859da8c2f0697988ccd" name="af5db45c871f89859da8c2f0697988ccd"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>enqueue</b> (<a class="el" href="struct_minisat_1_1_lit.html">Lit</a> p, CRef from=CRef_Undef)</td></tr>
 <tr class="separator:af5db45c871f89859da8c2f0697988ccd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a152b3ab287308a53e677f73c5cc79157" id="r_a152b3ab287308a53e677f73c5cc79157"><td class="memItemLeft" align="right" valign="top"><a id="a152b3ab287308a53e677f73c5cc79157" name="a152b3ab287308a53e677f73c5cc79157"></a>
-CRef&#160;</td><td class="memItemRight" valign="bottom"><b>propagate</b> ()</td></tr>
+<tr class="memitem:a152b3ab287308a53e677f73c5cc79157" id="r_a152b3ab287308a53e677f73c5cc79157"><td class="memItemLeft" align="right" valign="top">CRef&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a152b3ab287308a53e677f73c5cc79157">propagate</a> ()</td></tr>
+<tr class="memdesc:a152b3ab287308a53e677f73c5cc79157"><td class="mdescLeft">&#160;</td><td class="mdescRight">Propagates all enqueued facts.  <br /></td></tr>
 <tr class="separator:a152b3ab287308a53e677f73c5cc79157"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2fb2d91a89d728cdf90f04703d2f51d7" id="r_a2fb2d91a89d728cdf90f04703d2f51d7"><td class="memItemLeft" align="right" valign="top"><a id="a2fb2d91a89d728cdf90f04703d2f51d7" name="a2fb2d91a89d728cdf90f04703d2f51d7"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>cancelUntil</b> (int level)</td></tr>
 <tr class="separator:a2fb2d91a89d728cdf90f04703d2f51d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6d3e78b95132a09eaa210f514571e9aa" id="r_a6d3e78b95132a09eaa210f514571e9aa"><td class="memItemLeft" align="right" valign="top"><a id="a6d3e78b95132a09eaa210f514571e9aa" name="a6d3e78b95132a09eaa210f514571e9aa"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>analyze</b> (CRef confl, <a class="el" href="class_minisat_1_1vec.html">vec</a>&lt; <a class="el" href="struct_minisat_1_1_lit.html">Lit</a> &gt; &amp;out_learnt, int &amp;out_btlevel)</td></tr>
+<tr class="memitem:a6d3e78b95132a09eaa210f514571e9aa" id="r_a6d3e78b95132a09eaa210f514571e9aa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6d3e78b95132a09eaa210f514571e9aa">analyze</a> (CRef confl, <a class="el" href="class_minisat_1_1vec.html">vec</a>&lt; <a class="el" href="struct_minisat_1_1_lit.html">Lit</a> &gt; &amp;out_learnt, int &amp;out_btlevel)</td></tr>
+<tr class="memdesc:a6d3e78b95132a09eaa210f514571e9aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Analyzes a conflict and produces a reason clause.  <br /></td></tr>
 <tr class="separator:a6d3e78b95132a09eaa210f514571e9aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4bc629492593940fee7c81c54106e707" id="r_a4bc629492593940fee7c81c54106e707"><td class="memItemLeft" align="right" valign="top"><a id="a4bc629492593940fee7c81c54106e707" name="a4bc629492593940fee7c81c54106e707"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>analyzeFinal</b> (<a class="el" href="struct_minisat_1_1_lit.html">Lit</a> p, <a class="el" href="class_minisat_1_1_l_set.html">LSet</a> &amp;out_conflict)</td></tr>
@@ -426,8 +426,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>litRedundant</b> (<a 
 <tr class="memitem:ac3a707bbcbfcd0b3b4b2fc5dc399c1cd" id="r_ac3a707bbcbfcd0b3b4b2fc5dc399c1cd"><td class="memItemLeft" align="right" valign="top"><a id="ac3a707bbcbfcd0b3b4b2fc5dc399c1cd" name="ac3a707bbcbfcd0b3b4b2fc5dc399c1cd"></a>
 <a class="el" href="class_minisat_1_1lbool.html">lbool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>solve_</b> ()</td></tr>
 <tr class="separator:ac3a707bbcbfcd0b3b4b2fc5dc399c1cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a62eea2c00917497fbfb843bf9ca4482e" id="r_a62eea2c00917497fbfb843bf9ca4482e"><td class="memItemLeft" align="right" valign="top"><a id="a62eea2c00917497fbfb843bf9ca4482e" name="a62eea2c00917497fbfb843bf9ca4482e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>reduceDB</b> ()</td></tr>
+<tr class="memitem:a62eea2c00917497fbfb843bf9ca4482e" id="r_a62eea2c00917497fbfb843bf9ca4482e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a62eea2c00917497fbfb843bf9ca4482e">reduceDB</a> ()</td></tr>
+<tr class="memdesc:a62eea2c00917497fbfb843bf9ca4482e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reduces the database of learnt clauses.  <br /></td></tr>
 <tr class="separator:a62eea2c00917497fbfb843bf9ca4482e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8158cf7db6c80fe89b31b87e731a1716" id="r_a8158cf7db6c80fe89b31b87e731a1716"><td class="memItemLeft" align="right" valign="top"><a id="a8158cf7db6c80fe89b31b87e731a1716" name="a8158cf7db6c80fe89b31b87e731a1716"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>removeSatisfied</b> (<a class="el" href="class_minisat_1_1vec.html">vec</a>&lt; CRef &gt; &amp;cs)</td></tr>
@@ -611,6 +611,141 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>asynch_interrupt</b><
 <tr class="separator:af5b6991a49c0182825ed1778c25fd0a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a6d3e78b95132a09eaa210f514571e9aa" name="a6d3e78b95132a09eaa210f514571e9aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d3e78b95132a09eaa210f514571e9aa">&#9670;&#160;</a></span>analyze()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Solver::analyze </td>
+          <td>(</td>
+          <td class="paramtype">CRef</td>          <td class="paramname"><span class="paramname"><em>confl</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_minisat_1_1vec.html">vec</a>&lt; <a class="el" href="struct_minisat_1_1_lit.html">Lit</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>out_learnt</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;</td>          <td class="paramname"><span class="paramname"><em>out_btlevel</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Analyzes a conflict and produces a reason clause. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">confl</td><td>The reference to the conflicting clause. </td></tr>
+    <tr><td class="paramname">out_learnt</td><td>A vector to store the learnt clause. </td></tr>
+    <tr><td class="paramname">out_btlevel</td><td>The backtrack level determined by the conflict analysis.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>The <code>analyze</code> method examines the conflict and extracts a new clause that prevents the same conflict from reoccurring. It uses techniques like UIP (Unique Implication Point) to generate minimal and effective learnt clauses. The learnt clause is added to the clause database and helps prune the search space.</p>
+<h3><a class="anchor" id="autotoc_md0"></a>
+Complexity</h3>
+<ul>
+<li>Linear in the size of the implication graph related to the conflict.</li>
+</ul>
+<h3><a class="anchor" id="autotoc_md1"></a>
+Contribution to SAT solving</h3>
+<ul>
+<li>Generates conflict clauses that guide the solver away from previously explored paths.</li>
+<li>Plays a crucial role in the CDCL algorithm by preventing redundant conflicts. </li>
+</ul>
+
+</div>
+</div>
+<a id="a152b3ab287308a53e677f73c5cc79157" name="a152b3ab287308a53e677f73c5cc79157"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a152b3ab287308a53e677f73c5cc79157">&#9670;&#160;</a></span>propagate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CRef Solver::propagate </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Propagates all enqueued facts. </p>
+<dl class="section return"><dt>Returns</dt><dd>CRef - A reference to the conflicting clause if a conflict arises; otherwise, CRef_Undef.</dd></dl>
+<p>The <code>propagate</code> method performs unit propagation using the two-watched literals scheme. For each literal in the trail, it examines all watched clauses and ensures they remain satisfied or finds new watchers. If a clause cannot be satisfied, a conflict is detected.</p>
+<h3><a class="anchor" id="autotoc_md2"></a>
+Complexity</h3>
+<ul>
+<li>Amortized linear in the number of watched clauses per literal.</li>
+</ul>
+<h3><a class="anchor" id="autotoc_md3"></a>
+Contribution to SAT solving</h3>
+<ul>
+<li>Detects conflicts early by propagating unit clauses.</li>
+<li>Ensures the solver respects the constraints of the problem. </li>
+</ul>
+
+</div>
+</div>
+<a id="a62eea2c00917497fbfb843bf9ca4482e" name="a62eea2c00917497fbfb843bf9ca4482e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62eea2c00917497fbfb843bf9ca4482e">&#9670;&#160;</a></span>reduceDB()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Solver::reduceDB </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reduces the database of learnt clauses. </p>
+<p>The <code>reduceDB</code> method removes less useful learnt clauses to maintain solver efficiency. Clauze are evaluated based on their activity (frequency of use in conflicts). Locked and binary clauses are always preserved.</p>
+<h3><a class="anchor" id="autotoc_md4"></a>
+Complexity</h3>
+<ul>
+<li>Linear in the number of learnt clauses.</li>
+</ul>
+<h3><a class="anchor" id="autotoc_md5"></a>
+Contribution to SAT solving</h3>
+<ul>
+<li>Prevents memory overflow and performance degradation by controlling the size of the clause database.</li>
+<li>Focuses computational resources on the most impactful clauses. </li>
+</ul>
+
+</div>
+</div>
 <a id="a16eaedf9b9c2d13d4ff5e93f759cfcf6" name="a16eaedf9b9c2d13d4ff5e93f759cfcf6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a16eaedf9b9c2d13d4ff5e93f759cfcf6">&#9670;&#160;</a></span>search()</h2>
 
@@ -637,11 +772,24 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>asynch_interrupt</b><
 <p>Searches for a model within a specified number of conflicts. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">nof_conflicts</td><td>The number of conflicts to allow before stopping. </td></tr>
+    <tr><td class="paramname">nof_conflicts</td><td>The number of conflicts allowed before stopping the search. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The result of the search: satisfiable, unsatisfiable, or undefined. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>lbool - The result of the search: satisfiable (l_True), unsatisfiable (l_False), or undefined (l_Undef).</dd></dl>
+<p>The <code>search</code> method is the primary loop of the SAT solver. It repeatedly propagates unit clauses, analyzes conflicts, learns new clauses, and adjusts the decision stack. If no conflict is detected, it makes new decisions to explore the search space.</p>
+<h3><a class="anchor" id="autotoc_md6"></a>
+Complexity</h3>
+<ul>
+<li>Worst case: Exponential in the number of variables (inherent to SAT problems).</li>
+<li>Practical performance depends on heuristics and the problem structure.</li>
+</ul>
+<h3><a class="anchor" id="autotoc_md7"></a>
+Contribution to SAT solving</h3>
+<ul>
+<li>Implements the core logic for finding a satisfying assignment or proving unsatisfiability.</li>
+<li>Combines propagation, conflict analysis, and clause learning for efficient exploration. </li>
+</ul>
 
 </div>
 </div>

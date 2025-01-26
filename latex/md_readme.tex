@@ -1,11 +1,11 @@
 \chapter{Formal verification using Mini\+Sat}
 \hypertarget{md_readme}{}\label{md_readme}\index{Formal verification using MiniSat@{Formal verification using MiniSat}}
-\label{md_readme_autotoc_md0}%
-\Hypertarget{md_readme_autotoc_md0}%
+\label{md_readme_autotoc_md9}%
+\Hypertarget{md_readme_autotoc_md9}%
 
 
-In this project we will be looking into the implementation of {\bfseries{Mini\+Sat}}, a popular SAT solver, to figure out how this works. Our goal is to better understand how it implements the algorithms and how they work, and also runing some benchmarks to see how it behaves.\hypertarget{md_readme_autotoc_md1}{}\doxysection{\texorpdfstring{What is Mini\+Sat?}{What is Mini\+Sat?}}\label{md_readme_autotoc_md1}
-Mini\+Sat is a lightweight and super-\/efficient SAT solver that\textquotesingle{}s often used in formal verification, AI, and other fields. It takes logical formulas in CNF (Conjunctive Normal Form) and tries to tell if they\textquotesingle{}re satisfiable or not. It\textquotesingle{}s a very good starting point for people interested getting started on SAT.\hypertarget{md_readme_autotoc_md2}{}\doxysection{\texorpdfstring{Getting started\+: Installing Mini\+Sat}{Getting started\+: Installing Mini\+Sat}}\label{md_readme_autotoc_md2}
+In this project we will be looking into the implementation of {\bfseries{Mini\+Sat}}, a popular SAT solver, to figure out how this works. Our goal is to better understand how it implements the algorithms and how they work, and also runing some benchmarks to see how it behaves.\hypertarget{md_readme_autotoc_md10}{}\doxysection{\texorpdfstring{What is Mini\+Sat?}{What is Mini\+Sat?}}\label{md_readme_autotoc_md10}
+Mini\+Sat is a lightweight and super-\/efficient SAT solver that\textquotesingle{}s often used in formal verification, AI, and other fields. It takes logical formulas in CNF (Conjunctive Normal Form) and tries to tell if they\textquotesingle{}re satisfiable or not. It\textquotesingle{}s a very good starting point for people interested getting started on SAT.\hypertarget{md_readme_autotoc_md11}{}\doxysection{\texorpdfstring{Getting started\+: Installing Mini\+Sat}{Getting started\+: Installing Mini\+Sat}}\label{md_readme_autotoc_md11}
 We recommend running Mini\+Sat on a Linux enviroment, as it\textquotesingle{}s easier to install and compile compared to Windows.
 
 There are 2 ways\+: installing it directly using the command line, or downloading and building the tool.
@@ -37,7 +37,7 @@ And then build it\+:
 \DoxyCodeLine{cmake\ ..\ \&\&\ make}
 
 \end{DoxyCode}
-\hypertarget{md_readme_autotoc_md3}{}\doxysection{\texorpdfstring{About the benchmarks}{About the benchmarks}}\label{md_readme_autotoc_md3}
+\hypertarget{md_readme_autotoc_md12}{}\doxysection{\texorpdfstring{About the benchmarks}{About the benchmarks}}\label{md_readme_autotoc_md12}
 For our tests, we\textquotesingle{}re using the {\bfseries{\href{https://benchmark-database.de/?track=main_2024&family=cryptography-simon}{\texttt{ Cryptography-\/\+Simon}}}} benchmark family from the {\bfseries{\href{https://satcompetition.github.io/2024/}{\texttt{ SAT Competition 2024}}}}. These benchmarks are specifically designed for evaluating SAT solvers in cryptographic contexts.
 
 To run the script easier, we\textquotesingle{}ve written a script, {\ttfamily run\+\_\+minisat.\+sh}. To use it first go into the benchmarks folder and run it like this\+:

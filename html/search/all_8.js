@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['installing_20minisat_0',['Getting started: Installing MiniSat',['../md_readme.html#autotoc_md2',1,'']]],
+  ['installing_20minisat_0',['Getting started: Installing MiniSat',['../md_readme.html#autotoc_md11',1,'']]],
   ['int64option_1',['Int64Option',['../class_minisat_1_1_int64_option.html',1,'Minisat']]],
   ['int64range_2',['Int64Range',['../struct_minisat_1_1_int64_range.html',1,'Minisat']]],
   ['intmap_3',['IntMap',['../class_minisat_1_1_int_map.html',1,'Minisat']]],
@@ -24,5 +24,5 @@ var searchData=
   ['intrange_21',['IntRange',['../struct_minisat_1_1_int_range.html',1,'Minisat']]],
   ['intset_22',['IntSet',['../class_minisat_1_1_int_set.html',1,'Minisat']]],
   ['intset_3c_20lit_2c_20mkindexlit_20_3e_23',['IntSet&lt; Lit, MkIndexLit &gt;',['../class_minisat_1_1_int_set.html',1,'Minisat']]],
-  ['is_20minisat_24',['What is MiniSat?',['../md_readme.html#autotoc_md1',1,'']]]
+  ['is_20minisat_24',['What is MiniSat?',['../md_readme.html#autotoc_md10',1,'']]]
 ];

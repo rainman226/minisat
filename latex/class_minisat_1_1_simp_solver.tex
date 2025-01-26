@@ -343,12 +343,12 @@ void {\bfseries unchecked\+Enqueue} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Li
 \item 
 bool {\bfseries enqueue} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p, CRef from=CRef\+\_\+\+Undef)
 \item 
-CRef {\bfseries propagate} ()
-\item 
+CRef \mbox{\hyperlink{class_minisat_1_1_solver_a152b3ab287308a53e677f73c5cc79157}{propagate}} ()
+\begin{DoxyCompactList}\small\item\em Propagates all enqueued facts. \end{DoxyCompactList}\item 
 void {\bfseries cancel\+Until} (int level)
 \item 
-void {\bfseries analyze} (CRef confl, \mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} $>$ \&out\+\_\+learnt, int \&out\+\_\+btlevel)
-\item 
+void \mbox{\hyperlink{class_minisat_1_1_solver_a6d3e78b95132a09eaa210f514571e9aa}{analyze}} (CRef confl, \mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ \mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} $>$ \&out\+\_\+learnt, int \&out\+\_\+btlevel)
+\begin{DoxyCompactList}\small\item\em Analyzes a conflict and produces a reason clause. \end{DoxyCompactList}\item 
 void {\bfseries analyze\+Final} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p, \mbox{\hyperlink{class_minisat_1_1_l_set}{LSet}} \&out\+\_\+conflict)
 \item 
 bool {\bfseries lit\+Redundant} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} p)
@@ -357,8 +357,8 @@ bool {\bfseries lit\+Redundant} (\mbox{\hyperlink{struct_minisat_1_1_lit}{Lit}} 
 \begin{DoxyCompactList}\small\item\em Searches for a model within a specified number of conflicts. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_minisat_1_1lbool}{lbool}} {\bfseries solve\+\_\+} ()
 \item 
-void {\bfseries reduce\+DB} ()
-\item 
+void \mbox{\hyperlink{class_minisat_1_1_solver_a62eea2c00917497fbfb843bf9ca4482e}{reduce\+DB}} ()
+\begin{DoxyCompactList}\small\item\em Reduces the database of learnt clauses. \end{DoxyCompactList}\item 
 void {\bfseries remove\+Satisfied} (\mbox{\hyperlink{class_minisat_1_1vec}{vec}}$<$ CRef $>$ \&cs)
 \item 
 void {\bfseries rebuild\+Order\+Heap} ()
